@@ -462,8 +462,8 @@ button:hover > .icon--diagonal {
 .hero__visual > picture img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: 55% center;
+  object-fit: contain;
+  object-position: right center;
   filter: saturate(0.84) brightness(0.8) contrast(1.08);
   animation: heroZoom 18s ease-in-out infinite alternate;
 }
@@ -1803,7 +1803,7 @@ footer > p {
 
 @keyframes heroZoom {
   to {
-    transform: scale(1.015);
+    transform: scale(1.005);
   }
 }
 
@@ -1993,6 +1993,7 @@ footer > p {
   }
 
   .hero__visual > picture img {
+    object-fit: cover;
     object-position: 68% center;
     filter: saturate(0.86) brightness(0.84) contrast(1.08);
   }
