@@ -145,6 +145,18 @@ export const projects: PortfolioProject[] = [
     tags: ["Quarto", "design de interação", "JavaScript"],
     href: "https://github.com/lsbjordao/quarto-focus-mode",
   },
+  {
+    number: "07",
+    title: "Quarto Conditional Vars",
+    kicker: "Um documento, múltiplas versões",
+    description:
+      "Extensão que renderiza conteúdo condicional a partir de variáveis do projeto, com regras combináveis e compatibilidade entre engines Quarto.",
+    image: "/images/quarto-conditional-vars.webp",
+    imageAlt: "Identidade visual da extensão Quarto Conditional Vars",
+    category: "Ciência aberta",
+    tags: ["Quarto", "Lua", "YAML", "open source"],
+    href: "https://lsbjordao.github.io/quarto-conditional-vars/",
+  },
 ];
 
 export const timeline = [
