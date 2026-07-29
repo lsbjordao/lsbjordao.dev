@@ -204,14 +204,25 @@ export default function Home() {
         </div>
 
         <div className="hero__visual" aria-label="Microscopia de tricomas de Mimosa">
-          <Image
-            src="/images/trichomes.webp"
-            alt="Mosaico de imagens microscópicas de tricomas do gênero Mimosa"
-            fill
-            sizes="(max-width: 900px) 100vw, 48vw"
-            quality={60}
-            priority
-          />
+          <picture>
+            <source
+              srcSet="/images/trichomes-480.avif 480w, /images/trichomes-640.avif 640w, /images/trichomes-960.avif 960w, /images/trichomes-1440.avif 1440w"
+              sizes="(max-width: 820px) 100vw, 45vw"
+              type="image/avif"
+            />
+            <source
+              srcSet="/images/trichomes-480.webp 480w, /images/trichomes-640.webp 640w, /images/trichomes-960.webp 960w, /images/trichomes-1440.webp 1440w"
+              sizes="(max-width: 820px) 100vw, 45vw"
+              type="image/webp"
+            />
+            <img
+              src="/images/trichomes-960.webp"
+              alt="Mosaico de imagens microscópicas de tricomas do gênero Mimosa"
+              width="960"
+              height="540"
+              fetchPriority="high"
+            />
+          </picture>
           <div className="hero__visual-shade" />
           <div className="specimen-tag">
             <span>SPECIMEN / DATA</span>
