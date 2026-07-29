@@ -1212,45 +1212,129 @@ button:hover > .icon--diagonal {
   border-color: var(--line);
 }
 
-.authorship-note {
+.mapbiomas-award {
   margin-top: 4rem;
-  padding: 2.4rem;
   display: grid;
-  grid-template-columns: 5rem 1fr auto;
-  align-items: center;
-  gap: 2rem;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   border: 1px solid rgba(217, 255, 99, 0.35);
-  background: rgba(217, 255, 99, 0.035);
+  background:
+    radial-gradient(circle at 95% 5%, rgba(217, 255, 99, 0.1), transparent 30%),
+    rgba(217, 255, 99, 0.035);
 }
 
-.authorship-note__number {
-  align-self: stretch;
-  display: grid;
-  place-items: center;
-  color: var(--ink-deep);
-  background: var(--acid);
-  font-size: 0.6rem;
-  font-weight: 800;
+.mapbiomas-award__media {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+  border-right: 1px solid rgba(217, 255, 99, 0.22);
+}
+
+.mapbiomas-award__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(7, 19, 13, 0.58), transparent 40%);
+}
+
+.mapbiomas-award__media img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.mapbiomas-award__media > span {
+  position: absolute;
+  z-index: 2;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.52rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.mapbiomas-award__content {
+  padding: clamp(2.2rem, 4vw, 4rem);
+}
+
+.mapbiomas-award__meta {
+  padding-bottom: 1.15rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 1px solid var(--line-light);
+  color: rgba(255, 255, 255, 0.45);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
-.authorship-note h3 {
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 2.2vw, 2.1rem);
-  font-style: italic;
-  font-weight: 450;
+.mapbiomas-award__meta strong {
+  color: var(--acid);
 }
 
-.authorship-note p {
-  max-width: 55rem;
-  margin-top: 0.45rem;
-  color: rgba(255, 255, 255, 0.58);
+.mapbiomas-award__content > .eyebrow {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+}
+
+.mapbiomas-award h3 {
+  max-width: 46rem;
+  margin-top: 1.2rem;
+  font-family: var(--serif);
+  font-size: clamp(2.3rem, 4.1vw, 4.8rem);
+  font-weight: 430;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+.mapbiomas-award__lead {
+  max-width: 39rem;
+  margin-top: 2rem;
+  color: rgba(255, 255, 255, 0.65);
   font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.mapbiomas-award__methods {
+  margin-top: 2.3rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+}
+
+.mapbiomas-award__methods article {
+  padding: 1.4rem 1.4rem 1.5rem 0;
+}
+
+.mapbiomas-award__methods article + article {
+  padding-right: 0;
+  padding-left: 1.4rem;
+  border-left: 1px solid var(--line-light);
+}
+
+.mapbiomas-award__methods span {
+  color: var(--coral);
+  font-size: 0.5rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.mapbiomas-award__methods p {
+  margin-top: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.66rem;
   line-height: 1.65;
 }
 
-.authorship-note .button {
-  white-space: nowrap;
+.mapbiomas-award__actions {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.7rem;
 }
 
 .work {
@@ -2203,13 +2287,8 @@ footer > p {
     grid-template-columns: 4rem 1.1fr 0.9fr;
   }
 
-  .authorship-note {
-    grid-template-columns: 4rem 1fr;
-  }
-
-  .authorship-note .button {
-    grid-column: 2;
-    justify-self: start;
+  .mapbiomas-award {
+    grid-template-columns: 0.9fr 1.1fr;
   }
 
   .project-card__description {
@@ -2391,18 +2470,18 @@ footer > p {
     margin-top: 1rem;
   }
 
-  .authorship-note {
-    padding: 1.4rem;
+  .mapbiomas-award {
     grid-template-columns: 1fr;
   }
 
-  .authorship-note__number {
-    width: 3rem;
-    height: 3rem;
+  .mapbiomas-award__media {
+    min-height: min(58vw, 30rem);
+    border-right: 0;
+    border-bottom: 1px solid rgba(217, 255, 99, 0.22);
   }
 
-  .authorship-note .button {
-    grid-column: 1;
+  .mapbiomas-award__media img {
+    object-position: center;
   }
 
   .work__header {
@@ -2540,6 +2619,41 @@ footer > p {
   .section {
     padding-top: 5.5rem;
     padding-bottom: 5.5rem;
+  }
+
+  .mapbiomas-award__content {
+    padding: 1.5rem;
+  }
+
+  .mapbiomas-award__meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .mapbiomas-award__methods {
+    grid-template-columns: 1fr;
+  }
+
+  .mapbiomas-award__methods article {
+    padding-right: 0;
+  }
+
+  .mapbiomas-award__methods article + article {
+    padding-left: 0;
+    border-top: 1px solid var(--line-light);
+    border-left: 0;
+  }
+
+  .mapbiomas-award__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mapbiomas-award__actions .button,
+  .mapbiomas-award__actions .text-link {
+    width: 100%;
+    justify-content: center;
   }
 
   .hero__copy {

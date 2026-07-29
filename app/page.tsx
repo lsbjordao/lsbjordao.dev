@@ -482,24 +482,68 @@ export default function Home() {
           })}
         </div>
 
-        <aside className="authorship-note" data-reveal>
-          <span className="authorship-note__number">A–01</span>
-          <div>
-            <h3>Autoria se preserva com precisão.</h3>
-            <p>
-              Este registro separa, deliberadamente, o que projetei e
-              implementei, as ferramentas públicas utilizadas e o que chegou —
-              ou não — à operação institucional. É um relato técnico da minha
-              contribuição, sustentado por interfaces, documentos e artefatos
-              do processo.
-            </p>
+        <aside className="mapbiomas-award" data-reveal>
+          <div className="mapbiomas-award__media">
+            <Image
+              src="/images/mapbiomas-award.jpg"
+              alt="Menção Honrosa para Lucas Sá Barreto Jordão na 4ª edição do Prêmio MapBiomas, categoria Aplicações em Políticas Públicas"
+              fill
+              sizes="(max-width: 820px) 100vw, 44vw"
+            />
+            <span>Reconhecimento · 2022</span>
           </div>
-          <ExternalLink
-            href="https://lsbjordao.github.io/posts/Premio-MapBiomas/"
-            className="button button--outline"
-          >
-            Ver trabalho MapBiomas <Arrow diagonal />
-          </ExternalLink>
+
+          <div className="mapbiomas-award__content">
+            <div className="mapbiomas-award__meta">
+              <span>4ª EDIÇÃO · PRÊMIO MAPBIOMAS</span>
+              <strong>MENÇÃO HONROSA</strong>
+            </div>
+            <p className="eyebrow eyebrow--acid">
+              Destaque · Aplicações em Políticas Públicas
+            </p>
+            <h3>
+              O MapBiomas e a avaliação do risco de extinção da flora
+              brasileira
+            </h3>
+            <p className="mapbiomas-award__lead">
+              Trabalho desenvolvido no contexto do CNCFlora/JBRJ para tornar
+              parâmetros do critério B da Lista Vermelha da IUCN mais
+              objetivos, reprodutíveis e operacionais.
+            </p>
+
+            <div className="mapbiomas-award__methods">
+              <article>
+                <span>01 / DECLÍNIO CONTÍNUO</span>
+                <p>
+                  Regressão linear aplicada à série histórica de uso e
+                  cobertura do solo para estimar tendências de acréscimo ou
+                  decréscimo em AOO, EOO e habitat.
+                </p>
+              </article>
+              <article>
+                <span>02 / LOCATIONS</span>
+                <p>
+                  Método de buffer variável para aglutinar ocorrências
+                  próximas e semiautomatizar a contagem de situações de ameaça.
+                </p>
+              </article>
+            </div>
+
+            <div className="mapbiomas-award__actions">
+              <ExternalLink
+                href="https://brasil.mapbiomas.org/wp-content/uploads/sites/4/2023/08/MencaoHonrosa_CategoriaDestaqueAplicacoesEmPoliticasPublicas_LucasSBJordao.pdf"
+                className="button button--acid"
+              >
+                Abrir trabalho completo <Arrow diagonal />
+              </ExternalLink>
+              <ExternalLink
+                href="https://lsbjordao.github.io/posts/Premio-MapBiomas/"
+                className="text-link"
+              >
+                Ler contexto no blog <Arrow />
+              </ExternalLink>
+            </div>
+          </div>
         </aside>
       </section>
 

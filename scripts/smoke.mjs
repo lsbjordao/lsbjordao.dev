@@ -120,6 +120,18 @@ const patents = await evaluate(`(() => {
   };
 })()`);
 
+const award = await evaluate(`(() => {
+  const section = document.querySelector(".mapbiomas-award");
+  return {
+    title: section?.querySelector("h3")?.textContent.trim(),
+    image:
+      section?.querySelector("img")?.currentSrc ||
+      section?.querySelector("img")?.getAttribute("src"),
+    pdf: section?.querySelector("a[href$='.pdf']")?.href,
+    methods: section?.querySelectorAll(".mapbiomas-award__methods article").length
+  };
+})()`);
+
 const filter = await evaluate(`(() => {
   const button = [...document.querySelectorAll(".project-filter button")]
     .find((node) => node.textContent.includes("Conservação"));
@@ -163,6 +175,7 @@ const report = {
   structural,
   details,
   patents,
+  award,
   filter,
   coac,
   menu,
@@ -185,6 +198,10 @@ const failed =
   !patents.scholarLink?.includes("4981648392507436705") ||
   patents.statuses.filter((status) => status === "Atual").length !== 2 ||
   !patents.statuses.includes("Índice histórico") ||
+  !award.title?.includes("avaliação do risco de extinção") ||
+  !award.image?.includes("mapbiomas-award") ||
+  !award.pdf?.includes("MencaoHonrosa") ||
+  award.methods !== 2 ||
   filter.count !== 1 ||
   !coac?.includes("Planilha") ||
   menu.expanded !== "true" ||
