@@ -124,6 +124,19 @@ export const projects: PortfolioProject[] = [
   },
   {
     number: "03",
+    title: "TTS–Mimosa Docs",
+    kicker: "Caracteres taxonômicos como software",
+    description:
+      "Documentação tipada dos caracteres de Mimosa, organizada em módulos navegáveis e mantida com tecnologias de engenharia de software.",
+    image: "/images/tts-mimosa-docs.webp",
+    imageAlt:
+      "Documentação TTS-Mimosa exibindo módulos de caracteres taxonômicos",
+    category: "Taxonomia",
+    tags: ["TypeScript", "TypeDoc", "TSDoc", "modelagem de domínio"],
+    href: "https://lsbjordao.github.io/TTS-Mimosa/",
+  },
+  {
+    number: "04",
     title: "LULC × Leguminosae",
     kicker: "Conservação orientada por dados",
     description:
@@ -136,7 +149,7 @@ export const projects: PortfolioProject[] = [
     href: "https://lsbjordao.github.io/LULC-MapBiomas-Leguminosae/",
   },
   {
-    number: "04",
+    number: "05",
     title: "FFB Cronologia",
     kicker: "Mudanças taxonômicas no tempo",
     description:
@@ -149,7 +162,7 @@ export const projects: PortfolioProject[] = [
     href: "https://lsbjordao-ffb-cronologia.hf.space/",
   },
   {
-    number: "05",
+    number: "06",
     title: "Quarto Scientific Writing",
     kicker: "Escrita científica assistida",
     description:
@@ -161,7 +174,7 @@ export const projects: PortfolioProject[] = [
     href: "https://github.com/lsbjordao/quarto-scientific-writing",
   },
   {
-    number: "06",
+    number: "07",
     title: "Quarto Focus Mode",
     kicker: "Leitura sem ruído",
     description:
@@ -173,7 +186,7 @@ export const projects: PortfolioProject[] = [
     href: "https://github.com/lsbjordao/quarto-focus-mode",
   },
   {
-    number: "07",
+    number: "08",
     title: "Quarto Conditional Vars",
     kicker: "Um documento, múltiplas versões",
     description:
@@ -183,19 +196,6 @@ export const projects: PortfolioProject[] = [
     category: "Ciência aberta",
     tags: ["Quarto", "Lua", "YAML", "open source"],
     href: "https://lsbjordao.github.io/quarto-conditional-vars/",
-  },
-  {
-    number: "08",
-    title: "TTS–Mimosa Docs",
-    kicker: "Caracteres taxonômicos como software",
-    description:
-      "Documentação tipada dos caracteres de Mimosa, organizada em módulos navegáveis e mantida com tecnologias de engenharia de software.",
-    image: "/images/tts-mimosa-docs.webp",
-    imageAlt:
-      "Documentação TTS-Mimosa exibindo módulos de caracteres taxonômicos",
-    category: "Taxonomia",
-    tags: ["TypeScript", "TypeDoc", "TSDoc", "modelagem de domínio"],
-    href: "https://lsbjordao.github.io/TTS-Mimosa/",
   },
 ];
 

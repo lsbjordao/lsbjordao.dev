@@ -92,7 +92,9 @@ const structural = await evaluate(`(async () => {
     brokenImages,
     unsafeExternalLinks,
     sections: document.querySelectorAll("section").length,
-    projects: document.querySelectorAll(".project-card").length
+    projects: document.querySelectorAll(".project-card").length,
+    projectOrder: [...document.querySelectorAll(".project-card h3")]
+      .map((heading) => heading.textContent)
   };
 })()`);
 
@@ -174,6 +176,8 @@ const failed =
   structural.brokenImages.length > 0 ||
   structural.unsafeExternalLinks.length > 0 ||
   structural.projects !== 8 ||
+  structural.projectOrder[1] !== "TTS–Mimosa" ||
+  structural.projectOrder[2] !== "TTS–Mimosa Docs" ||
   !details ||
   !patents.open ||
   patents.mentions !== 3 ||

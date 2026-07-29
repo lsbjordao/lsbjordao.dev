@@ -1374,9 +1374,9 @@ button:hover > .icon--diagonal {
     filter 750ms var(--ease);
 }
 
-.project-card:nth-child(3) .project-card__media img,
-.project-card:nth-child(5) .project-card__media img,
-.project-card:nth-child(6) .project-card__media img {
+.project-card:nth-child(4) .project-card__media img,
+.project-card:nth-child(6) .project-card__media img,
+.project-card:nth-child(7) .project-card__media img {
   object-fit: contain;
   padding: 7%;
   background: #dfe4db;
