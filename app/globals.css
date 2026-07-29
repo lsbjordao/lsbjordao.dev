@@ -1480,6 +1480,219 @@ button:hover > .icon--diagonal {
   padding-top: 0;
 }
 
+.patent-index {
+  margin-top: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  color: var(--white);
+  background:
+    radial-gradient(circle at 82% 2%, rgba(217, 255, 99, 0.12), transparent 30%),
+    var(--ink-deep);
+}
+
+.patent-index__intro {
+  padding: clamp(2rem, 4vw, 4rem);
+}
+
+.patent-index__meta {
+  padding-bottom: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  border-bottom: 1px solid var(--line-light);
+  color: rgba(255, 255, 255, 0.45);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.patent-index__headline {
+  padding: clamp(2.5rem, 5vw, 5rem) 0;
+  display: grid;
+  grid-template-columns: clamp(5rem, 9vw, 8.5rem) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 4rem);
+}
+
+.patent-index__count {
+  color: var(--acid);
+  font-family: var(--serif);
+  font-size: clamp(5rem, 10vw, 9rem);
+  font-weight: 420;
+  letter-spacing: -0.08em;
+  line-height: 0.72;
+}
+
+.patent-index__headline h3 {
+  max-width: 60rem;
+  margin-top: 1.35rem;
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 5.5vw, 6rem);
+  font-weight: 430;
+  letter-spacing: -0.055em;
+  line-height: 0.92;
+}
+
+.patent-index__headline h3 em {
+  color: var(--coral);
+  font-weight: 410;
+}
+
+.patent-index__summary {
+  padding-left: calc(clamp(5rem, 9vw, 8.5rem) + clamp(1.5rem, 4vw, 4rem));
+  display: grid;
+  grid-template-columns: minmax(0, 38rem) auto;
+  align-items: end;
+  justify-content: space-between;
+  gap: 3rem;
+}
+
+.patent-index__summary > p {
+  color: rgba(255, 255, 255, 0.67);
+  font-size: 0.78rem;
+  line-height: 1.72;
+}
+
+.patent-index__details {
+  border-top: 1px solid var(--line-light);
+}
+
+.patent-index__details summary {
+  min-height: 4.6rem;
+  padding: 1.2rem clamp(2rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 1.5rem;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--acid);
+  font-size: 0.58rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.patent-index__details summary::-webkit-details-marker {
+  display: none;
+}
+
+.patent-index__summary-note {
+  color: rgba(255, 255, 255, 0.39);
+  font-weight: 650;
+}
+
+.patent-index__toggle {
+  justify-self: end;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 300ms var(--ease);
+}
+
+.patent-index__details[open] .patent-index__toggle {
+  transform: rotate(45deg);
+}
+
+.patent-index__list {
+  border-top: 1px solid var(--line-light);
+}
+
+.patent-mention {
+  min-height: 8.3rem;
+  padding: 1.5rem clamp(2rem, 4vw, 4rem);
+  display: grid;
+  grid-template-columns: 2.5rem 9rem minmax(0, 1fr) 7rem 1.5rem;
+  align-items: center;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--line-light);
+  transition:
+    color 250ms ease,
+    background-color 250ms ease;
+}
+
+.patent-mention:last-child {
+  border-bottom: 0;
+}
+
+.patent-mention:hover {
+  color: var(--ink-deep);
+  background: var(--acid);
+}
+
+.patent-mention__index,
+.patent-mention__publication time,
+.patent-mention__status {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.patent-mention__index {
+  color: rgba(255, 255, 255, 0.32);
+}
+
+.patent-mention__publication {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.patent-mention__publication strong {
+  color: var(--acid);
+  font-size: 0.66rem;
+  letter-spacing: -0.01em;
+}
+
+.patent-mention__publication time {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.patent-mention__title {
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  line-height: 1.2;
+}
+
+.patent-mention__title small {
+  margin-top: 0.5rem;
+  display: block;
+  color: rgba(255, 255, 255, 0.44);
+  font-family: var(--sans);
+  font-size: 0.56rem;
+  line-height: 1.5;
+}
+
+.patent-mention__status {
+  justify-self: start;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.57);
+  text-align: center;
+}
+
+.patent-mention__status.is-current {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+
+.patent-mention__arrow {
+  justify-self: end;
+  color: var(--acid);
+}
+
+.patent-mention:hover .patent-mention__index,
+.patent-mention:hover .patent-mention__publication time,
+.patent-mention:hover .patent-mention__title small,
+.patent-mention:hover .patent-mention__status,
+.patent-mention:hover .patent-mention__publication strong,
+.patent-mention:hover .patent-mention__arrow {
+  border-color: rgba(7, 19, 13, 0.35);
+  color: var(--ink-deep);
+}
+
 .trajectory {
   min-height: 100svh;
   padding: 0;
@@ -2155,6 +2368,41 @@ footer > p {
     min-height: 70vw;
   }
 
+  .patent-index__summary {
+    padding-left: 0;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .patent-index__summary .button {
+    justify-self: start;
+  }
+
+  .patent-index__summary-note {
+    display: none;
+  }
+
+  .patent-mention {
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+  }
+
+  .patent-mention__publication {
+    grid-column: 2;
+  }
+
+  .patent-mention__title {
+    grid-column: 2;
+  }
+
+  .patent-mention__status {
+    grid-column: 2;
+  }
+
+  .patent-mention__arrow {
+    grid-column: 3;
+    grid-row: 1 / 4;
+  }
+
   .trajectory {
     grid-template-columns: 1fr;
   }
@@ -2256,6 +2504,36 @@ footer > p {
 
   .hero__visual {
     min-height: 48svh;
+  }
+
+  .patent-index__meta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .patent-index__headline {
+    grid-template-columns: 1fr;
+  }
+
+  .patent-index__count {
+    font-size: 4.5rem;
+  }
+
+  .patent-index__headline h3 {
+    margin-top: 1rem;
+  }
+
+  .patent-index__details summary {
+    grid-template-columns: minmax(0, 1fr) 1.5rem;
+  }
+
+  .patent-mention {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    grid-template-columns: 1.8rem minmax(0, 1fr) 1rem;
+    align-items: start;
+    gap: 1rem;
   }
 
   .research-feature__media {

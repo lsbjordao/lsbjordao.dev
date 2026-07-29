@@ -102,6 +102,18 @@ const details = await evaluate(`(() => {
   return details.open;
 })()`);
 
+const patents = await evaluate(`(() => {
+  const details = document.querySelector(".patent-index details");
+  details.querySelector("summary").click();
+  return {
+    open: details.open,
+    mentions: details.querySelectorAll(".patent-mention").length,
+    scholarLink: document.querySelector(".patent-index__summary a")?.href,
+    statuses: [...details.querySelectorAll(".patent-mention__status")]
+      .map((node) => node.textContent.trim())
+  };
+})()`);
+
 const filter = await evaluate(`(() => {
   const button = [...document.querySelectorAll(".project-filter button")]
     .find((node) => node.textContent.includes("Conservação"));
@@ -141,7 +153,15 @@ const menu = await evaluate(`(() => {
   ));
 })()`);
 
-const report = { structural, details, filter, coac, menu, runtimeErrors };
+const report = {
+  structural,
+  details,
+  patents,
+  filter,
+  coac,
+  menu,
+  runtimeErrors
+};
 console.log(JSON.stringify(report, null, 2));
 
 const failed =
@@ -151,6 +171,11 @@ const failed =
   structural.unsafeExternalLinks.length > 0 ||
   structural.projects !== 8 ||
   !details ||
+  !patents.open ||
+  patents.mentions !== 3 ||
+  !patents.scholarLink?.includes("4981648392507436705") ||
+  patents.statuses.filter((status) => status === "Atual").length !== 2 ||
+  !patents.statuses.includes("Índice histórico") ||
   filter.count !== 1 ||
   !coac?.includes("Planilha") ||
   menu.expanded !== "true" ||

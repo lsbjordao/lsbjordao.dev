@@ -74,12 +74,12 @@ export const projects: PortfolioProject[] = [
     title: "TypeTaxonScript",
     kicker: "Taxonomia como código",
     description:
-      "Framework publicado para transformar descrições biológicas em dados tipados, validáveis, versionáveis e colaborativos.",
+      "Framework publicado para transformar descrições biológicas em dados tipados, validáveis, versionáveis e colaborativos — com registro acadêmico no Google Patents.",
     image: "/images/type-taxon-script.webp",
     imageAlt:
       "Documentação visual da estrutura de dados do TypeTaxonScript",
     category: "Taxonomia",
-    tags: ["TypeScript", "JSON", "DDD", "open source"],
+    tags: ["TypeScript", "JSON", "DDD", "Google Patents"],
     href: "https://github.com/lsbjordao/TypeTaxonScript",
   },
   {
@@ -171,6 +171,43 @@ export const projects: PortfolioProject[] = [
     href: "https://lsbjordao.github.io/TTS-Mimosa/",
   },
 ];
+
+export const googlePatents = {
+  verifiedAt: "29 JUL 2026",
+  scholarRecord: {
+    label: "Registro acadêmico",
+    href: "https://patents.google.com/scholar/4981648392507436705",
+  },
+  mentions: [
+    {
+      publication: "CN107861721A",
+      publicationDate: "30 MAR 2018",
+      title:
+        "Reverse graphical intelligence programming method and apparatus, equipment and storage medium",
+      status: "Atual",
+      note: "TypeTaxonScript aparece hoje em Similar Documents.",
+      href: "https://patents.google.com/patent/CN107861721A/en",
+    },
+    {
+      publication: "US20260127206A1",
+      publicationDate: "07 MAI 2026",
+      title:
+        "Application generation system based on ingested documents using integrated programmatic and specialized guided and constrained artificial intelligence",
+      status: "Atual",
+      note: "TypeTaxonScript aparece hoje em Similar Documents.",
+      href: "https://patents.google.com/patent/US20260127206A1/en",
+    },
+    {
+      publication: "CN101253476B",
+      publicationDate: "11 JAN 2012",
+      title: "Translation system and method for programming code",
+      status: "Índice histórico",
+      note:
+        "Ocorrência preservada no índice de busca; a lista dinâmica já não a exibe na consulta ao vivo.",
+      href: "https://patents.google.com/patent/CN101253476B/zh",
+    },
+  ],
+};
 
 export const timeline = [
   {

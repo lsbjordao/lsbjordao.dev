@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import {
   cncSystems,
+  googlePatents,
   posts,
   projects,
   stats,
@@ -573,6 +574,86 @@ export default function Home() {
             </article>
           ))}
         </div>
+
+        {(activeFilter === "Todos" || activeFilter === "Taxonomia") && (
+          <aside className="patent-index" data-reveal>
+            <div className="patent-index__intro">
+              <div className="patent-index__meta">
+                <span>REC–01 / DESCOBERTA INTERDISCIPLINAR</span>
+                <time>VERIFICADO {googlePatents.verifiedAt}</time>
+              </div>
+              <div className="patent-index__headline">
+                <span className="patent-index__count">
+                  {String(googlePatents.mentions.length).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="eyebrow eyebrow--acid">Google Patents</p>
+                  <h3>
+                    TypeTaxonScript no mapa semântico da{" "}
+                    <em>engenharia de software.</em>
+                  </h3>
+                </div>
+              </div>
+              <div className="patent-index__summary">
+                <p>
+                  O artigo possui registro acadêmico próprio e foi associado
+                  pela seção automatizada <i>Similar Documents</i> a três
+                  documentos de patente que pude verificar — duas ocorrências
+                  atuais e uma preservada no índice de busca.
+                </p>
+                <ExternalLink
+                  href={googlePatents.scholarRecord.href}
+                  className="button button--acid"
+                >
+                  Abrir registro acadêmico <Arrow diagonal />
+                </ExternalLink>
+              </div>
+            </div>
+
+            <details className="patent-index__details">
+              <summary>
+                <span>Ver listagem verificada</span>
+                <span className="patent-index__summary-note">
+                  Não equivale a patente ou citação de anterioridade
+                </span>
+                <span aria-hidden="true" className="patent-index__toggle">
+                  +
+                </span>
+              </summary>
+              <div className="patent-index__list">
+                {googlePatents.mentions.map((mention, index) => (
+                  <ExternalLink
+                    href={mention.href}
+                    className="patent-mention"
+                    key={mention.publication}
+                  >
+                    <span className="patent-mention__index">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="patent-mention__publication">
+                      <strong>{mention.publication}</strong>
+                      <time>{mention.publicationDate}</time>
+                    </span>
+                    <span className="patent-mention__title">
+                      {mention.title}
+                      <small>{mention.note}</small>
+                    </span>
+                    <span
+                      className={`patent-mention__status ${
+                        mention.status === "Atual" ? "is-current" : ""
+                      }`}
+                    >
+                      {mention.status}
+                    </span>
+                    <span className="patent-mention__arrow">
+                      <Arrow diagonal />
+                    </span>
+                  </ExternalLink>
+                ))}
+              </div>
+            </details>
+          </aside>
+        )}
       </section>
 
       <section className="trajectory section" id="trajetoria">
