@@ -280,6 +280,66 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="research-feature" id="tricomas">
+        <div className="research-feature__media" data-reveal>
+          <picture>
+            <source
+              srcSet="/images/trichomes-480.avif 480w, /images/trichomes-640.avif 640w, /images/trichomes-960.avif 960w, /images/trichomes-1440.avif 1440w"
+              sizes="(max-width: 900px) 100vw, 58vw"
+              type="image/avif"
+            />
+            <source
+              srcSet="/images/trichomes-480.webp 480w, /images/trichomes-640.webp 640w, /images/trichomes-960.webp 960w, /images/trichomes-1440.webp 1440w"
+              sizes="(max-width: 900px) 100vw, 58vw"
+              type="image/webp"
+            />
+            <img
+              src="/images/trichomes-960.webp"
+              alt="Prancha comparativa com diferentes tipos de tricomas do gênero Mimosa"
+              width="960"
+              height="540"
+              loading="lazy"
+            />
+          </picture>
+          <div className="research-feature__plate">
+            <span>PRANCHA MORFOLÓGICA / MIMOSA</span>
+            <small>diversidade de formas e termos</small>
+          </div>
+        </div>
+
+        <div className="research-feature__content" data-reveal>
+          <div className="section-index">PUBLICAÇÃO EM DESTAQUE / 2020</div>
+          <p className="eyebrow">Taxonomia · Morfologia comparada</p>
+          <h2>
+            Uma linguagem comum
+            <br />
+            <em>para os tricomas.</em>
+          </h2>
+          <p className="research-feature__lead">
+            Antes de estruturar morfologia como dados, foi preciso organizar a
+            própria linguagem usada para descrever as formas.
+          </p>
+          <p className="research-feature__body">
+            No artigo <cite>Trichomes in Mimosa</cite>, propus com Marli Pires
+            Morim e José Fernando A. Baumgratz uma caracterização dos tricomas
+            do gênero e uma padronização terminológica para tornar seu uso
+            taxonômico mais consistente e comparável.
+          </p>
+          <div className="research-feature__citation">
+            <div>
+              <span>FLORA · VOLUME 272</span>
+              <strong>ARTICLE 151702</strong>
+            </div>
+            <ExternalLink
+              href="https://doi.org/10.1016/j.flora.2020.151702"
+              className="button button--ink"
+            >
+              Ler o artigo <Arrow diagonal />
+            </ExternalLink>
+          </div>
+        </div>
+      </section>
+
       <section className="case section section--dark" id="cncflora">
         <div className="case__grain" />
         <div className="section-index section-index--light">
