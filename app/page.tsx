@@ -571,6 +571,28 @@ export default function Home() {
                   </div>
                 </div>
               </ExternalLink>
+              {project.relatedLinks && (
+                <div
+                  className="project-card__related"
+                  aria-label={`Links do ${project.title} no Google Patents`}
+                >
+                  <span>Google Patents</span>
+                  <div>
+                    {project.relatedLinks.map((link) => (
+                      <ExternalLink
+                        href={link.href}
+                        className={
+                          link.status === "historical" ? "is-historical" : ""
+                        }
+                        key={link.href}
+                      >
+                        {link.label}
+                        <Arrow diagonal />
+                      </ExternalLink>
+                    ))}
+                  </div>
+                </div>
+              )}
             </article>
           ))}
         </div>

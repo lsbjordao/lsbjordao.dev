@@ -14,6 +14,11 @@ export type PortfolioProject = {
   tags: string[];
   href: string;
   number: string;
+  relatedLinks?: Array<{
+    label: string;
+    href: string;
+    status?: "current" | "historical";
+  }>;
 };
 
 export const stats = [
@@ -81,6 +86,28 @@ export const projects: PortfolioProject[] = [
     category: "Taxonomia",
     tags: ["TypeScript", "JSON", "DDD", "Google Patents"],
     href: "https://github.com/lsbjordao/TypeTaxonScript",
+    relatedLinks: [
+      {
+        label: "Registro acadêmico",
+        href: "https://patents.google.com/scholar/4981648392507436705",
+        status: "current",
+      },
+      {
+        label: "CN107861721A",
+        href: "https://patents.google.com/patent/CN107861721A/en",
+        status: "current",
+      },
+      {
+        label: "US20260127206A1",
+        href: "https://patents.google.com/patent/US20260127206A1/en",
+        status: "current",
+      },
+      {
+        label: "CN101253476B",
+        href: "https://patents.google.com/patent/CN101253476B/zh",
+        status: "historical",
+      },
+    ],
   },
   {
     number: "02",

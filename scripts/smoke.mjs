@@ -105,9 +105,13 @@ const details = await evaluate(`(() => {
 const patents = await evaluate(`(() => {
   const details = document.querySelector(".patent-index details");
   details.querySelector("summary").click();
+  const cardLinks = document.querySelectorAll(
+    ".project-card__related a[href*='patents.google.com']"
+  );
   return {
     open: details.open,
     mentions: details.querySelectorAll(".patent-mention").length,
+    cardLinks: cardLinks.length,
     scholarLink: document.querySelector(".patent-index__summary a")?.href,
     statuses: [...details.querySelectorAll(".patent-mention__status")]
       .map((node) => node.textContent.trim())
@@ -173,6 +177,7 @@ const failed =
   !details ||
   !patents.open ||
   patents.mentions !== 3 ||
+  patents.cardLinks !== 4 ||
   !patents.scholarLink?.includes("4981648392507436705") ||
   patents.statuses.filter((status) => status === "Atual").length !== 2 ||
   !patents.statuses.includes("Índice histórico") ||
