@@ -166,6 +166,18 @@ const coac = await evaluate(`(() => {
   }));
 })()`);
 
+const legacyMigration = await evaluate(`(() => {
+  const system = [...document.querySelectorAll(".system")]
+    .find((node) => node.querySelector("h3")?.textContent.includes("dados legados"));
+  return {
+    systems: document.querySelectorAll(".system").length,
+    airflow: system?.querySelector('img[src*="apache-airflow"]')?.getAttribute("src"),
+    dbt: system?.querySelector('img[src*="dbt"]')?.getAttribute("src"),
+    portal: system?.querySelector('a[href*="cncflora.jbrj.gov.br"]')?.href,
+    text: system?.textContent
+  };
+})()`);
+
 await send("Emulation.setDeviceMetricsOverride", {
   width: 390,
   height: 844,
@@ -190,6 +202,7 @@ const report = {
   chronology,
   filter,
   coac,
+  legacyMigration,
   menu,
   runtimeErrors
 };
@@ -220,6 +233,11 @@ const failed =
   !chronology.description?.includes("394 versões") ||
   filter.count !== 1 ||
   !coac?.includes("Planilha") ||
+  legacyMigration.systems !== 4 ||
+  !legacyMigration.airflow ||
+  !legacyMigration.dbt ||
+  !legacyMigration.portal?.startsWith("https://cncflora.jbrj.gov.br") ||
+  !legacyMigration.text?.includes("executei sozinho") ||
   menu.expanded !== "true" ||
   !menu.open ||
   runtimeErrors.length > 0;

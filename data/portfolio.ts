@@ -72,6 +72,20 @@ export const cncSystems = [
       "Atuei da arquitetura à interface, integrando MapBiomas, métricas de AOO e EOO, tendências de uso do solo e a redação estruturada das justificativas.",
     tags: ["Next.js", "NestJS", "PostGIS", "MapBiomas", "IUCN"],
   },
+  {
+    number: "04",
+    title: "Resgatar",
+    name: "Resgate de dados legados",
+    status: "Migração concluída",
+    image: "/images/apache-airflow.svg",
+    imageAlt:
+      "Fluxo de migração dos dados legados para o ProFlora com Apache Airflow e dbt",
+    summary:
+      "Planejei e executei sozinho o resgate dos dados do sistema legado, migrando o acervo histórico para a arquitetura do ProFlora.",
+    contribution:
+      "Conduzi todas as etapas da migração: orquestrei extração e carga com Apache Airflow, modelei e validei as transformações com dbt e disponibilizei o legado recuperado na nova base. Esses dados hoje alimentam o portal público do CNCFlora.",
+    tags: ["Apache Airflow", "dbt", "ETL", "migração de dados", "ProFlora"],
+  },
 ];
 
 export const projects: PortfolioProject[] = [

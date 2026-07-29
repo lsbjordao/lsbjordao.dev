@@ -378,10 +378,18 @@ export default function Home() {
             <small>do dado bruto à decisão</small>
           </div>
           <div className="system-map__flow" role="list">
+            <div className="flow-node" role="listitem">
+              <small>COORDENAR</small>
+              <strong>Fluxo de trabalho</strong>
+              <span>etapas · papéis · auditoria</span>
+            </div>
+            <span className="flow-arrow" aria-hidden="true">
+              →
+            </span>
             <div className="flow-node flow-node--source" role="listitem">
-              <small>ENTRADAS</small>
-              <strong>ProFlora</strong>
-              <span>MapBiomas · especialistas</span>
+              <small>RESGATAR</small>
+              <strong>Legado → ProFlora</strong>
+              <span>Airflow · dbt · validação</span>
             </div>
             <span className="flow-arrow" aria-hidden="true">
               →
@@ -403,16 +411,17 @@ export default function Home() {
               →
             </span>
             <div className="flow-node flow-node--output" role="listitem">
-              <small>COORDENAR</small>
-              <strong>CoAC</strong>
-              <span>etapas · papéis · auditoria</span>
+              <small>PUBLICAR</small>
+              <strong>Dados abertos e métodos inovadores</strong>
+              <span>páginas web · aplicabilidade · artigos científicos</span>
             </div>
           </div>
         </div>
 
         <div className="case__systems">
           {cncSystems.map((system) => {
-            const isCoac = system.name === "Acompanhamento de fluxo de trabalho";
+            const isCoac = system.name === "CoAC Acompanhamento";
+            const isLegacy = system.name === "Resgate de dados legados";
             const image =
               isCoac && coacMode === "operation"
                 ? "/images/coac-sheets.webp"
@@ -429,12 +438,59 @@ export default function Home() {
                   <span>{system.title}</span>
                 </div>
                 <div className="system__media">
-                  <Image
-                    src={image}
-                    alt={imageAlt}
-                    fill
-                    sizes="(max-width: 900px) 100vw, 55vw"
-                  />
+                  {isLegacy ? (
+                    <div
+                      className="legacy-migration"
+                      role="img"
+                      aria-label={imageAlt}
+                    >
+                      <div className="legacy-migration__source">
+                        <span className="legacy-migration__database" />
+                        <small>SISTEMA LEGADO</small>
+                        <strong>Acervo histórico</strong>
+                      </div>
+                      <span className="legacy-migration__arrow">→</span>
+                      <div className="legacy-migration__tools">
+                        <div>
+                          <Image
+                            src="/images/apache-airflow.svg"
+                            alt=""
+                            width={54}
+                            height={54}
+                          />
+                          <span>
+                            <small>ORQUESTRAÇÃO</small>
+                            <strong>Airflow</strong>
+                          </span>
+                        </div>
+                        <div>
+                          <Image
+                            src="/images/dbt.svg"
+                            alt=""
+                            width={54}
+                            height={54}
+                          />
+                          <span>
+                            <small>TRANSFORMAÇÃO</small>
+                            <strong>dbt</strong>
+                          </span>
+                        </div>
+                      </div>
+                      <span className="legacy-migration__arrow">→</span>
+                      <div className="legacy-migration__target">
+                        <span>PRO</span>
+                        <strong>Flora</strong>
+                        <small>dados recuperados</small>
+                      </div>
+                    </div>
+                  ) : (
+                    <Image
+                      src={image}
+                      alt={imageAlt}
+                      fill
+                      sizes="(max-width: 900px) 100vw, 55vw"
+                    />
+                  )}
                   <span className="system__status">{system.status}</span>
                   {isCoac && (
                     <div
@@ -476,6 +532,14 @@ export default function Home() {
                       <li key={tag}>{tag}</li>
                     ))}
                   </ul>
+                  {isLegacy && (
+                    <ExternalLink
+                      href="https://cncflora.jbrj.gov.br/"
+                      className="system__public-link"
+                    >
+                      Explorar dados públicos <Arrow diagonal />
+                    </ExternalLink>
+                  )}
                 </div>
               </article>
             );
