@@ -203,36 +203,39 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero__visual" aria-label="Microscopia de tricomas de Mimosa">
+        <div
+          className="hero__visual"
+          aria-label="Mimosa osmarii, espécie descrita por Lucas S.B. Jordão"
+        >
           <picture>
             <source
-              srcSet="/images/trichomes-480.avif 480w, /images/trichomes-640.avif 640w, /images/trichomes-960.avif 960w, /images/trichomes-1440.avif 1440w"
+              srcSet="/images/mimosa-osmarii-480.avif 480w, /images/mimosa-osmarii-640.avif 640w, /images/mimosa-osmarii-960.avif 960w, /images/mimosa-osmarii-1440.avif 1440w"
               sizes="(max-width: 820px) 100vw, 45vw"
               type="image/avif"
             />
             <source
-              srcSet="/images/trichomes-480.webp 480w, /images/trichomes-640.webp 640w, /images/trichomes-960.webp 960w, /images/trichomes-1440.webp 1440w"
+              srcSet="/images/mimosa-osmarii-480.webp 480w, /images/mimosa-osmarii-640.webp 640w, /images/mimosa-osmarii-960.webp 960w, /images/mimosa-osmarii-1440.webp 1440w"
               sizes="(max-width: 820px) 100vw, 45vw"
               type="image/webp"
             />
             <img
-              src="/images/trichomes-960.webp"
-              alt="Mosaico de imagens microscópicas de tricomas do gênero Mimosa"
+              src="/images/mimosa-osmarii-960.webp"
+              alt="Ramo de Mimosa osmarii com folhas e inflorescência rosada"
               width="960"
-              height="540"
+              height="640"
               fetchPriority="high"
             />
           </picture>
           <div className="hero__visual-shade" />
           <div className="specimen-tag">
-            <span>SPECIMEN / DATA</span>
-            <strong>Mimosa L.</strong>
-            <small>morfologia estruturada</small>
+            <span>ESPÉCIE NOVA / TAXONOMIA</span>
+            <strong>Mimosa osmarii</strong>
+            <small>descrita por Lucas S.B. Jordão</small>
           </div>
           <div className="hero__coordinate">
-            22°58&apos;S
+            MIMOSA
             <br />
-            43°13&apos;W
+            DESCRIÇÃO TAXONÔMICA
           </div>
           <div className="hero__orbit" />
         </div>
