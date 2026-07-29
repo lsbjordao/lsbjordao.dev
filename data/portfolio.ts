@@ -157,6 +157,19 @@ export const projects: PortfolioProject[] = [
     tags: ["Quarto", "Lua", "YAML", "open source"],
     href: "https://lsbjordao.github.io/quarto-conditional-vars/",
   },
+  {
+    number: "08",
+    title: "TTS–Mimosa Docs",
+    kicker: "Caracteres taxonômicos como software",
+    description:
+      "Documentação tipada dos caracteres de Mimosa, organizada em módulos navegáveis e mantida com tecnologias de engenharia de software.",
+    image: "/images/tts-mimosa-docs.webp",
+    imageAlt:
+      "Documentação TTS-Mimosa exibindo módulos de caracteres taxonômicos",
+    category: "Taxonomia",
+    tags: ["TypeScript", "TypeDoc", "TSDoc", "modelagem de domínio"],
+    href: "https://lsbjordao.github.io/TTS-Mimosa/",
+  },
 ];
 
 export const timeline = [

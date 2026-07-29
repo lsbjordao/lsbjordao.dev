@@ -149,7 +149,7 @@ const failed =
   structural.duplicateIds.length > 0 ||
   structural.brokenImages.length > 0 ||
   structural.unsafeExternalLinks.length > 0 ||
-  structural.projects !== 7 ||
+  structural.projects !== 8 ||
   !details ||
   filter.count !== 1 ||
   !coac?.includes("Planilha") ||
