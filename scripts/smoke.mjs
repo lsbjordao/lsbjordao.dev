@@ -118,9 +118,11 @@ const coac = await evaluate(`(() => {
   const button = [...document.querySelectorAll(".view-switch button")]
     .find((node) => node.textContent.includes("Operação real"));
   button.click();
-  return new Promise((resolve) => requestAnimationFrame(() =>
-    resolve(document.querySelector(".system:nth-child(3) img")?.alt)
-  ));
+  return new Promise((resolve) => requestAnimationFrame(() => {
+    const system = [...document.querySelectorAll(".system")]
+      .find((node) => node.querySelector("h3")?.textContent.includes("CoAC"));
+    resolve(system?.querySelector("img")?.alt);
+  }));
 })()`);
 
 await send("Emulation.setDeviceMetricsOverride", {

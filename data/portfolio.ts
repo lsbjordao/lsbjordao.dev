@@ -26,6 +26,20 @@ export const stats = [
 export const cncSystems = [
   {
     number: "01",
+    title: "Coordenar",
+    name: "CoAC Acompanhamento",
+    status: "Protótipo não adotado",
+    image: "/images/coac-app.webp",
+    imageAlt:
+      "Interface do protótipo CoAC Acompanhamento para gestão de avaliações",
+    summary:
+      "Concebi e construí uma aplicação para tornar visíveis etapas, responsáveis, pendências e progresso de centenas de avaliações em tempo real.",
+    contribution:
+      "A aplicação não foi implantada institucionalmente. O fluxo efetivamente usado permaneceu em uma planilha que configurei com Apps Script, APIs, mensageria e registros operacionais.",
+    tags: ["workflow", "Apps Script", "Google APIs", "mensageria"],
+  },
+  {
+    number: "02",
     title: "Orquestrar",
     name: "Bull–ProFlora",
     status: "ETL em operação",
@@ -39,7 +53,7 @@ export const cncSystems = [
     tags: ["BullMQ", "Redis", "ETL", "APIs", "logs"],
   },
   {
-    number: "02",
+    number: "03",
     title: "Analisar",
     name: "Avalia–CNCFlora",
     status: "Aplicação interna",
@@ -51,20 +65,6 @@ export const cncSystems = [
     contribution:
       "Atuei da arquitetura à interface, integrando MapBiomas, métricas de AOO e EOO, tendências de uso do solo e a redação estruturada das justificativas.",
     tags: ["Next.js", "NestJS", "PostGIS", "MapBiomas", "IUCN"],
-  },
-  {
-    number: "03",
-    title: "Coordenar",
-    name: "CoAC Acompanhamento",
-    status: "Protótipo não adotado",
-    image: "/images/coac-app.webp",
-    imageAlt:
-      "Interface do protótipo CoAC Acompanhamento para gestão de avaliações",
-    summary:
-      "Concebi e construí uma aplicação para tornar visíveis etapas, responsáveis, pendências e progresso de centenas de avaliações em tempo real.",
-    contribution:
-      "A aplicação não foi implantada institucionalmente. O fluxo efetivamente usado permaneceu em uma planilha que configurei com Apps Script, APIs, mensageria e registros operacionais.",
-    tags: ["workflow", "Apps Script", "Google APIs", "mensageria"],
   },
 ];
 

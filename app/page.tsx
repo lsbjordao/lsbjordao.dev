@@ -132,7 +132,7 @@ export default function Home() {
           <span className="brand__mark">LJ</span>
           <span className="brand__meta">
             <strong>Lucas Jordão</strong>
-            <small>Botânica × Sistemas</small>
+            <small>Botânica × Sistemas × Ciência de Dados</small>
           </span>
         </a>
 
@@ -205,7 +205,7 @@ export default function Home() {
 
         <div
           className="hero__visual"
-          aria-label="Mimosa osmarii, espécie descrita por Lucas S.B. Jordão"
+          aria-label="Mimosa osmarii, espécie descrita por Lucas S.B. Jordão et al."
         >
           <picture>
             <source
@@ -230,7 +230,7 @@ export default function Home() {
           <div className="specimen-tag">
             <span>ESPÉCIE NOVA / TAXONOMIA</span>
             <strong>Mimosa osmarii</strong>
-            <small>descrita por Lucas S.B. Jordão</small>
+            <small>descrita por Lucas S.B. Jordão et al.</small>
           </div>
           <div className="hero__coordinate">
             MIMOSA
@@ -410,8 +410,8 @@ export default function Home() {
         </div>
 
         <div className="case__systems">
-          {cncSystems.map((system, index) => {
-            const isCoac = index === 2;
+          {cncSystems.map((system) => {
+            const isCoac = system.name === "CoAC Acompanhamento";
             const image =
               isCoac && coacMode === "operation"
                 ? "/images/coac-sheets.webp"
@@ -644,9 +644,9 @@ export default function Home() {
         </div>
         <p className="eyebrow eyebrow--acid">Próximo capítulo</p>
         <h2 data-reveal>
-          A ciência precisa de
+          A ciência e gestão precisa de
           <br />
-          <em>infraestruturas vivas.</em>
+          <em>infraestruturas vivas e integradas.</em>
         </h2>
         <p className="contact__intro">
           Estou interessado em projetos onde biodiversidade, dados e produto
