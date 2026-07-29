@@ -14,6 +14,7 @@ export type PortfolioProject = {
   tags: string[];
   href: string;
   number: string;
+  relatedLabel?: string;
   relatedLinks?: Array<{
     label: string;
     href: string;
@@ -151,15 +152,28 @@ export const projects: PortfolioProject[] = [
   {
     number: "05",
     title: "FFB Cronologia",
-    kicker: "Mudanças taxonômicas no tempo",
+    kicker: "Histórico, ranking e nomes aceitos",
     description:
-      "Aplicação que compara versões da Flora e Funga do Brasil e revela a história de cada nome científico.",
+      "Aplicação de utilidade geral que compara 394 versões da Flora e Funga do Brasil, revela mudanças taxonômicas, cria rankings filtráveis e localiza nomes aceitos em lote com busca flexível.",
     image: "/images/ffb-cronologia.webp",
     imageAlt:
-      "Marca da aplicação Flora e Funga do Brasil Cronologia",
+      "Ranking por versão da aplicação Flora e Funga do Brasil Cronologia",
     category: "Software",
-    tags: ["Python", "dados abertos", "taxonomia"],
-    href: "https://lsbjordao-ffb-cronologia.hf.space/",
+    tags: ["394 versões", "busca flexível", "taxonomia", "dados abertos"],
+    href: "https://lsbjordao-ffb-cronologia.hf.space/#/ranking",
+    relatedLabel: "Explorar aplicação",
+    relatedLinks: [
+      {
+        label: "Ranking",
+        href: "https://lsbjordao-ffb-cronologia.hf.space/#/ranking",
+        status: "current",
+      },
+      {
+        label: "Busca de nomes em lote",
+        href: "https://lsbjordao-ffb-cronologia.hf.space/#/lote",
+        status: "current",
+      },
+    ],
   },
   {
     number: "06",

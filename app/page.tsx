@@ -412,7 +412,7 @@ export default function Home() {
 
         <div className="case__systems">
           {cncSystems.map((system) => {
-            const isCoac = system.name === "CoAC Acompanhamento";
+            const isCoac = system.name === "Acompanhamento de fluxo de trabalho";
             const image =
               isCoac && coacMode === "operation"
                 ? "/images/coac-sheets.webp"
@@ -618,9 +618,9 @@ export default function Home() {
               {project.relatedLinks && (
                 <div
                   className="project-card__related"
-                  aria-label={`Links do ${project.title} no Google Patents`}
+                  aria-label={`Links relacionados ao projeto ${project.title}`}
                 >
-                  <span>Google Patents</span>
+                  <span>{project.relatedLabel ?? "Google Patents"}</span>
                   <div>
                     {project.relatedLinks.map((link) => (
                       <ExternalLink

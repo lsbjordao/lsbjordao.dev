@@ -132,6 +132,17 @@ const award = await evaluate(`(() => {
   };
 })()`);
 
+const chronology = await evaluate(`(() => {
+  const card = [...document.querySelectorAll(".project-card")]
+    .find((project) => project.querySelector("h3")?.textContent.includes("FFB Cronologia"));
+  return {
+    image: card?.querySelector("img")?.getAttribute("src"),
+    links: [...(card?.querySelectorAll(".project-card__related a") ?? [])]
+      .map((link) => link.href),
+    description: card?.querySelector(".project-card__description > p")?.textContent
+  };
+})()`);
+
 const filter = await evaluate(`(() => {
   const button = [...document.querySelectorAll(".project-filter button")]
     .find((node) => node.textContent.includes("Conservação"));
@@ -176,6 +187,7 @@ const report = {
   details,
   patents,
   award,
+  chronology,
   filter,
   coac,
   menu,
@@ -202,6 +214,10 @@ const failed =
   !award.image?.includes("mapbiomas-award") ||
   !award.pdf?.includes("MencaoHonrosa") ||
   award.methods !== 2 ||
+  !chronology.image?.includes("ffb-cronologia") ||
+  !chronology.links.some((link) => link.endsWith("#/ranking")) ||
+  !chronology.links.some((link) => link.endsWith("#/lote")) ||
+  !chronology.description?.includes("394 versões") ||
   filter.count !== 1 ||
   !coac?.includes("Planilha") ||
   menu.expanded !== "true" ||
