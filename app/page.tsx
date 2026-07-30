@@ -238,11 +238,17 @@ export default function Home() {
             />
           </picture>
           <div className="hero__visual-shade" />
-          <div className="specimen-tag">
+          <ExternalLink
+            href="https://doi.org/10.11646/phytotaxa.312.2.6"
+            className="specimen-tag"
+          >
             <span>ESPÉCIE NOVA / TAXONOMIA</span>
             <strong>Mimosa osmarii</strong>
             <small>descrita por Lucas S.B. Jordão et al.</small>
-          </div>
+            <span className="specimen-tag__action">
+              Ler descrição da espécie <Arrow diagonal />
+            </span>
+          </ExternalLink>
           <div className="hero__coordinate">
             MIMOSA
             <br />

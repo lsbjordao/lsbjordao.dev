@@ -98,6 +98,16 @@ const structural = await evaluate(`(async () => {
   };
 })()`);
 
+const specimenTag = await evaluate(`(() => {
+  const tag = document.querySelector(".specimen-tag");
+  return {
+    element: tag?.tagName,
+    href: tag?.href,
+    title: tag?.querySelector("strong")?.textContent.trim(),
+    action: tag?.querySelector(".specimen-tag__action")?.textContent.trim()
+  };
+})()`);
+
 const details = await evaluate(`(() => {
   const details = document.querySelector(".system details");
   details.querySelector("summary").click();
@@ -217,6 +227,7 @@ const menu = await evaluate(`(() => {
 
 const report = {
   structural,
+  specimenTag,
   details,
   patents,
   award,
@@ -238,6 +249,10 @@ const failed =
   structural.projects !== 8 ||
   structural.projectOrder[1] !== "TTS–Mimosa" ||
   structural.projectOrder[2] !== "TTS–Mimosa Docs" ||
+  specimenTag.element !== "A" ||
+  specimenTag.href !== "https://doi.org/10.11646/phytotaxa.312.2.6" ||
+  specimenTag.title !== "Mimosa osmarii" ||
+  !specimenTag.action?.includes("Ler descrição da espécie") ||
   !details ||
   !patents.open ||
   patents.mentions !== 3 ||

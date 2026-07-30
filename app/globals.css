@@ -493,6 +493,27 @@ button:hover > .icon--diagonal {
   border-left: 3px solid var(--acid);
   backdrop-filter: blur(12px);
   display: grid;
+  color: var(--paper);
+  transform-origin: bottom right;
+  transition:
+    padding 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.specimen-tag:hover,
+.specimen-tag:focus-visible {
+  padding-top: 1.45rem;
+  padding-bottom: 1.4rem;
+  background: rgba(7, 19, 13, 0.94);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.28);
+  transform: translateY(-0.9rem) scale(1.035);
+}
+
+.specimen-tag:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 4px;
 }
 
 .specimen-tag span,
@@ -509,6 +530,36 @@ button:hover > .icon--diagonal {
   font-size: 1.45rem;
   font-style: italic;
   font-weight: 450;
+}
+
+.specimen-tag__action {
+  display: flex;
+  overflow: hidden;
+  max-height: 0;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0;
+  color: var(--acid) !important;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition:
+    max-height 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    margin-top 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease 40ms,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.specimen-tag__action .icon {
+  flex: 0 0 auto;
+  width: 0.9rem;
+}
+
+.specimen-tag:hover .specimen-tag__action,
+.specimen-tag:focus-visible .specimen-tag__action {
+  max-height: 2rem;
+  margin-top: 0.9rem;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero__coordinate {
