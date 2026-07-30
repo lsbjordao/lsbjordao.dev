@@ -264,6 +264,105 @@ export const googlePatents = {
   ],
 };
 
+export const technologyGroups = [
+  {
+    name: "Linguagens & interfaces",
+    items: [
+      { name: "JavaScript", icon: "/images/tech/javascript.svg" },
+      { name: "TypeScript", icon: "/images/tech/typescript.svg" },
+      { name: "Python", icon: "/images/tech/python.svg" },
+      { name: "R", icon: "/images/tech/r.svg" },
+      { name: "Node.js", icon: "/images/tech/nodejs.svg" },
+      { name: "React", icon: "/images/tech/react.svg" },
+      { name: "Next.js", icon: "/images/tech/nextdotjs.svg", monochrome: true },
+      { name: "Nextra", icon: "/images/tech/nextra.svg", monochrome: true },
+      { name: "RegEx", mark: ".*" },
+    ],
+  },
+  {
+    name: "Dados & pipelines",
+    items: [
+      { name: "dbt", icon: "/images/tech/dbt.svg", monochrome: true },
+      { name: "MongoDB", icon: "/images/tech/mongodb.svg" },
+      { name: "PostgreSQL", icon: "/images/tech/postgresql.svg" },
+      { name: "DuckDB", icon: "/images/tech/duckdb.svg", monochrome: true },
+      { name: "Trino", icon: "/images/tech/trino.svg", monochrome: true },
+      { name: "Redis", icon: "/images/tech/redis.svg" },
+      {
+        name: "ClickHouse",
+        icon: "/images/tech/clickhouse.svg",
+        monochrome: true,
+      },
+      { name: "Apache Airflow", icon: "/images/tech/apacheairflow.svg" },
+      {
+        name: "Apache Kafka",
+        icon: "/images/tech/apachekafka.svg",
+        monochrome: true,
+      },
+      {
+        name: "RabbitMQ",
+        icon: "/images/tech/rabbitmq.svg",
+        monochrome: true,
+      },
+      { name: "NumPy", icon: "/images/tech/numpy.svg" },
+      { name: "Pandas", icon: "/images/tech/pandas.svg" },
+      { name: "Jupyter", icon: "/images/tech/jupyter.svg" },
+      {
+        name: "Google Earth Engine",
+        icon: "/images/tech/googleearthengine.svg",
+        monochrome: true,
+      },
+    ],
+  },
+  {
+    name: "Infraestrutura & cloud",
+    items: [
+      { name: "Linux", icon: "/images/tech/linux.svg" },
+      { name: "Debian", icon: "/images/tech/debian.svg" },
+      { name: "Fedora", icon: "/images/tech/fedora.svg" },
+      { name: "Docker", icon: "/images/tech/docker.svg" },
+      { name: "Git", icon: "/images/tech/git.svg" },
+      {
+        name: "Google Cloud",
+        icon: "/images/tech/googlecloud.svg",
+        monochrome: true,
+      },
+      {
+        name: "AWS",
+        icon: "/images/tech/amazonwebservices.svg",
+        monochrome: true,
+      },
+      {
+        name: "Azure",
+        icon: "/images/tech/microsoftazure.svg",
+        monochrome: true,
+      },
+    ],
+  },
+  {
+    name: "Publicação & métodos",
+    items: [
+      { name: "LaTeX", icon: "/images/tech/latex.svg" },
+      { name: "Quarto", icon: "/images/tech/quarto.svg", monochrome: true },
+      { name: "Sphinx", icon: "/images/tech/sphinx.svg", monochrome: true },
+      {
+        name: "Reveal.js",
+        icon: "/images/tech/revealdotjs.svg",
+        monochrome: true,
+      },
+      { name: "CRISP-DM", mark: "◇" },
+      { name: "KDD", mark: "K" },
+      {
+        name: "Scrum",
+        icon: "/images/tech/scrumalliance.svg",
+        monochrome: true,
+      },
+      { name: "Agile", mark: "↗" },
+      { name: "GIMP", icon: "/images/tech/gimp.svg", monochrome: true },
+    ],
+  },
+];
+
 export const timeline = [
   {
     year: "2004",

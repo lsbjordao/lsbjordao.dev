@@ -178,6 +178,27 @@ const legacyMigration = await evaluate(`(() => {
   };
 })()`);
 
+const technologies = await evaluate(`(() => {
+  const section = document.querySelector("#tecnologias");
+  const primarySets = section?.querySelectorAll(
+    ".technology-marquee__set:not([aria-hidden])"
+  );
+  const names = [...(primarySets ?? [])]
+    .flatMap((set) => [...set.querySelectorAll(".technology-chip__label > strong")])
+    .map((node) => node.textContent.trim());
+  return {
+    groups: section?.querySelectorAll(".technology-group").length,
+    items: names.length,
+    uniqueItems: new Set(names).size,
+    duplicatedSets: section?.querySelectorAll(
+      '.technology-marquee__set[aria-hidden="true"]'
+    ).length,
+    localIcons: section?.querySelectorAll('img[src*="/images/tech/"]').length,
+    hasRegex: names.includes("RegEx"),
+    original: section?.querySelector('a[href*="/about.html"]')?.href
+  };
+})()`);
+
 await send("Emulation.setDeviceMetricsOverride", {
   width: 390,
   height: 844,
@@ -203,6 +224,7 @@ const report = {
   filter,
   coac,
   legacyMigration,
+  technologies,
   menu,
   runtimeErrors
 };
@@ -238,6 +260,13 @@ const failed =
   !legacyMigration.dbt ||
   !legacyMigration.portal?.startsWith("https://cncflora.jbrj.gov.br") ||
   !legacyMigration.text?.includes("executei sozinho") ||
+  technologies.groups !== 4 ||
+  technologies.items !== 40 ||
+  technologies.uniqueItems !== 40 ||
+  technologies.duplicatedSets !== 2 ||
+  technologies.localIcons !== 72 ||
+  !technologies.hasRegex ||
+  !technologies.original?.endsWith("/about.html") ||
   menu.expanded !== "true" ||
   !menu.open ||
   runtimeErrors.length > 0;

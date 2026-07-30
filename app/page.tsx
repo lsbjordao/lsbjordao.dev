@@ -8,6 +8,7 @@ import {
   posts,
   projects,
   stats,
+  technologyGroups,
   timeline,
   type ProjectCategory,
 } from "@/data/portfolio";
@@ -18,6 +19,15 @@ const projectFilters: Array<"Todos" | ProjectCategory> = [
   "Taxonomia",
   "Software",
   "Ciência aberta",
+];
+
+const technologyRows = [
+  technologyGroups.slice(0, 2).flatMap((group) =>
+    group.items.map((item) => ({ ...item, group: group.name })),
+  ),
+  technologyGroups.slice(2).flatMap((group) =>
+    group.items.map((item) => ({ ...item, group: group.name })),
+  ),
 ];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -786,6 +796,111 @@ export default function Home() {
         )}
       </section>
 
+      <section className="technology-stack section" id="tecnologias">
+        <div className="technology-stack__glow" aria-hidden="true" />
+        <div className="section-index section-index--light">
+          03 / TECNOLOGIAS
+        </div>
+
+        <header className="technology-stack__header" data-reveal>
+          <div>
+            <p className="eyebrow eyebrow--acid">
+              Da escrita científica à infraestrutura
+            </p>
+            <h2>
+              Tecnologias que atravessam
+              <br />
+              <em>o trabalho.</em>
+            </h2>
+          </div>
+          <div className="technology-stack__intro">
+            <span className="technology-stack__count">
+              <strong>40</strong>
+              tecnologias &amp; métodos
+            </span>
+            <p>
+              Um repertório construído em problemas reais: aplicações
+              científicas, engenharia de dados, publicação reprodutível e
+              infraestrutura.
+            </p>
+            <ExternalLink
+              href="https://lsbjordao.github.io/about.html"
+              className="text-link text-link--light"
+            >
+              Ver inventário original <Arrow diagonal />
+            </ExternalLink>
+          </div>
+        </header>
+
+        <div className="technology-stack__groups" data-reveal>
+          {technologyGroups.map((group, index) => (
+            <div className="technology-group" key={group.name}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{group.name}</strong>
+              <small>{group.items.length} itens</small>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="technology-marquee"
+          aria-label="Tecnologias e métodos utilizados"
+          data-reveal
+        >
+          {technologyRows.map((row, rowIndex) => (
+            <div
+              className={`technology-marquee__viewport ${
+                rowIndex === 1 ? "is-reverse" : ""
+              }`}
+              key={`technology-row-${rowIndex + 1}`}
+            >
+              <div className="technology-marquee__track">
+                {[false, true].map((duplicate) => (
+                  <div
+                    className="technology-marquee__set"
+                    aria-hidden={duplicate || undefined}
+                    key={duplicate ? "duplicate" : "primary"}
+                  >
+                    {row.map((technology) => (
+                      <div
+                        className="technology-chip"
+                        key={`${technology.group}-${technology.name}`}
+                      >
+                        <span className="technology-chip__icon">
+                          {"icon" in technology &&
+                          typeof technology.icon === "string" ? (
+                            <Image
+                              src={technology.icon}
+                              alt=""
+                              width={34}
+                              height={34}
+                              className={
+                                "monochrome" in technology &&
+                                technology.monochrome
+                                  ? "is-monochrome"
+                                  : undefined
+                              }
+                            />
+                          ) : (
+                            <strong aria-hidden="true">
+                              {"mark" in technology ? technology.mark : ""}
+                            </strong>
+                          )}
+                        </span>
+                        <span className="technology-chip__label">
+                          <strong>{technology.name}</strong>
+                          <small>{technology.group}</small>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="trajectory section" id="trajetoria">
         <div className="trajectory__image" data-reveal>
           <Image
@@ -797,7 +912,7 @@ export default function Home() {
           <span>Expedição botânica · Cerrado · 2017</span>
         </div>
         <div className="trajectory__content">
-          <div className="section-index">03 / TRAJETÓRIA</div>
+          <div className="section-index">04 / TRAJETÓRIA</div>
           <h2 data-reveal>
             Do espécime
             <br />
@@ -818,7 +933,7 @@ export default function Home() {
       </section>
 
       <section className="notes section" id="notas">
-        <div className="section-index">04 / NOTAS & PUBLICAÇÕES</div>
+        <div className="section-index">05 / NOTAS & PUBLICAÇÕES</div>
         <header className="notes__header" data-reveal>
           <h2>
             Pensamento em
