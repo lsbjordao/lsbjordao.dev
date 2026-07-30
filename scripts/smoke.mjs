@@ -261,10 +261,10 @@ const failed =
   !legacyMigration.portal?.startsWith("https://cncflora.jbrj.gov.br") ||
   !legacyMigration.text?.includes("executei sozinho") ||
   technologies.groups !== 4 ||
-  technologies.items !== 40 ||
-  technologies.uniqueItems !== 40 ||
+  technologies.items !== 41 ||
+  technologies.uniqueItems !== 41 ||
   technologies.duplicatedSets !== 2 ||
-  technologies.localIcons !== 72 ||
+  technologies.localIcons !== 74 ||
   !technologies.hasRegex ||
   !technologies.original?.endsWith("/about.html") ||
   menu.expanded !== "true" ||

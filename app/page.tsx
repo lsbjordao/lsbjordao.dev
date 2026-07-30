@@ -815,7 +815,7 @@ export default function Home() {
           </div>
           <div className="technology-stack__intro">
             <span className="technology-stack__count">
-              <strong>40</strong>
+              <strong>41</strong>
               tecnologias &amp; métodos
             </span>
             <p>

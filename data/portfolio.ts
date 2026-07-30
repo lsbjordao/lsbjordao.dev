@@ -285,6 +285,10 @@ export const technologyGroups = [
       { name: "dbt", icon: "/images/tech/dbt.svg", monochrome: true },
       { name: "MongoDB", icon: "/images/tech/mongodb.svg" },
       { name: "PostgreSQL", icon: "/images/tech/postgresql.svg" },
+      {
+        name: "Apache Parquet",
+        icon: "/images/tech/apacheparquet.svg",
+      },
       { name: "DuckDB", icon: "/images/tech/duckdb.svg", monochrome: true },
       { name: "Trino", icon: "/images/tech/trino.svg", monochrome: true },
       { name: "Redis", icon: "/images/tech/redis.svg" },
