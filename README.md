@@ -89,8 +89,8 @@ npm run typecheck
 npm run build
 ```
 
-O build gera `dist/` com export estático (`/index.html`, `/en.html`,
-`/robots.txt`, `/sitemap.xml`), as variantes em `/_img/` e o Worker de hosting.
+O build gera `dist/` com export estático (`/index.html`, `/en.html`, `/404.html`,
+`/robots.txt`, `/sitemap.xml`) e as variantes em `/_img/`.
 
 Vale conferir que nenhuma URL de imagem ficou pendurada — o loader aponta para
 arquivos gerados, então uma largura sem variante seria 404 silencioso:
@@ -109,3 +109,31 @@ for page in ("dist/index.html", "dist/en.html"):
 print(f"{len(faltando)} imagens faltando")
 PY
 ```
+
+## Deploy
+
+O site vive em `https://lsbjordao.dev` — o **apex** é o endereço canônico, e é
+ele que está em `profile.site` (`data/site.ts`), de onde saem `metadataBase`,
+os `canonical`, o `sitemap.xml` e o par `hreflang`. Mudar o host não deveria
+mudar esse valor.
+
+Hospedagem: **Cloudflare Pages**, ligado a este repositório. Como a saída é
+export estático, não há runtime — o Pages só serve arquivos.
+
+| Campo | Valor |
+| --- | --- |
+| Build command | `npm run build` |
+| Output directory | `dist` |
+| Node | `22`, pinado em `.nvmrc` |
+
+O apex funciona porque o DNS não aceita `CNAME` na raiz e a Cloudflare resolve
+isso com CNAME flattening — não há IP fixo para manter.
+
+O `www` **não** é um domínio customizado do projeto: `_redirects` do Pages não
+faz redirect a nível de domínio, então o `www → apex` é uma Redirect Rule na
+zona (`Rules → Redirect Rules`), com `www.lsbjordao.dev/*` → `lsbjordao.dev/$1`,
+301, preservando query string.
+
+`npm run build:openai` existe só para o deploy antigo na plataforma da OpenAI —
+ele acrescenta `dist/server/index.js` e `dist/.openai/hosting.json`, que o
+Cloudflare Pages ignora. O build normal não gera nenhum dos dois.

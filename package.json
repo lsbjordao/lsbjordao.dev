@@ -7,7 +7,8 @@
     "dev": "next dev",
     "images": "node scripts/generate-images.mjs",
     "prebuild": "node scripts/generate-images.mjs",
-    "build": "next build && node scripts/prepare-sites.mjs",
+    "build": "next build",
+    "build:openai": "next build && node scripts/prepare-sites.mjs",
     "contributions": "node scripts/fetch-contributions.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit"
