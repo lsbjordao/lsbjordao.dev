@@ -1,3 +1,5 @@
+import type { Stat } from "../site";
+
 export const pt = {
   meta: {
     locale: "pt-BR",
@@ -82,16 +84,85 @@ export const pt = {
     },
   },
 
+  /* Doze números em três fileiras de quatro. Os que têm `drawer` abrem a lista
+     que os sustenta — número sozinho é alegação, número com lista é evidência. */
   stats: [
     { value: "06", label: "anos construindo sistemas em produção" },
     { value: "03", label: "sistemas institucionais em operação" },
     { value: "53", label: "repositórios públicos" },
+    { value: "06", label: "pacotes publicados no npm", drawer: "packages" },
     { value: "588", label: "avaliações publicadas na Lista Vermelha da IUCN" },
     { value: "06", label: "espécies novas descritas" },
-    { value: "08", label: "artigos publicados como primeiro autor" },
-    { value: "06", label: "artigos publicados como coautor" },
+    {
+      value: "08",
+      label: "artigos publicados como primeiro autor",
+      drawer: "firstAuthor",
+    },
+    { value: "06", label: "artigos publicados como coautor", drawer: "coAuthor" },
     { value: "01", label: "capítulo de livro publicado" },
-  ],
+    {
+      value: "08",
+      label: "participações em bancas examinadoras",
+      drawer: "examBoards",
+    },
+    {
+      value: "01",
+      label: "orientação de trabalho de conclusão de graduação",
+      drawer: "supervision",
+    },
+    {
+      value: "07",
+      label: "periódicos científicos revisados",
+      drawer: "peerReview",
+    },
+  ] as Stat[],
+
+  /** Rótulos das gavetas dos números grandes. */
+  drawers: {
+    open: "Ver lista",
+    close: "Fechar lista",
+    hint: "clique ou passe o cursor",
+    forthcoming: "No prelo",
+    packages: {
+      title: "Pacotes publicados no npm",
+      note: "Escopo @lsbjordao · instaláveis com npm i",
+    },
+    firstAuthor: {
+      title: "Artigos como primeiro autor",
+      note: "Ordem cronológica inversa · fonte: Currículo Lattes",
+    },
+    coAuthor: {
+      title: "Artigos como coautor",
+      note: "Ordem cronológica inversa · fonte: Currículo Lattes",
+    },
+    examBoards: {
+      title: "Bancas examinadoras",
+      note: "Trabalhos examinados · os nomes dos candidatos ficam no Lattes",
+    },
+    supervision: {
+      title: "Orientação concluída",
+      note: "Trabalho de conclusão de curso de graduação",
+    },
+    peerReview: {
+      title: "Pareceres ad hoc",
+      note: "Periódicos para os quais emiti parecer",
+    },
+    levels: {
+      phd: "Qualificação de doutorado",
+      msc: "Qualificação de mestrado",
+      undergraduate: "TCC de graduação",
+    },
+  },
+
+  packages: {
+    tts: "Framework que transforma descrições biológicas em dados tipados e validáveis.",
+    iucnValidator:
+      "Valida, reconcilia e normaliza declarações de critérios (A–E) da Lista Vermelha da IUCN contra a evidência apresentada, com relatórios multilíngues.",
+    genbank: "Cliente das E-utilities do NCBI GenBank para Node.js.",
+    ffb: "SDK da Flora e Funga do Brasil: famílias, gêneros, espécies e táxons.",
+    ibge: "Cliente das APIs de localidades do IBGE, de UFs a subdistritos.",
+    mapbiomasAlerta: "Acesso programático aos alertas do MapBiomas Alerta.",
+  },
 
   manifesto: {
     index: "00 / PONTO DE VISTA",
@@ -498,7 +569,73 @@ export const pt = {
   },
 
   teaching: {
-    index: "04 / MATERIAL DIDÁTICO",
+    index: "04 / DOCÊNCIA",
+
+    /* Dar aula é a parte mais antiga da minha trajetória e a que menos aparece
+       num portfólio de engenharia — por isso vem antes da estante de apostilas. */
+    practice: {
+      eyebrow: "Ensino · do fundamental à pós-graduação",
+      heading: { line1: "Ensinar é a forma mais", emphasis: "antiga do meu trabalho." },
+      intro:
+        "Comecei como monitor de micologia em 2007 e nunca parei. Dei aula de Ciências no ensino fundamental, de educação ambiental em horto escola, e hoje ministro disciplinas e treinamentos de pós-graduação sobre filoinformática, legislação ambiental e avaliação de risco de extinção. É a mesma prática do resto desta página: tornar método e evidência utilizáveis por outras pessoas.",
+      countLabel: "turmas, cursos e disciplinas em destaque",
+      listNote: {
+        text: "Uma seleção, não a relação completa — o registro integral está no",
+        link: "Currículo Lattes",
+      },
+      credential: {
+        label: "Habilitação",
+        value:
+          "Licenciado em Ciências Biológicas (2009) · bacharel (2007) · Universidade Santa Úrsula",
+      },
+      kinds: {
+        course: "Curso · disciplina",
+        position: "Vínculo docente",
+      },
+      hoursLabel: "carga horária",
+      roles: {
+        cncflora: {
+          title: "Treinamento da equipe em avaliação de risco de extinção",
+          place: "CNCFlora / JBRJ · Rio de Janeiro",
+        },
+        ufms: {
+          title:
+            "Espécies Ameaçadas: da política pública à avaliação do risco de extinção",
+          place: "Universidade Federal de Mato Grosso do Sul · remoto",
+        },
+        enbtGuest: {
+          title:
+            "Filogenia, biogeografia e diversificação de Mimosa ser. Paucifoliatae — professor convidado na disciplina EB004, Introdução à Sistemática Filogenética",
+          place: "Escola Nacional de Botânica Tropical / JBRJ",
+        },
+        enbtPhylo: {
+          title: "Tópicos Especiais: Introdução à Filoinformática (EB02935)",
+          place: "Escola Nacional de Botânica Tropical / JBRJ",
+        },
+        bioforense: {
+          title:
+            "Botânica forense, botânica básica e legislação aplicada à proteção da flora — preparatório para perito criminal",
+          place: "Curso Bioforense · Rio de Janeiro",
+        },
+        hortoEscola: {
+          title: "Professor de educação ambiental",
+          place: "Horto Escola Artesanal · São Pedro da Aldeia, RJ",
+        },
+        seeduc: {
+          title: "Docente II · educação básica",
+          place: "Secretaria de Educação do Estado do Rio de Janeiro",
+        },
+        laranjeiras: {
+          title: "Professor de Ciências · 2º ciclo do ensino fundamental",
+          place: "Sociedade Educacional Laranjeiras · Rio de Janeiro",
+        },
+        usu: {
+          title: "Monitoria em Micologia",
+          place: "Universidade Santa Úrsula · Rio de Janeiro",
+        },
+      },
+    },
+
     eyebrow: "Cursos e apostilas de acesso aberto",
     heading: { line1: "Uma estante para", emphasis: "ensinar em público." },
     intro:
@@ -596,8 +733,113 @@ export const pt = {
     groups: {
       languages: "Linguagens & interfaces",
       dataPipelines: "Dados & pipelines",
+      knowledge: "Conhecimento & semântica",
       infrastructure: "Infraestrutura & cloud",
       publishing: "Publicação & métodos",
+    },
+    skills: {
+      eyebrow: "O que eu sei fazer com elas",
+      heading: { before: "Ferramenta é meio.", emphasis: "Habilidade é o trabalho." },
+      intro:
+        "A lista acima diz com o que eu trabalho. Esta diz o que eu resolvo — agrupado por domínio de problema.",
+      countLabel: "competências",
+      groups: {
+        dataEngineering: {
+          title: "Engenharia de dados",
+          items: [
+            "ETL e ELT automatizados",
+            "Orquestração de pipelines",
+            "Mensageria e filas assíncronas",
+            "Modelagem e teste de transformações",
+            "Aplicações de uso intensivo de dados",
+            "Contratos de dados e versionamento",
+            "Migração de acervos legados",
+          ],
+        },
+        fullstack: {
+          title: "Desenvolvimento full stack",
+          items: [
+            "Aplicações web de ponta a ponta",
+            "APIs REST e GraphQL com NestJS",
+            "Componentização em React e Svelte",
+            "Modelagem e evolução de esquema",
+            "Autenticação, autorização e auditoria",
+            "Renderização estática, SSR e performance",
+            "Testes automatizados e revisão de código",
+          ],
+        },
+        extraction: {
+          title: "Extração & integração",
+          items: [
+            "Extração de dados com regex",
+            "Web scraping e PDF scraping",
+            "Mineração de texto",
+            "APIs REST e GraphQL",
+            "Integração de fontes heterogêneas",
+            "Dados FAIR e vocabulários de biodiversidade",
+          ],
+        },
+        modelling: {
+          title: "Modelagem & bancos de dados",
+          items: [
+            "Bancos relacionais e SQL analítico",
+            "NoSQL orientado a documentos",
+            "NoSQL orientado a grafos",
+            "Busca vetorial e embeddings",
+            "Ontologias, RDF e SPARQL",
+            "Modelagem de domínio de negócio",
+            "Padrões de projeto",
+          ],
+        },
+        platform: {
+          title: "Plataforma & infraestrutura",
+          items: [
+            "Arquitetura em microsserviços",
+            "Engenharia de plataforma",
+            "CI/CD e práticas DevOps",
+            "IaaS e nuvem pública",
+            "Contêineres e ambientes reprodutíveis",
+            "Git, fluxos de branch e revisão",
+            "Observabilidade e catálogo de serviços",
+          ],
+        },
+        geo: {
+          title: "Geoespacial & conservação",
+          items: [
+            "Banco e consultas espaciais com PostGIS",
+            "Séries históricas de uso e cobertura do solo",
+            "Sensoriamento remoto no Google Earth Engine",
+            "Métricas de AOO, EOO e perda de habitat",
+            "Critérios da Lista Vermelha da IUCN",
+            "Ecologia de paisagens e corredores ecológicos",
+            "Modelagem de cenários com CA-Markov",
+          ],
+        },
+        analysis: {
+          title: "Análise & decisão",
+          items: [
+            "Indicadores e relatórios reprodutíveis",
+            "Análise de dados financeiros",
+            "Analítica de visitação com Google Analytics",
+            "Estatística aplicada e regressão",
+            "Painéis analíticos e BI",
+            "Storytelling de dados",
+            "CRISP-DM e KDD",
+          ],
+        },
+        product: {
+          title: "Produto & processo",
+          items: [
+            "Lean Inception",
+            "Product Backlog Building",
+            "Scrum, Kanban e práticas ágeis",
+            "Engenharia e elicitação de requisitos",
+            "Storytelling de domínio",
+            "Documentação e publicação reprodutível",
+            "Acessibilidade digital (eMAG e WCAG)",
+          ],
+        },
+      },
     },
   },
 
@@ -793,9 +1035,77 @@ export const pt = {
           "Novas ferramentas e abordagens automatizadas para avaliação do risco de extinção: analisando a dinâmica da cobertura e uso do solo · 74º Congresso Nacional de Botânica · 2024",
         alt: "Lucas Jordão apresentando uma palestra sobre ferramentas automatizadas para avaliação do risco de extinção no 74º Congresso Nacional de Botânica",
       },
+      "cnb74-lulc": {
+        caption:
+          "Evolução da cobertura e do uso do solo: a evidência que sustenta o critério B · 74º Congresso Nacional de Botânica · 2024",
+        alt: "Lucas Jordão apresentando um mapa de evolução da cobertura e uso do solo do Distrito Federal no 74º Congresso Nacional de Botânica, na Universidade de Brasília",
+      },
       "cncflora-training": {
         caption: "Curso de treinamento no CNCFlora · 2026",
         alt: "Lucas Jordão ministrando um treinamento para a equipe do CNCFlora em uma sala de aula",
+      },
+    },
+    courses: {
+      label: "Formação complementar",
+      note: (count: number, hours: number) =>
+        `${count} cursos · ${hours}h registradas no Lattes`,
+      items: {
+        emagAuthor: {
+          title: "eMAG Conteudista",
+          place: "Escola Nacional de Administração Pública (ENAP)",
+        },
+        emagDev: {
+          title: "eMAG Desenvolvedor",
+          place: "Escola Nacional de Administração Pública (ENAP)",
+        },
+        susData: {
+          title: "Análise de dados para pesquisa no SUS",
+          place: "Fundação Oswaldo Cruz (FIOCRUZ)",
+        },
+        itGovernance: {
+          title: "Governança de TIC no contexto da transformação digital",
+          place: "Escola Nacional de Administração Pública (ENAP)",
+        },
+        spatialPriority: {
+          title: "Priorização espacial para conservação",
+          place: "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro",
+        },
+        landscapeEcology: {
+          title: "Ecologia de paisagens e modelagem de corredores ecológicos",
+          place: "Universidade de Brasília (UnB)",
+        },
+        earthEngine: {
+          title: "Análise de imagens orbitais no Google Earth Engine",
+          place: "Solved — Soluções em Geoinformação",
+        },
+        lawPhilosophy: {
+          title: "Filosofia do Direito",
+          place: "Instituto para Reforma das Relações entre Estado e Empresa (IREE)",
+        },
+        economics: {
+          title: "Economia para pensar o Brasil",
+          place: "Instituto para Reforma das Relações entre Estado e Empresa (IREE)",
+        },
+        educationSociety: {
+          title: "Educação, ambiente e sociedade",
+          place: "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro",
+        },
+        sem: {
+          title: "Microscopia eletrônica de varredura",
+          place: "Instituto de Pesquisas Jardim Botânico do Rio de Janeiro",
+        },
+        environmentalBasics: {
+          title: "Básico ambiental",
+          place: "Academia do Concurso · Rio de Janeiro",
+        },
+        astronomy: {
+          title: "História da astronomia",
+          place: "Fundação Planetário da Cidade do Rio de Janeiro",
+        },
+        greenLeadership: {
+          title: "Formação de lideranças verdes",
+          place: "Fundação Verde Herbert Daniel",
+        },
       },
     },
     timelineLabel: "Linha do tempo",
@@ -880,7 +1190,7 @@ export const pt = {
     ],
     primaryCta: "Falar comigo no LinkedIn",
     lattesCta: "Ver Currículo Lattes",
-    cvCta: "Baixar currículo (PDF)",
+    cvCta: "Baixar currículo (1 página)",
     links: { github: "GitHub", lattes: "Currículo Lattes", blog: "Blog" },
     linkNote: {
       github: "53 repositórios públicos",

@@ -12,14 +12,74 @@
 import type { CSSProperties } from "react";
 import { spineWidth, teaching, teachingChapterTotal } from "@/data/teaching";
 import { copy as allCopy } from "@/data/copy";
-import type { Lang } from "@/data/site";
+import { profile, teachingRoles, type Lang } from "@/data/site";
 
 export default function Teaching({ lang }: { lang: Lang }) {
   const c = allCopy[lang].teaching;
+  const p = c.practice;
 
   return (
     <section className="teaching section" id="aulas">
       <div className="section-index">{c.index}</div>
+
+      {/* A docência vem antes da estante: as apostilas são o rastro do que
+          foi ensinado, não o contrário. */}
+      <div className="docencia">
+        <header className="docencia__header" data-reveal>
+          <div>
+            <p className="eyebrow">{p.eyebrow}</p>
+            <h2>
+              {p.heading.line1}
+              <br />
+              <em>{p.heading.emphasis}</em>
+            </h2>
+          </div>
+          <div className="docencia__intro">
+            <span className="docencia__count">
+              <strong>{String(teachingRoles.length).padStart(2, "0")}</strong>
+              {p.countLabel}
+            </span>
+            <p>{p.intro}</p>
+            <p className="docencia__credential">
+              <span>{p.credential.label}</span>
+              {p.credential.value}
+            </p>
+          </div>
+        </header>
+
+        <ol className="docencia__list" data-reveal>
+          {teachingRoles.map((role) => {
+            const roleCopy = p.roles[role.id];
+            return (
+              <li className={`docencia-role docencia-role--${role.kind}`} key={role.id}>
+                <time>{role.years}</time>
+                <div>
+                  <span className="docencia-role__kind">
+                    {p.kinds[role.kind]}
+                    {role.hours && (
+                      <em>
+                        {role.hours} {p.hoursLabel}
+                      </em>
+                    )}
+                  </span>
+                  <h3>{roleCopy.title}</h3>
+                  <small>{roleCopy.place}</small>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+
+        {/* O número e a lista são um recorte. Sem dizer isso, nove entradas
+            leem como "foi só isso" — e não foi. */}
+        <p className="docencia__note" data-reveal>
+          {p.listNote.text}{" "}
+          <a href={profile.lattes} target="_blank" rel="noreferrer">
+            {p.listNote.link}
+          </a>
+          .
+        </p>
+      </div>
 
       <header className="teaching__header" data-reveal>
         <div>

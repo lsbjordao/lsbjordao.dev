@@ -26,12 +26,16 @@ app/
   sitemap.ts       /sitemap.xml com o par hreflang
 data/
   site.ts          dados independentes de idioma: links, imagens, stack, ids
+  academia.ts      publicações, bancas, orientações e pareceres (citações)
+  teaching.ts      apostilas da estante e a largura das lombadas
   copy/pt.ts       todo o texto em português (fonte da verdade da forma)
   copy/en.ts       tradução; precisa satisfazer `Copy = typeof pt`
 scripts/
   image-sizes.json larguras e qualidade — fonte única
   image-loader.ts  loader do next/image
   generate-images.mjs gera as variantes em public/_img/
+  cv/curriculo.html currículo de uma página, em A4
+  build-cv.mjs     renderiza o currículo em public/cv/ com o Chrome headless
 ```
 
 Português e inglês são **rotas estáticas separadas**, não uma troca em
@@ -45,6 +49,27 @@ Um projeto novo precisa de três coisas: uma entrada em `projects`
 `data/copy/en.ts` sob a mesma chave; e a imagem em `public/images/`. Se a chave
 faltar em `en.ts`, o `typecheck` acusa — é essa a proteção contra tradução
 esquecida.
+
+### Números grandes e suas gavetas
+
+Os doze números do topo vivem em `stats`, em `data/copy`. Quem tem `drawer`
+vira botão e abre, embaixo da grade inteira, a lista que comprova o número —
+as listas estão em `data/academia.ts`, fora do `copy` porque citação é nome
+próprio e não se traduz. Passar o cursor pré-visualiza, clicar fixa.
+
+Os DOIs foram conferidos um a um no Crossref. Item sem registro achado fica
+sem link e renderiza como texto: identificador inventado é pior que ausente.
+
+### Currículo de uma página
+
+`npm run cv` renderiza `scripts/cv/curriculo.html` em
+`public/cv/lucas-jordao-cv.pdf` com o Chrome headless, usando as mesmas fontes
+variáveis e a mesma paleta do site. O script conta as páginas do PDF e falha se
+passar de uma — o formato é a restrição, então ele é verificado, não confiado.
+
+O PDF é versionado: o deploy é um export estático e não roda este script. Depois
+de editar o HTML, rode `npm run cv` e faça commit do PDF junto. O Lattes
+completo continua em `public/cv/lucas-jordao-curriculo-lattes.pdf`.
 
 ### Imagens responsivas
 

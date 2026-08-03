@@ -84,12 +84,66 @@ export const en: Copy = {
     { value: "06", label: "years shipping production systems" },
     { value: "03", label: "institutional systems in operation" },
     { value: "53", label: "public repositories" },
+    { value: "06", label: "packages published on npm", drawer: "packages" },
     { value: "588", label: "assessments published on the IUCN Red List" },
     { value: "06", label: "new species described" },
-    { value: "08", label: "published papers as first author" },
-    { value: "06", label: "published papers as co-author" },
+    { value: "08", label: "published papers as first author", drawer: "firstAuthor" },
+    { value: "06", label: "published papers as co-author", drawer: "coAuthor" },
     { value: "01", label: "published book chapter" },
+    { value: "08", label: "examination boards served on", drawer: "examBoards" },
+    {
+      value: "01",
+      label: "undergraduate thesis supervised",
+      drawer: "supervision",
+    },
+    { value: "07", label: "scientific journals peer-reviewed", drawer: "peerReview" },
   ],
+
+  drawers: {
+    open: "See the list",
+    close: "Close the list",
+    hint: "click or hover",
+    forthcoming: "In press",
+    packages: {
+      title: "Packages published on npm",
+      note: "@lsbjordao scope · installable with npm i",
+    },
+    firstAuthor: {
+      title: "Papers as first author",
+      note: "Reverse chronological order · source: Lattes CV",
+    },
+    coAuthor: {
+      title: "Papers as co-author",
+      note: "Reverse chronological order · source: Lattes CV",
+    },
+    examBoards: {
+      title: "Examination boards",
+      note: "Works examined · candidate names stay on the Lattes CV",
+    },
+    supervision: {
+      title: "Completed supervision",
+      note: "Undergraduate final thesis",
+    },
+    peerReview: {
+      title: "Ad hoc peer review",
+      note: "Journals I have reviewed for",
+    },
+    levels: {
+      phd: "PhD qualifying exam",
+      msc: "MSc qualifying exam",
+      undergraduate: "Undergraduate thesis",
+    },
+  },
+
+  packages: {
+    tts: "A framework that turns biological descriptions into typed, validatable data.",
+    iucnValidator:
+      "Validates, reconciles and normalises IUCN Red List criteria declarations (A–E) against the evidence supplied, with multilingual reports.",
+    genbank: "An NCBI GenBank E-utilities client for Node.js.",
+    ffb: "Flora and Funga of Brazil SDK: families, genera, species and taxa.",
+    ibge: "A client for the IBGE localities APIs, from states down to subdistricts.",
+    mapbiomasAlerta: "Programmatic access to MapBiomas Alerta deforestation alerts.",
+  },
 
   manifesto: {
     index: "00 / POINT OF VIEW",
@@ -493,7 +547,71 @@ export const en: Copy = {
   },
 
   teaching: {
-    index: "04 / COURSE MATERIAL",
+    index: "04 / TEACHING",
+
+    practice: {
+      eyebrow: "Teaching · from primary school to graduate courses",
+      heading: { line1: "Teaching is the oldest", emphasis: "part of my practice." },
+      intro:
+        "I started as a mycology teaching assistant in 2007 and never stopped. I taught science in primary school and environmental education at a teaching nursery, and today I run graduate courses and staff training on phyloinformatics, environmental law and extinction risk assessment. It is the same practice as the rest of this page: making methods and evidence usable by other people.",
+      countLabel: "selected classes, courses and modules",
+      listNote: {
+        text: "A selection, not the full record — the complete list is on the",
+        link: "Lattes CV",
+      },
+      credential: {
+        label: "Qualification",
+        value:
+          "Licentiate in Biological Sciences (2009) · BSc (2007) · Universidade Santa Úrsula",
+      },
+      kinds: {
+        course: "Course · module",
+        position: "Teaching post",
+      },
+      hoursLabel: "contact hours",
+      roles: {
+        cncflora: {
+          title: "Staff training in extinction risk assessment",
+          place: "CNCFlora / JBRJ · Rio de Janeiro",
+        },
+        ufms: {
+          title:
+            "Threatened Species: from public policy to extinction risk assessment",
+          place: "Universidade Federal de Mato Grosso do Sul · remote",
+        },
+        enbtGuest: {
+          title:
+            "Phylogeny, biogeography and diversification of Mimosa ser. Paucifoliatae — guest lecturer on EB004, Introduction to Phylogenetic Systematics",
+          place: "Escola Nacional de Botânica Tropical / JBRJ",
+        },
+        enbtPhylo: {
+          title: "Special Topics: Introduction to Phyloinformatics (EB02935)",
+          place: "Escola Nacional de Botânica Tropical / JBRJ",
+        },
+        bioforense: {
+          title:
+            "Forensic botany, general botany and law applied to flora protection — preparatory course for forensic examiners",
+          place: "Curso Bioforense · Rio de Janeiro",
+        },
+        hortoEscola: {
+          title: "Environmental education teacher",
+          place: "Horto Escola Artesanal · São Pedro da Aldeia, RJ",
+        },
+        seeduc: {
+          title: "Teacher II · basic education",
+          place: "Rio de Janeiro State Department of Education",
+        },
+        laranjeiras: {
+          title: "Science teacher · lower secondary school",
+          place: "Sociedade Educacional Laranjeiras · Rio de Janeiro",
+        },
+        usu: {
+          title: "Mycology teaching assistant",
+          place: "Universidade Santa Úrsula · Rio de Janeiro",
+        },
+      },
+    },
+
     eyebrow: "Open-access courses and handbooks",
     heading: { line1: "A shelf for", emphasis: "teaching in public." },
     intro:
@@ -587,8 +705,113 @@ export const en: Copy = {
     groups: {
       languages: "Languages & interfaces",
       dataPipelines: "Data & pipelines",
+      knowledge: "Knowledge & semantics",
       infrastructure: "Infrastructure & cloud",
       publishing: "Publishing & methods",
+    },
+    skills: {
+      eyebrow: "What I do with them",
+      heading: { before: "Tools are the means.", emphasis: "Skills are the work." },
+      intro:
+        "The list above says what I work with. This one says what I solve — grouped by problem domain.",
+      countLabel: "skills",
+      groups: {
+        dataEngineering: {
+          title: "Data engineering",
+          items: [
+            "Automated ETL and ELT",
+            "Pipeline orchestration",
+            "Messaging and asynchronous queues",
+            "Transformation modelling and testing",
+            "Data-intensive applications",
+            "Data contracts and versioning",
+            "Legacy data migration",
+          ],
+        },
+        fullstack: {
+          title: "Full stack development",
+          items: [
+            "End-to-end web applications",
+            "REST and GraphQL APIs with NestJS",
+            "Componentisation in React and Svelte",
+            "Schema modelling and migration",
+            "Authentication, authorisation and audit trails",
+            "Static rendering, SSR and performance",
+            "Automated testing and code review",
+          ],
+        },
+        extraction: {
+          title: "Extraction & integration",
+          items: [
+            "Data extraction with regex",
+            "Web scraping and PDF scraping",
+            "Text mining",
+            "REST and GraphQL APIs",
+            "Integration of heterogeneous sources",
+            "FAIR data and biodiversity vocabularies",
+          ],
+        },
+        modelling: {
+          title: "Modelling & databases",
+          items: [
+            "Relational databases and analytical SQL",
+            "Document-oriented NoSQL",
+            "Graph-oriented NoSQL",
+            "Vector search and embeddings",
+            "Ontologies, RDF and SPARQL",
+            "Business domain modelling",
+            "Design patterns",
+          ],
+        },
+        platform: {
+          title: "Platform & infrastructure",
+          items: [
+            "Microservice architecture",
+            "Platform engineering",
+            "CI/CD and DevOps practices",
+            "IaaS and public cloud",
+            "Containers and reproducible environments",
+            "Git, branching flows and review",
+            "Observability and service catalogue",
+          ],
+        },
+        geo: {
+          title: "Geospatial & conservation",
+          items: [
+            "Spatial databases and queries with PostGIS",
+            "Land-cover and land-use time series",
+            "Remote sensing with Google Earth Engine",
+            "AOO, EOO and habitat-loss metrics",
+            "IUCN Red List criteria",
+            "Landscape ecology and ecological corridors",
+            "Scenario modelling with CA-Markov",
+          ],
+        },
+        analysis: {
+          title: "Analysis & decision",
+          items: [
+            "Reproducible indicators and reporting",
+            "Financial data analysis",
+            "Web analytics with Google Analytics",
+            "Applied statistics and regression",
+            "Analytical dashboards and BI",
+            "Data storytelling",
+            "CRISP-DM and KDD",
+          ],
+        },
+        product: {
+          title: "Product & process",
+          items: [
+            "Lean Inception",
+            "Product Backlog Building",
+            "Scrum, Kanban and agile practices",
+            "Requirements engineering and elicitation",
+            "Domain storytelling",
+            "Reproducible documentation and publishing",
+            "Digital accessibility (eMAG and WCAG)",
+          ],
+        },
+      },
     },
   },
 
@@ -782,9 +1005,77 @@ export const en: Copy = {
           "New tools and automated approaches for extinction risk assessment: analysing land-cover and land-use dynamics · 74th National Botany Congress · 2024",
         alt: "Lucas Jordão giving a talk on automated tools for extinction risk assessment at the 74th National Botany Congress",
       },
+      "cnb74-lulc": {
+        caption:
+          "Land-cover and land-use change: the evidence behind criterion B · 74th National Botany Congress · 2024",
+        alt: "Lucas Jordão presenting a land-cover and land-use change map of the Federal District at the 74th National Botany Congress, University of Brasília",
+      },
       "cncflora-training": {
         caption: "Training course at CNCFlora · 2026",
         alt: "Lucas Jordão delivering a training session to the CNCFlora team in a classroom",
+      },
+    },
+    courses: {
+      label: "Continuing education",
+      note: (count: number, hours: number) =>
+        `${count} courses · ${hours}h recorded on the Lattes CV`,
+      items: {
+        emagAuthor: {
+          title: "eMAG accessibility for content authors",
+          place: "National School of Public Administration (ENAP)",
+        },
+        emagDev: {
+          title: "eMAG accessibility for developers",
+          place: "National School of Public Administration (ENAP)",
+        },
+        susData: {
+          title: "Data analysis for research in the Brazilian public health system",
+          place: "Oswaldo Cruz Foundation (FIOCRUZ)",
+        },
+        itGovernance: {
+          title: "IT governance in the context of digital transformation",
+          place: "National School of Public Administration (ENAP)",
+        },
+        spatialPriority: {
+          title: "Spatial prioritisation for conservation",
+          place: "Rio de Janeiro Botanical Garden Research Institute",
+        },
+        landscapeEcology: {
+          title: "Landscape ecology and ecological corridor modelling",
+          place: "University of Brasília (UnB)",
+        },
+        earthEngine: {
+          title: "Satellite image analysis with Google Earth Engine",
+          place: "Solved — Geoinformation Solutions",
+        },
+        lawPhilosophy: {
+          title: "Philosophy of Law",
+          place: "Institute for the Reform of State–Business Relations (IREE)",
+        },
+        economics: {
+          title: "Economics for thinking about Brazil",
+          place: "Institute for the Reform of State–Business Relations (IREE)",
+        },
+        educationSociety: {
+          title: "Education, environment and society",
+          place: "Rio de Janeiro Botanical Garden Research Institute",
+        },
+        sem: {
+          title: "Scanning electron microscopy",
+          place: "Rio de Janeiro Botanical Garden Research Institute",
+        },
+        environmentalBasics: {
+          title: "Environmental fundamentals",
+          place: "Academia do Concurso · Rio de Janeiro",
+        },
+        astronomy: {
+          title: "History of astronomy",
+          place: "Rio de Janeiro City Planetarium Foundation",
+        },
+        greenLeadership: {
+          title: "Green leadership training",
+          place: "Fundação Verde Herbert Daniel",
+        },
       },
     },
     timelineLabel: "Timeline",
@@ -868,7 +1159,7 @@ export const en: Copy = {
     ],
     primaryCta: "Message me on LinkedIn",
     lattesCta: "View Lattes CV",
-    cvCta: "Download CV (PDF)",
+    cvCta: "Download CV (1 page)",
     links: { github: "GitHub", lattes: "Lattes CV", blog: "Blog" },
     linkNote: {
       github: "53 public repositories",

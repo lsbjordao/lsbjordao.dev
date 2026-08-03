@@ -26,7 +26,13 @@ export const profile = {
   lattes: "https://lattes.cnpq.br/6445788694639027",
   lattesId: "6445788694639027",
   blog: "https://lsbjordao.github.io/",
-  cv: "/cv/lucas-jordao-curriculo-lattes.pdf",
+  /**
+   * Currículo de uma página, gerado por `npm run cv` a partir de
+   * `scripts/cv/curriculo.html`. O Lattes completo continua em
+   * `/cv/lucas-jordao-curriculo-lattes.pdf`, mas quem recruta quer uma folha.
+   */
+  cv: "/cv/lucas-jordao-cv.pdf",
+  lattesPdf: "/cv/lucas-jordao-curriculo-lattes.pdf",
   site: "https://lsbjordao.dev",
 };
 
@@ -391,6 +397,7 @@ export const googlePatents = {
 export type TechnologyGroupId =
   | "languages"
   | "dataPipelines"
+  | "knowledge"
   | "infrastructure"
   | "publishing";
 
@@ -407,8 +414,10 @@ export const technologyGroups: Array<{
       { name: "R", icon: "/images/tech/r.svg" },
       { name: "Node.js", icon: "/images/tech/nodejs.svg" },
       { name: "React", icon: "/images/tech/react.svg" },
+      { name: "Svelte", icon: "/images/tech/svelte.svg" },
       { name: "Next.js", icon: "/images/tech/nextdotjs.svg", monochrome: true },
       { name: "Nextra", icon: "/images/tech/nextra.svg", monochrome: true },
+      { name: "Vite", icon: "/images/tech/vite.svg" },
       { name: "GraphQL", icon: "/images/tech/graphql.svg", monochrome: true },
       { name: "RegEx", mark: ".*" },
     ],
@@ -423,7 +432,11 @@ export const technologyGroups: Array<{
       { name: "DuckDB", icon: "/images/tech/duckdb.svg", monochrome: true },
       { name: "Trino", icon: "/images/tech/trino.svg", monochrome: true },
       { name: "Redis", icon: "/images/tech/redis.svg" },
-      { name: "ClickHouse", icon: "/images/tech/clickhouse.svg", monochrome: true },
+      {
+        name: "Apache Superset",
+        icon: "/images/tech/apachesuperset.svg",
+        monochrome: true,
+      },
       { name: "Apache Airflow", icon: "/images/tech/apacheairflow.svg" },
       { name: "Apache Kafka", icon: "/images/tech/apachekafka.svg", monochrome: true },
       { name: "RabbitMQ", icon: "/images/tech/rabbitmq.svg", monochrome: true },
@@ -435,6 +448,20 @@ export const technologyGroups: Array<{
         icon: "/images/tech/googleearthengine.svg",
         monochrome: true,
       },
+    ],
+  },
+  {
+    id: "knowledge",
+    items: [
+      { name: "Protégé", icon: "/images/tech/protege.svg", monochrome: true },
+      {
+        name: "Apache Jena Fuseki",
+        icon: "/images/tech/apachejena.svg",
+        monochrome: true,
+      },
+      { name: "Neo4j", icon: "/images/tech/neo4j.svg", monochrome: true },
+      { name: "Obsidian", icon: "/images/tech/obsidian.svg", monochrome: true },
+      { name: "OWL / RDF / SPARQL", mark: "◎" },
     ],
   },
   {
@@ -454,7 +481,9 @@ export const technologyGroups: Array<{
   {
     id: "publishing",
     items: [
-      { name: "LaTeX", icon: "/images/tech/latex.svg" },
+      /* O SVG do LaTeX é preto sólido: sem `monochrome` ele some contra o fundo
+         escuro desta seção. O invert(1) o devolve em branco. */
+      { name: "LaTeX", icon: "/images/tech/latex.svg", monochrome: true },
       { name: "Quarto", icon: "/images/tech/quarto.svg", monochrome: true },
       { name: "Sphinx", icon: "/images/tech/sphinx.svg", monochrome: true },
       { name: "Sphinx-Needs", icon: "/images/tech/sphinx.svg", monochrome: true },
@@ -472,6 +501,132 @@ export const technologyCount = technologyGroups.reduce(
   (total, group) => total + group.items.length,
   0,
 );
+
+/**
+ * Competências agrupadas por domínio. As ferramentas acima dizem *com o quê* eu
+ * trabalho; estes grupos dizem *o que eu sei fazer* — que é o que uma vaga
+ * costuma perguntar. Os textos ficam em `data/copy`, indexados por `id`.
+ */
+export type SkillGroupId =
+  | "dataEngineering"
+  | "fullstack"
+  | "extraction"
+  | "modelling"
+  | "platform"
+  | "geo"
+  | "analysis"
+  | "product";
+
+/** Oito grupos, em duas fileiras de quatro. Os códigos rimam com os das
+    trilhas da chave de determinação — é o mesmo repertório, destrinchado. */
+export const skillGroups: Array<{ id: SkillGroupId; code: string }> = [
+  { id: "dataEngineering", code: "ENG–DAT" },
+  { id: "fullstack", code: "ENG–APP" },
+  { id: "extraction", code: "EXT–INT" },
+  { id: "modelling", code: "MOD–SEM" },
+  { id: "platform", code: "PLT–OPS" },
+  { id: "geo", code: "GEO–CON" },
+  { id: "analysis", code: "ANA–DEC" },
+  { id: "product", code: "PRD–AGL" },
+];
+
+export type PackageId =
+  | "tts"
+  | "iucnValidator"
+  | "genbank"
+  | "ffb"
+  | "ibge"
+  | "mapbiomasAlerta";
+
+/** Pacotes publicados no npm sob o escopo `@lsbjordao`. */
+export const npmPackages: Array<{
+  id: PackageId;
+  name: string;
+  version: string;
+  href: string;
+}> = [
+  {
+    id: "tts",
+    name: "@lsbjordao/type-taxon-script",
+    version: "1.1.19",
+    href: "https://www.npmjs.com/package/@lsbjordao/type-taxon-script",
+  },
+  {
+    id: "iucnValidator",
+    name: "@lsbjordao/iucn-red-list-criteria-validator.js",
+    version: "0.1.0",
+    href: "https://www.npmjs.com/package/@lsbjordao/iucn-red-list-criteria-validator.js",
+  },
+  {
+    id: "genbank",
+    name: "@lsbjordao/genbank-js",
+    version: "1.0.2",
+    href: "https://www.npmjs.com/package/@lsbjordao/genbank-js",
+  },
+  {
+    id: "ffb",
+    name: "@lsbjordao/ffb-js",
+    version: "0.0.13",
+    href: "https://www.npmjs.com/package/@lsbjordao/ffb-js",
+  },
+  {
+    id: "ibge",
+    name: "@lsbjordao/ibge-js",
+    version: "0.0.10",
+    href: "https://www.npmjs.com/package/@lsbjordao/ibge-js",
+  },
+  {
+    id: "mapbiomasAlerta",
+    name: "@lsbjordao/mapbiomas-alerta.js",
+    version: "0.0.8",
+    href: "https://www.npmjs.com/package/@lsbjordao/mapbiomas-alerta.js",
+  },
+];
+
+/** Gavetas abertas a partir dos números grandes do topo da página. */
+export type StatDrawerId =
+  | "packages"
+  | "firstAuthor"
+  | "coAuthor"
+  | "examBoards"
+  | "supervision"
+  | "peerReview";
+
+export type Stat = { value: string; label: string; drawer?: StatDrawerId };
+
+export type TeachingRoleId =
+  | "cncflora"
+  | "ufms"
+  | "enbtGuest"
+  | "enbtPhylo"
+  | "bioforense"
+  | "hortoEscola"
+  | "seeduc"
+  | "laranjeiras"
+  | "usu";
+
+/**
+ * Docência, do ensino fundamental à pós-graduação. `kind` separa o que é
+ * disciplina/curso do que é vínculo de professor — a estante de apostilas
+ * logo abaixo já mostra o material produzido para várias delas.
+ */
+export const teachingRoles: Array<{
+  id: TeachingRoleId;
+  years: string;
+  kind: "course" | "position";
+  /** Carga horária registrada no Lattes, quando há. */
+  hours?: string;
+}> = [
+  { id: "cncflora", years: "2026", kind: "course" },
+  { id: "ufms", years: "2025", kind: "course", hours: "30h" },
+  { id: "enbtGuest", years: "2023", kind: "course", hours: "4h" },
+  { id: "enbtPhylo", years: "2022", kind: "course", hours: "60h" },
+  { id: "bioforense", years: "2019", kind: "course" },
+  { id: "hortoEscola", years: "2014—15", kind: "position" },
+  { id: "seeduc", years: "2013—16", kind: "position" },
+  { id: "laranjeiras", years: "2010—12", kind: "position" },
+  { id: "usu", years: "2007", kind: "course", hours: "60h" },
+];
 
 export type ExperienceChapterId = "field" | "lab" | "herbaria" | "communication";
 
@@ -494,6 +649,7 @@ export type ExperiencePhotoId =
   | "ilc8-talk"
   | "ilc8-talk-wide"
   | "cnb74-talk"
+  | "cnb74-lulc"
   | "cncflora-training";
 
 /**
@@ -620,12 +776,61 @@ export const experiencePhotos: Array<{
     fit: "contain",
   },
   {
+    id: "cnb74-lulc",
+    chapter: "communication",
+    image: "/images/photos/portfolio/cnb74-lulc-2024.webp",
+    fit: "contain",
+  },
+  {
     id: "cncflora-training",
     chapter: "communication",
     image: "/images/photos/portfolio/cncflora-training-2026.webp",
     fit: "contain",
   },
 ];
+
+export type CourseId =
+  | "emagAuthor"
+  | "emagDev"
+  | "susData"
+  | "itGovernance"
+  | "spatialPriority"
+  | "landscapeEcology"
+  | "earthEngine"
+  | "lawPhilosophy"
+  | "economics"
+  | "educationSociety"
+  | "sem"
+  | "environmentalBasics"
+  | "astronomy"
+  | "greenLeadership";
+
+/**
+ * Formação complementar declarada no Lattes. Fecha a trajetória porque conta a
+ * mesma história por outro ângulo: a virada para dados e infraestrutura tem
+ * lastro em curso feito, não só em projeto entregue.
+ */
+export const courses: Array<{ id: CourseId; year: string; hours?: string }> = [
+  { id: "emagAuthor", year: "2026", hours: "20h" },
+  { id: "emagDev", year: "2026", hours: "30h" },
+  { id: "susData", year: "2025—26", hours: "50h" },
+  { id: "itGovernance", year: "2025", hours: "20h" },
+  { id: "spatialPriority", year: "2024" },
+  { id: "landscapeEcology", year: "2023", hours: "15h" },
+  { id: "earthEngine", year: "2022", hours: "40h" },
+  { id: "lawPhilosophy", year: "2020", hours: "18h" },
+  { id: "economics", year: "2020", hours: "30h" },
+  { id: "educationSociety", year: "2014", hours: "40h" },
+  { id: "sem", year: "2013", hours: "75h" },
+  { id: "environmentalBasics", year: "2011", hours: "360h" },
+  { id: "astronomy", year: "2010", hours: "8h" },
+  { id: "greenLeadership", year: "2009", hours: "64h" },
+];
+
+export const courseHoursTotal = courses.reduce(
+  (total, course) => total + (course.hours ? Number.parseInt(course.hours, 10) : 0),
+  0,
+);
 
 export type TimelineId =
   | "start"

@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Lucas Sá Barreto Jordão — Currículo</title>
+<style>
+/*
+ * Currículo de uma página, para prospecção no LinkedIn.
+ *
+ * Renderizado por `scripts/build-cv.mjs` com o Chrome headless em A4. Toda a
+ * medida é em mm porque a folha é a unidade real aqui: o que não couber em
+ * 297mm não existe. Se precisar de mais espaço, corte conteúdo — não encolha
+ * a fonte abaixo de 7.6pt, que é onde o texto começa a falhar impresso.
+ *
+ * A paleta é a mesma de `app/globals.css`, para o PDF e o site lerem como a
+ * mesma pessoa.
+ */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 200 800;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("../../node_modules/@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 200 800;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("../../node_modules/@fontsource-variable/newsreader/files/newsreader-latin-wght-italic.woff2") format("woff2-variations");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: block;
+}
+
+:root {
+  --ink: #10251b;
+  --ink-deep: #07130d;
+  --paper: #f4f2ea;
+  --acid: #d9ff63;
+  --coral: #ff7657;
+  --muted: #6e766f;
+  --line: rgba(16, 37, 27, 0.16);
+  --line-light: rgba(255, 255, 255, 0.16);
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 210mm;
+  height: 297mm;
+  display: grid;
+  grid-template-columns: 66mm 1fr;
+  background: #fff;
+  color: var(--ink);
+  font-family: "Manrope", sans-serif;
+  font-size: 8.2pt;
+  line-height: 1.42;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── Coluna escura ────────────────────────────────────────────────────── */
+
+.side {
+  padding: 11mm 7mm 9mm;
+  background: var(--ink-deep);
+  color: rgba(255, 255, 255, 0.82);
+  display: flex;
+  flex-direction: column;
+  /* `space-between` espalha a sobra entre todas as seções. Ancorar só o rodapé
+     com `margin-top: auto` empoçava ~10mm de vazio logo acima dele. */
+  justify-content: space-between;
+  gap: 4.6mm;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  padding-bottom: 4mm;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.mark__initials {
+  display: grid;
+  place-items: center;
+  width: 12mm;
+  height: 12mm;
+  border: 1px solid var(--acid);
+  color: var(--acid);
+  font-family: "Newsreader", serif;
+  font-size: 14pt;
+  letter-spacing: -0.04em;
+}
+
+.mark__meta {
+  display: grid;
+  gap: 0.6mm;
+  font-size: 6.6pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.mark__meta strong {
+  color: var(--acid);
+  font-size: 7.2pt;
+  font-weight: 700;
+}
+
+.side h2 {
+  margin: 0 0 2.2mm;
+  color: var(--acid);
+  font-size: 6.8pt;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.side section {
+  break-inside: avoid;
+}
+
+.contact {
+  display: grid;
+  gap: 1.5mm;
+  font-size: 7.6pt;
+  word-break: break-word;
+}
+
+.contact span {
+  display: block;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 6.4pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.degree {
+  display: grid;
+  gap: 0.5mm;
+  padding-bottom: 2.4mm;
+  margin-bottom: 2.4mm;
+  border-bottom: 1px solid var(--line-light);
+}
+
+.degree:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.degree strong {
+  color: #fff;
+  font-size: 7.8pt;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.degree small {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 7pt;
+}
+
+.degree time {
+  color: var(--acid);
+  font-size: 6.6pt;
+  letter-spacing: 0.06em;
+}
+
+.stack {
+  display: grid;
+  gap: 1.8mm;
+}
+
+.stack div {
+  display: grid;
+  gap: 0.4mm;
+}
+
+.stack dt {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 6.3pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stack dd {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 7.4pt;
+  line-height: 1.4;
+}
+
+.side footer {
+  padding-top: 3.5mm;
+  border-top: 1px solid var(--line-light);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 6.6pt;
+  line-height: 1.5;
+}
+
+.side footer strong {
+  display: block;
+  color: var(--acid);
+  font-size: 6.8pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Coluna clara ─────────────────────────────────────────────────────── */
+
+.main {
+  padding: 11mm 10mm 9mm;
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+  gap: 4.6mm;
+}
+
+.name {
+  margin: 0;
+  font-size: 25pt;
+  font-weight: 780;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+}
+
+.name em {
+  display: block;
+  font-family: "Newsreader", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.role {
+  margin: 2.4mm 0 0;
+  padding-top: 2.4mm;
+  border-top: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 8.4pt;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.role span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.profile {
+  margin: 0;
+  font-size: 8.2pt;
+  line-height: 1.5;
+}
+
+.main h2 {
+  margin: 0 0 2.4mm;
+  padding-bottom: 1.2mm;
+  border-bottom: 1px solid var(--ink);
+  font-size: 7pt;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.job {
+  margin-bottom: 3.4mm;
+}
+
+.job:last-child {
+  margin-bottom: 0;
+}
+
+.job__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 3mm;
+}
+
+.job__head strong {
+  font-size: 9pt;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+}
+
+.job__head time {
+  color: var(--muted);
+  font-size: 7pt;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.job__place {
+  margin: 0.3mm 0 1.4mm;
+  color: var(--muted);
+  font-size: 7.4pt;
+}
+
+.job__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 3mm;
+  margin-bottom: 1mm;
+}
+
+.job__title span {
+  color: var(--ink);
+  font-size: 7.8pt;
+  font-weight: 700;
+}
+
+.job__title time {
+  color: var(--muted);
+  font-size: 6.8pt;
+  white-space: nowrap;
+}
+
+.job ul {
+  margin: 0 0 1.8mm;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1mm;
+}
+
+.job li {
+  position: relative;
+  padding-left: 3.2mm;
+  font-size: 7.9pt;
+  line-height: 1.42;
+}
+
+.job li::before {
+  content: "";
+  position: absolute;
+  top: 1.35mm;
+  left: 0;
+  width: 1.1mm;
+  height: 1.1mm;
+  border: 0.5px solid var(--ink);
+  transform: rotate(45deg);
+}
+
+.job ul:last-child {
+  margin-bottom: 0;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6mm 4mm;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  position: relative;
+  padding-left: 3.4mm;
+  font-size: 7.7pt;
+  line-height: 1.38;
+}
+
+.highlights li::before {
+  content: "";
+  position: absolute;
+  top: 1.1mm;
+  left: 0;
+  width: 1.4mm;
+  height: 1.4mm;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.highlights strong {
+  font-weight: 780;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: auto;
+  border-top: 1px solid var(--ink);
+  padding-top: 2.8mm;
+}
+
+.numbers div {
+  display: grid;
+  gap: 0.4mm;
+}
+
+.numbers strong {
+  font-family: "Newsreader", serif;
+  font-size: 15pt;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.numbers span {
+  color: var(--muted);
+  font-size: 6.2pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<aside class="side">
+  <div class="mark">
+    <span class="mark__initials">LJ</span>
+    <span class="mark__meta">
+      <strong>Lucas Jordão</strong>
+      Rio de Janeiro · Brasil
+    </span>
+  </div>
+
+  <section>
+    <h2>Contato</h2>
+    <div class="contact">
+      <a href="mailto:tucarj@gmail.com">tucarj@gmail.com</a>
+      <a href="https://www.linkedin.com/in/lucas-jord%C3%A3o-0349b616">linkedin.com/in/lucas-jordão</a>
+      <a href="https://github.com/lsbjordao">github.com/lsbjordao</a>
+      <a href="https://lsbjordao.dev">lsbjordao.dev</a>
+      <a href="https://lattes.cnpq.br/6445788694639027">lattes.cnpq.br/6445788694639027</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Formação</h2>
+    <div class="degree">
+      <strong>Graduação em Ciência de Dados</strong>
+      <small>Universidade Estácio de Sá</small>
+      <time>desde 2025 · em curso</time>
+    </div>
+    <div class="degree">
+      <strong>Pós-doutorado em Botânica</strong>
+      <small>Jardim Botânico do Rio de Janeiro</small>
+      <time>2019</time>
+    </div>
+    <div class="degree">
+      <strong>Doutorado em Botânica</strong>
+      <small>Jardim Botânico do Rio de Janeiro</small>
+      <time>2015 — 2019</time>
+    </div>
+    <div class="degree">
+      <strong>Mestrado em Ciências Biológicas</strong>
+      <small>Museu Nacional / UFRJ</small>
+      <time>2012 — 2014</time>
+    </div>
+    <div class="degree">
+      <strong>Ciências Biológicas</strong>
+      <small>Universidade Santa Úrsula<br>bacharelado e licenciatura</small>
+      <time>2007 · 2009</time>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tecnologias</h2>
+    <dl class="stack">
+      <div>
+        <dt>Linguagens</dt>
+        <dd>TypeScript · JavaScript · Python · R · SQL</dd>
+      </div>
+      <div>
+        <dt>Aplicações</dt>
+        <dd>Next.js · React · NestJS · Node.js · GraphQL · REST</dd>
+      </div>
+      <div>
+        <dt>Dados</dt>
+        <dd>Apache Airflow · dbt · BullMQ/Redis · Kafka · DuckDB · Trino · Superset</dd>
+      </div>
+      <div>
+        <dt>Bancos</dt>
+        <dd>PostgreSQL/PostGIS · MongoDB · Neo4j · Jena Fuseki</dd>
+      </div>
+      <div>
+        <dt>Infraestrutura</dt>
+        <dd>Docker · Git · GitLab CI/CD · Linux · GCP · AWS · Azure</dd>
+      </div>
+      <div>
+        <dt>Geoespacial</dt>
+        <dd>MapBiomas · Google Earth Engine · séries LULC · critérios IUCN</dd>
+      </div>
+      <div>
+        <dt>Processo</dt>
+        <dd>Lean Inception · Product Backlog Building · Scrum · Kanban · engenharia de requisitos</dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer>
+    <strong>Idiomas</strong>
+    Português nativo · inglês para leitura e escrita técnica
+    <br><br>
+    <strong>Disponibilidade</strong>
+    Imediata · remoto, híbrido ou Rio de Janeiro
+  </footer>
+</aside>
+
+<main class="main">
+  <header>
+    <h1 class="name">
+      Lucas Sá Barreto
+      <em>Jordão</em>
+    </h1>
+    <p class="role">
+      Engenharia de dados · Full stack · Geoespacial
+      <span>— Doutor em Botânica</span>
+    </p>
+  </header>
+
+  <p class="profile">
+    Doutor em Botânica que virou engenheiro. Passei seis anos construindo a
+    infraestrutura que sustenta a avaliação de risco de extinção da flora
+    brasileira: pipelines com Airflow e dbt, aplicações Next.js/NestJS sobre
+    PostgreSQL/PostGIS e análise geoespacial com MapBiomas. Procuro um time onde
+    domínio, dados e produto sejam a mesma conversa.
+  </p>
+
+  <section>
+    <h2>Experiência</h2>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>CNCFlora / Jardim Botânico do Rio de Janeiro</strong>
+        <time>2020 — 2026</time>
+      </div>
+      <p class="job__place">Rio de Janeiro · Brasil</p>
+
+      <div class="job__title">
+        <span>Analista de TI</span>
+        <time>2024 — 2026</time>
+      </div>
+      <ul>
+        <li>
+          Atuei da arquitetura à interface do <strong>Avalia–CNCFlora</strong>,
+          ambiente interno de avaliação: modelagem em PostgreSQL/PostGIS,
+          back-end NestJS expondo REST e GraphQL, front-end Next.js e CI/CD em
+          GitLab.
+        </li>
+        <li>
+          Projetei e implementei o ETL <strong>Bull–ProFlora</strong>, ligando o
+          ProFlora a filas assíncronas e tornando processamentos pesados
+          repetíveis, monitoráveis e auditáveis.
+        </li>
+        <li>
+          Conduzi a <strong>migração do acervo legado</strong> com Apache Airflow
+          e dbt; os dados recuperados alimentam hoje o portal público do
+          CNCFlora.
+        </li>
+        <li>
+          Levantei requisitos com Sphinx-Needs, mantendo rastreabilidade entre
+          necessidade e implementação, e criei o catálogo de serviços da equipe
+          em Backstage.
+        </li>
+      </ul>
+
+      <div class="job__title">
+        <span>Analista da Lista Vermelha</span>
+        <time>2020 — 2024</time>
+      </div>
+      <ul>
+        <li>
+          Desenvolvi rotinas geoespaciais que tornaram o critério B da IUCN
+          objetivo e reprodutível: regressão sobre séries do MapBiomas para
+          estimar declínio contínuo em AOO, EOO e habitat, e método de buffer
+          variável para semiautomatizar a contagem de <em>locations</em>.
+        </li>
+        <li>
+          <strong>588 avaliações</strong> publicadas na Lista Vermelha da IUCN.
+        </li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>New York Botanical Garden</strong>
+        <time>2016 — 2017</time>
+      </div>
+      <p class="job__place">Nova York · Estados Unidos — Herbarium Digitization Intern</p>
+      <ul>
+        <li>
+          Digitalização de espécimes e curadoria de dados taxonômicos,
+          transformando acervo físico em dado acessível.
+        </li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>Docência</strong>
+        <time>2007 — 2026</time>
+      </div>
+      <p class="job__place">ENBT/JBRJ · UFMS · SEEDUC/RJ · Curso Bioforense</p>
+      <ul>
+        <li>
+          Nove turmas, cursos e disciplinas ministrados, da educação básica à
+          pós-graduação — filoinformática, legislação ambiental e avaliação de
+          risco de extinção —, com oito apostilas de acesso aberto publicadas em
+          Quarto.
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <section>
+    <h2>Destaques</h2>
+    <ul class="highlights">
+      <li>
+        <strong>Menção honrosa</strong> na 4ª edição do Prêmio MapBiomas (2022),
+        categoria Aplicações em Políticas Públicas.
+      </li>
+      <li>
+        <strong>TypeTaxonScript</strong>: framework de dados tipados para
+        sistemática, publicado em <em>Biology Methods and Protocols</em>.
+      </li>
+      <li>
+        Seis <strong>pacotes npm</strong> publicados e 53 repositórios públicos
+        de código aberto.
+      </li>
+      <li>
+        Oito bancas examinadoras e pareceres <em>ad hoc</em> para sete
+        periódicos científicos.
+      </li>
+    </ul>
+  </section>
+
+  <div class="numbers">
+    <div><strong>14</strong><span>artigos publicados</span></div>
+    <div><strong>08</strong><span>como primeiro autor</span></div>
+    <div><strong>06</strong><span>espécies novas descritas</span></div>
+    <div><strong>588</strong><span>avaliações na Lista Vermelha</span></div>
+  </div>
+</main>
+
+</body>
+</html>

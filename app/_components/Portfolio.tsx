@@ -12,6 +12,8 @@ import {
 } from "react";
 import {
   cncSystems,
+  courseHoursTotal,
+  courses,
   googlePatents,
   heroImage,
   key as determinationKey,
@@ -21,6 +23,7 @@ import {
   profile,
   projects,
   publicPortal,
+  skillGroups,
   technologyCount,
   technologyGroups,
   timeline,
@@ -36,6 +39,7 @@ import { copy as allCopy } from "@/data/copy";
 import ExperienceCarousel from "./ExperienceCarousel";
 import Phenology from "./Phenology";
 import ScrollProgress from "./ScrollProgress";
+import StatBoard from "./StatBoard";
 import Teaching from "./Teaching";
 
 type Filter = "all" | ProjectCategoryId;
@@ -198,6 +202,15 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         ? projects
         : projects.filter((project) => project.category === activeFilter),
     [activeFilter],
+  );
+
+  const skillCount = useMemo(
+    () =>
+      skillGroups.reduce(
+        (total, group) => total + c.technology.skills.groups[group.id].items.length,
+        0,
+      ),
+    [c],
   );
 
   const technologyRows = useMemo(
@@ -433,14 +446,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section className="stats" aria-label={c.a11y.statsRegion}>
-          {c.stats.map((stat) => (
-            <article className="stat" key={stat.label}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </article>
-          ))}
-        </section>
+        <StatBoard lang={lang} />
 
         <section className="manifesto section" id="manifesto">
           <div className="section-index">{c.manifesto.index}</div>
@@ -1300,6 +1306,45 @@ export default function Portfolio({ lang }: { lang: Lang }) {
               </div>
             ))}
           </div>
+
+          {/* As ferramentas acima respondem "com o quê"; estes grupos respondem
+              "o que sei fazer" — que é o que uma vaga de fato pergunta. */}
+          <div className="skills" data-reveal>
+            <header className="skills__header">
+              <div>
+                <p className="eyebrow eyebrow--acid">{c.technology.skills.eyebrow}</p>
+                <h3>
+                  {c.technology.skills.heading.before}
+                  <br />
+                  <em>{c.technology.skills.heading.emphasis}</em>
+                </h3>
+              </div>
+              <div className="skills__intro">
+                <span className="technology-stack__count">
+                  <strong>{skillCount}</strong>
+                  {c.technology.skills.countLabel}
+                </span>
+                <p>{c.technology.skills.intro}</p>
+              </div>
+            </header>
+
+            <div className="skills__grid">
+              {skillGroups.map((group) => {
+                const groupCopy = c.technology.skills.groups[group.id];
+                return (
+                  <article className="skill-card" key={group.id}>
+                    <span className="skill-card__code">{group.code}</span>
+                    <h4>{groupCopy.title}</h4>
+                    <ul>
+                      {groupCopy.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
         <Phenology lang={lang} />
@@ -1354,6 +1399,30 @@ export default function Portfolio({ lang }: { lang: Lang }) {
                 </article>
               ))}
             </div>
+
+            {/* A virada para dados e infraestrutura tem lastro em curso feito,
+                não só em projeto entregue. */}
+            <div className="timeline__label" data-reveal>
+              <span>{c.trajectory.courses.label}</span>
+              <small>
+                {c.trajectory.courses.note(courses.length, courseHoursTotal)}
+              </small>
+            </div>
+            <ul className="courses" data-reveal>
+              {courses.map((course) => {
+                const courseCopy = c.trajectory.courses.items[course.id];
+                return (
+                  <li className="course" key={course.id}>
+                    <time>{course.year}</time>
+                    <div>
+                      <h3>{courseCopy.title}</h3>
+                      <small>{courseCopy.place}</small>
+                    </div>
+                    {course.hours && <span className="course__hours">{course.hours}</span>}
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
 

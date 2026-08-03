@@ -779,35 +779,30 @@ button:hover > .icon--diagonal {
   animation: scrollLine 2.4s ease-in-out infinite;
 }
 
+.stats-board {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-warm);
+}
+
+/* As réguas entre os números são o `gap` deixando o fundo aparecer, não
+   `border` por célula. A gaveta entra e sai do meio da grade conforme o
+   número aberto, e qualquer regra de borda por `nth-child` passaria a contar
+   o painel como irmão — as linhas quebravam a cada abertura. */
 .stats {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  border-bottom: 1px solid var(--line);
-  background: var(--paper-warm);
+  gap: 1px;
+  background: var(--line);
 }
 
 .stat {
   grid-column: span 3;
   min-height: 10.5rem;
   padding: 2rem var(--page-pad);
-  border-right: 1px solid var(--line);
+  background: var(--paper-warm);
   display: flex;
   align-items: flex-end;
   gap: 1rem;
-}
-
-.stat:nth-child(4) {
-  border-right: 0;
-}
-
-/* São oito números em duas fileiras de quatro. A largura vem só de
-   `span 3`: a fileira de baixo não precisa de vão próprio. */
-.stat:nth-child(n + 5) {
-  border-top: 1px solid var(--line);
-}
-
-.stat:last-child {
-  border-right: 0;
 }
 
 .stat strong {
@@ -819,7 +814,7 @@ button:hover > .icon--diagonal {
   line-height: 0.72;
 }
 
-.stat span {
+.stat > span {
   max-width: 10rem;
   color: #596159;
   font-size: 0.62rem;
@@ -827,6 +822,308 @@ button:hover > .icon--diagonal {
   letter-spacing: 0.06em;
   line-height: 1.45;
   text-transform: uppercase;
+}
+
+/* ── Números com gaveta ───────────────────────────────────────────────────
+   O número vira botão quando existe uma lista que o comprova. */
+
+.stat--drawer {
+  margin: 0;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background 200ms var(--ease),
+    box-shadow 200ms var(--ease);
+}
+
+.stat--drawer:hover,
+.stat--drawer:focus-visible,
+.stat--drawer.is-open {
+  background: var(--white);
+  box-shadow: inset 0 -3px 0 var(--acid);
+  outline: none;
+}
+
+.stat--drawer:focus-visible {
+  box-shadow:
+    inset 0 -3px 0 var(--acid),
+    inset 0 0 0 2px var(--ink);
+}
+
+.stat__hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.55rem;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transform: translateY(-0.2rem);
+  transition:
+    opacity 200ms var(--ease),
+    transform 200ms var(--ease);
+}
+
+.stat--drawer:hover .stat__hint,
+.stat--drawer:focus-visible .stat__hint,
+.stat--drawer.is-open .stat__hint {
+  opacity: 1;
+  transform: none;
+}
+
+.stat__chevron {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-0.08rem, -0.08rem);
+  transition: transform 240ms var(--ease);
+}
+
+.stat--drawer.is-open .stat__chevron {
+  transform: rotate(-135deg) translate(-0.1rem, -0.1rem);
+}
+
+/* Ocupa a fileira inteira logo abaixo do número que a abriu. */
+.stat-drawer {
+  position: relative;
+  grid-column: 1 / -1;
+  padding: 2.4rem var(--page-pad) 2.8rem;
+  background: var(--white);
+  animation: stat-drawer-in 260ms var(--ease) both;
+}
+
+/* A seta encosta no cartão de origem: `--drawer-arrow` é o centro dele, em
+   porcentagem da grade, calculado no StatBoard. Ela é ácida, e não da cor do
+   painel, porque nasce da régua ácida que marca o cartão aberto — em branco
+   ela apagava um trecho dessa régua e parecia defeito. */
+.stat-drawer::before {
+  content: "";
+  position: absolute;
+  top: -0.42rem;
+  left: var(--drawer-arrow, 50%);
+  width: 0.85rem;
+  height: 0.85rem;
+  background: var(--acid);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+@keyframes stat-drawer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+.stat-drawer__head {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1.2rem;
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.stat-drawer__close {
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition:
+    border-color 160ms var(--ease),
+    background 160ms var(--ease),
+    color 160ms var(--ease);
+}
+
+.stat-drawer__close:hover,
+.stat-drawer__close:focus-visible {
+  border-color: var(--ink);
+  background: var(--paper-warm);
+  color: var(--ink);
+  outline: none;
+}
+
+.stat-drawer__head h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 430;
+  letter-spacing: -0.03em;
+}
+
+.stat-drawer__head p {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.drawer-list {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: drawer;
+}
+
+.drawer-list > li {
+  counter-increment: drawer;
+}
+
+.drawer-list a,
+.drawer-list__static {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) minmax(0, 15rem) auto;
+  gap: 0.3rem 1.4rem;
+  align-items: baseline;
+  padding: 0.85rem 0.9rem;
+  border-radius: 0.25rem;
+  transition: background 160ms var(--ease);
+}
+
+.drawer-list a:hover,
+.drawer-list a:focus-visible {
+  background: var(--paper-warm);
+  outline: none;
+}
+
+.drawer-list a:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.drawer-list__year {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+}
+
+.drawer-list__flag {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.drawer-list__flag::before {
+  content: "";
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-right: 0.3rem;
+  border-radius: 50%;
+  background: var(--coral);
+  vertical-align: middle;
+}
+
+.drawer-list__title {
+  font-size: 0.83rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.drawer-list__title code {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.drawer-list__title small {
+  margin-left: 0.5rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+}
+
+.drawer-list__body {
+  display: grid;
+  gap: 0.15rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.drawer-list__body i {
+  color: var(--ink);
+  font-style: italic;
+}
+
+.drawer-list__body small {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+}
+
+.drawer-list .icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted);
+  transition:
+    transform 180ms var(--ease),
+    color 180ms var(--ease);
+}
+
+.drawer-list a:hover .icon {
+  color: var(--ink);
+  transform: translate(2px, -2px);
+}
+
+.drawer-list--packages a {
+  grid-template-columns: minmax(0, 20rem) minmax(0, 1fr) auto;
+}
+
+.drawer-journals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.drawer-journals li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 0.25rem;
+}
+
+.drawer-journals strong {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.drawer-journals small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.62rem;
 }
 
 .section {
@@ -2831,8 +3128,176 @@ button:hover > .icon--diagonal {
   background: var(--paper-warm);
 }
 
-.teaching__header {
+/* ── Docência ─────────────────────────────────────────────────────────────
+   Abre a seção 04. A régua vertical à esquerda amarra dezenove anos de sala
+   de aula numa linha só — o mesmo recurso da linha do tempo da trajetória,
+   para as duas leituras rimarem. */
+
+.docencia {
   margin-top: clamp(3.5rem, 7vw, 6rem);
+}
+
+.docencia__header {
+  display: grid;
+  grid-template-columns: 1fr 26rem;
+  align-items: end;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.docencia__header h2 {
+  margin: 0.7rem 0 0;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  font-weight: 580;
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.docencia__header h2 em {
+  color: var(--coral);
+  font-family: var(--serif);
+  font-weight: 430;
+}
+
+.docencia__intro {
+  display: grid;
+  gap: 1.1rem;
+  padding-bottom: 0.4rem;
+  color: #596159;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+.docencia__intro p {
+  margin: 0;
+}
+
+.docencia__count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  color: #596159;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.docencia__count strong {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 3rem;
+  font-weight: 430;
+  letter-spacing: -0.07em;
+  line-height: 0.8;
+}
+
+.docencia__credential {
+  display: grid;
+  gap: 0.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.78rem;
+}
+
+.docencia__credential span {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.docencia__note {
+  margin: 1.2rem 0 clamp(4rem, 8vw, 6.5rem);
+  color: #747c75;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+}
+
+.docencia__note a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  transition: border-color 160ms var(--ease);
+}
+
+.docencia__note a:hover,
+.docencia__note a:focus-visible {
+  border-color: var(--ink);
+}
+
+.docencia__list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.docencia-role {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.docencia-role > time {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.docencia-role__kind {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.7rem;
+  margin-bottom: 0.4rem;
+  color: #596159;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.docencia-role__kind::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--coral);
+}
+
+.docencia-role--position .docencia-role__kind::before {
+  background: transparent;
+  border: 1px solid #596159;
+}
+
+.docencia-role__kind em {
+  padding: 0.1rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 0.15rem;
+  font-style: normal;
+  letter-spacing: 0.06em;
+}
+
+.docencia-role h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.docencia-role small {
+  color: #596159;
+  font-size: 0.75rem;
+}
+
+.teaching__header {
+  margin-top: 0;
   display: grid;
   grid-template-columns: 1fr 23rem;
   align-items: end;
@@ -3076,7 +3541,7 @@ button:hover > .icon--diagonal {
 .technology-stack__groups {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin-bottom: 3.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.17);
   border-bottom: 1px solid rgba(255, 255, 255, 0.17);
@@ -3234,6 +3699,129 @@ button:hover > .icon--diagonal {
   to {
     transform: translateX(-50%);
   }
+}
+
+/* ── Competências ─────────────────────────────────────────────────────────
+   Fecha a seção 05: as marcas do carrossel dizem com o quê eu trabalho, estes
+   cartões dizem o que eu resolvo. Ficam no mesmo fundo escuro para ler como
+   continuação, não como seção nova. */
+
+.skills {
+  position: relative;
+  margin-top: 5.5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.17);
+}
+
+.skills__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.85fr);
+  gap: 3.5rem;
+  align-items: end;
+  margin-bottom: 3rem;
+}
+
+.skills__header h3 {
+  margin: 0.6rem 0 0;
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  font-weight: 580;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.skills__header h3 em {
+  color: var(--acid);
+  font-family: var(--serif);
+  font-weight: 430;
+}
+
+.skills__intro {
+  display: grid;
+  gap: 1.1rem;
+  color: rgba(255, 255, 255, 0.67);
+  line-height: 1.7;
+}
+
+.skills__intro p {
+  margin: 0;
+  font-size: 0.88rem;
+}
+
+/* Oito cartões em duas fileiras de quatro. */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.17);
+  border: 1px solid rgba(255, 255, 255, 0.17);
+}
+
+/* Degrau intermediário: abaixo de ~283px por cartão os itens começam a quebrar
+   em duas linhas e a lista perde o ritmo de leitura. */
+@media (max-width: 1250px) {
+  .skills__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.skill-card {
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+  padding: 1.7rem 1.5rem 1.9rem;
+  background: var(--ink-deep);
+  transition: background 220ms var(--ease);
+}
+
+.skill-card:hover {
+  background: #0a1a12;
+}
+
+.skill-card__code {
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+}
+
+.skill-card h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.skill-card ul {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-card li {
+  position: relative;
+  padding-left: 1rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.skill-card li::before {
+  content: "";
+  position: absolute;
+  top: 0.52rem;
+  left: 0;
+  width: 0.32rem;
+  height: 0.32rem;
+  border: 1px solid var(--acid);
+  transform: rotate(45deg);
 }
 
 /* ── Fenologia ────────────────────────────────────────────────────────────
@@ -3987,6 +4575,54 @@ button:hover > .icon--diagonal {
   border-top: 1px solid var(--line);
 }
 
+/* Formação complementar: mesma régua da linha do tempo, passo bem mais curto.
+   São catorze itens — em duas colunas eles leem como anexo, que é o peso
+   certo ao lado dos marcos da trajetória. */
+.courses {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.course {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.course > time {
+  color: #747c75;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+}
+
+.course h3 {
+  margin: 0 0 0.1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.course small {
+  color: #747c75;
+  font-size: 0.7rem;
+}
+
+.course__hours {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+}
+
 .timeline__item {
   padding: 2rem 0 2.2rem;
   display: grid;
@@ -4634,23 +5270,41 @@ footer > p {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* As réguas continuam saindo do `gap`; aqui só a largura da célula muda. */
   .stat {
     grid-column: auto;
-    border-top: 0;
+  }
+
+  /* Empilhado: em duas colunas o corpo da entrada caía sob a coluna do ano,
+     com 4rem de largura, e o nome da instituição saía picotado. */
+  .drawer-list a,
+  .drawer-list__static,
+  .drawer-list--packages a {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.3rem;
+    padding: 1rem 0.6rem;
+  }
+
+  .drawer-list > li {
     border-bottom: 1px solid var(--line);
   }
 
-  .stat:nth-child(n + 5) {
-    grid-column: auto;
-    border-top: 0;
-  }
-
-  .stat:nth-child(2n) {
-    border-right: 0;
-  }
-
-  .stat:last-child {
+  .drawer-list > li:last-child {
     border-bottom: 0;
+  }
+
+  .drawer-list .icon {
+    display: none;
+  }
+
+  .skills__header,
+  .docencia__header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .manifesto {
@@ -4899,11 +5553,13 @@ footer > p {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .technology-group:nth-child(2) {
+  /* Cinco grupos em duas colunas: os pares fecham a linha, e todos menos o
+     último ganham a régua de baixo. */
+  .technology-group:nth-child(even) {
     border-right: 0;
   }
 
-  .technology-group:nth-child(-n + 2) {
+  .technology-group:not(:last-child) {
     border-bottom: 1px solid rgba(255, 255, 255, 0.17);
   }
 
@@ -5183,6 +5839,24 @@ footer > p {
   }
 
   .technology-stack__groups {
+    grid-template-columns: 1fr;
+  }
+
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skills {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .docencia-role {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .courses {
     grid-template-columns: 1fr;
   }
 
