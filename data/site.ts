@@ -30,6 +30,9 @@ export const profile = {
   site: "https://lsbjordao.dev",
 };
 
+/** Measurement ID do Google Analytics 4. Vazio desliga o script. */
+export const analyticsId = "G-5XDBLWWPVD";
+
 export const heroImage = {
   base: "/images/mimosa-osmarii",
   widths: [480, 640, 960, 1440],
