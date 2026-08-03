@@ -510,7 +510,8 @@ export const experiencePhotos: Array<{
     id: "field-canopy",
     chapter: "field",
     image: "/images/photos/portfolio/field-canopy.webp",
-    position: "52% center",
+    fit: "contain",
+    zoom: "medium",
   },
   {
     id: "field-search",
