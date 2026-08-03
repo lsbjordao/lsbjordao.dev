@@ -137,3 +137,24 @@ zona (`Rules → Redirect Rules`), com `www.lsbjordao.dev/*` → `lsbjordao.dev/
 `npm run build:openai` existe só para o deploy antigo na plataforma da OpenAI —
 ele acrescenta `dist/server/index.js` e `dist/.openai/hosting.json`, que o
 Cloudflare Pages ignora. O build normal não gera nenhum dos dois.
+
+### Analytics e consentimento
+
+Google Analytics 4, com o measurement ID em `analyticsId` (`data/site.ts`);
+esvaziar essa string desliga o script. O componente é
+`app/_components/Analytics.tsx`, incluído pelos **dois** layouts — se só o de
+português tivesse, `/en` ficaria sem medição.
+
+O gtag entra com `afterInteractive`, fora do caminho crítico da primeira
+renderização. Como as rotas são estáticas e separadas, cada uma dispara o
+próprio `page_view` no carregamento; não há navegação client-side entre elas
+para instrumentar.
+
+**Não há banner de consentimento, por decisão deliberada (2026-08-03).** O GA4
+grava cookie de identificação, o que sob GDPR exigiria consentimento prévio de
+visitantes da UE e sob a LGPD uma base legal explícita. A escolha foi aceitar
+essa irregularidade formal em troca de não colocar um banner na primeira
+impressão de uma landing de recolocação. Se o cálculo mudar, as saídas são
+Consent Mode v2 com `analytics_storage: denied` por padrão, ou trocar o GA por
+um analytics sem cookies — o Cloudflare Web Analytics dispensa banner por
+design e já está disponível na conta que hospeda o site.
