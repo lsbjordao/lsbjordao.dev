@@ -1504,6 +1504,13 @@ export default function Portfolio({ lang }: { lang: Lang }) {
                 <a className="button button--outline" href={profile.cv[lang]} download>
                   {c.contact.cvCta} <Arrow />
                 </a>
+                <a
+                  className="button button--outline"
+                  href={profile.cvDetailed[lang]}
+                  download
+                >
+                  {c.contact.cvDetailedCta} <Arrow />
+                </a>
               </div>
 
               <div className="contact__secondary">

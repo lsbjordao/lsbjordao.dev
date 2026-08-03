@@ -1,0 +1,324 @@
+/*
+ * Geometria do currículo detalhado, de duas páginas.
+ *
+ * Carregada depois de `cv-base.css`, que traz fontes, paleta e componentes.
+ * Compartilhada por `curriculo-detalhado.html` (PT) e `curriculum-detailed.html`
+ * (EN), pelo mesmo motivo que a folha de uma página é compartilhada: um estilo
+ * só, e o build confere as duas saídas.
+ *
+ * As duas páginas são explícitas no HTML — dois `.sheet` de 297mm com
+ * `break-after: page` no primeiro — em vez de deixar o Chrome quebrar onde der.
+ * Quebra automática distribui a sobra no lugar errado: o rodapé da primeira
+ * folha ficaria com um pedaço de seção órfão, e cada edição do texto moveria a
+ * dobra. Com folhas explícitas, o que transborda some no `overflow: hidden` e o
+ * build acusa — a contagem de páginas continua sendo o teste.
+ *
+ * Divisão de conteúdo: a primeira folha é o currículo que se lê sozinho, com os
+ * mesmos blocos da versão de uma página e bullets mais longos. A segunda é
+ * aprofundamento — sistemas, método, código aberto, docência e produção — e não
+ * repete nada da primeira. Se algo tiver de sair por falta de espaço, sai da
+ * segunda: a primeira é a que circula sozinha quando alguém imprime só uma
+ * folha.
+ */
+
+body {
+  width: 210mm;
+}
+
+.sheet {
+  width: 210mm;
+  height: 297mm;
+  /* Corta o que passar da folha em vez de empurrar para uma terceira página. O
+     estrago fica visível no PDF e o build reclama; um vazamento silencioso não. */
+  overflow: hidden;
+}
+
+/* ── Folha 1: coluna escura + coluna clara ────────────────────────────── */
+
+.sheet--split {
+  display: grid;
+  grid-template-columns: 66mm 1fr;
+  break-after: page;
+}
+
+.sheet--split .numbers {
+  margin-top: auto;
+}
+
+/* ── Folha 2: largura total sobre papel claro ─────────────────────────── */
+
+.sheet--flow {
+  background: var(--paper);
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ * Faixa escura de topo. Existe por dois motivos: amarra a segunda folha à
+ * primeira (é o mesmo preto da coluna) e identifica a página caso ela se separe
+ * da outra em cima de uma mesa — o que acontece sempre que alguém imprime.
+ */
+.band {
+  display: flex;
+  align-items: center;
+  gap: 3.4mm;
+  padding: 5mm 10mm;
+  background: var(--ink-deep);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.band__initials {
+  display: grid;
+  place-items: center;
+  width: 9mm;
+  height: 9mm;
+  border: 1px solid var(--acid);
+  color: var(--acid);
+  font-family: "Newsreader", serif;
+  font-size: 10.5pt;
+  letter-spacing: -0.04em;
+}
+
+.band__id strong {
+  display: block;
+  color: #fff;
+  font-size: 9pt;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+}
+
+.band__id span {
+  display: block;
+  margin-top: 0.4mm;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 6.4pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.band__meta {
+  margin-left: auto;
+  text-align: right;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 6.8pt;
+  line-height: 1.5;
+}
+
+.band__meta strong {
+  display: block;
+  color: var(--acid);
+  font-size: 6.4pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.flow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4.8mm;
+  padding: 8mm 10mm 9mm;
+}
+
+/* ── Sistemas ─────────────────────────────────────────────────────────── */
+
+.systems {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.6mm 6mm;
+}
+
+.system__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 3mm;
+}
+
+.system__head strong {
+  font-size: 8.6pt;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+}
+
+/* O estado de cada sistema fica ao lado do nome porque um deles é um protótipo
+   que nunca foi implantado, e omitir isso seria vender o que não existe. */
+.system__head span {
+  color: var(--muted);
+  font-size: 6.3pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.system__stack {
+  margin: 0.7mm 0 1.1mm;
+  color: var(--coral);
+  font-size: 6.8pt;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.system p:last-child {
+  margin: 0;
+  font-size: 7.6pt;
+  line-height: 1.4;
+}
+
+/* ── Método ───────────────────────────────────────────────────────────── */
+
+.methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5mm;
+}
+
+.method {
+  padding-left: 3mm;
+  border-left: 1px solid var(--line);
+}
+
+.method strong {
+  display: block;
+  color: var(--muted);
+  font-size: 6.4pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.method p {
+  margin: 1mm 0 0;
+  font-size: 7.5pt;
+  line-height: 1.4;
+}
+
+/* ── Código aberto ────────────────────────────────────────────────────── */
+
+.packages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6mm 5mm;
+  margin: 0 0 1.8mm;
+  padding: 0;
+  list-style: none;
+}
+
+.packages li {
+  font-size: 7.4pt;
+  line-height: 1.3;
+}
+
+.packages strong {
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.packages small {
+  display: block;
+  color: var(--muted);
+  font-size: 6.6pt;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 7.4pt;
+  line-height: 1.4;
+}
+
+/* ── Duas colunas: docência e produção ────────────────────────────────── */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+}
+
+.records {
+  display: grid;
+  gap: 1.5mm;
+  margin: 0 0 1.8mm;
+  padding: 0;
+  list-style: none;
+}
+
+.records li {
+  position: relative;
+  padding-left: 3.2mm;
+  font-size: 7.5pt;
+  line-height: 1.38;
+}
+
+.records li::before {
+  content: "";
+  position: absolute;
+  top: 1.3mm;
+  left: 0;
+  width: 1.1mm;
+  height: 1.1mm;
+  border: 0.5px solid var(--ink);
+  transform: rotate(45deg);
+}
+
+.records strong {
+  font-weight: 700;
+}
+
+/* A procedência — periódico e ano, instituição e nível — desce para a própria
+   linha. `em` continua servindo à ênfase dentro da frase corrida dos itens que
+   não têm título destacado, e por isso não pode ser o que quebra a linha. */
+.records .source {
+  display: block;
+  margin-top: 0.3mm;
+  color: var(--muted);
+  font-size: 6.9pt;
+}
+
+.records em {
+  font-style: italic;
+}
+
+/* ── Prêmio, no rodapé da folha ───────────────────────────────────────── */
+
+.award {
+  display: flex;
+  align-items: center;
+  gap: 5mm;
+  margin-top: auto;
+  padding: 4mm 5mm;
+  background: var(--ink-deep);
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.award__badge {
+  color: var(--acid);
+  font-size: 6.4pt;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.award__badge strong {
+  display: block;
+  font-family: "Newsreader", serif;
+  font-size: 11pt;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+
+.award p {
+  margin: 0;
+  font-size: 7.5pt;
+  line-height: 1.42;
+}
+
+.award p strong {
+  color: #fff;
+  font-weight: 700;
+}

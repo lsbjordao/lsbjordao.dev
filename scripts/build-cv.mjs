@@ -1,6 +1,11 @@
 /**
- * Renderiza os currículos de uma página em `public/cv/`: `curriculo.html` (PT)
- * e `curriculum.html` (EN), que compartilham `scripts/cv/cv.css`.
+ * Renderiza os quatro currículos em `public/cv/`: a edição de uma página em PT
+ * (`curriculo.html`) e EN (`curriculum.html`), e a detalhada, de duas páginas,
+ * em PT (`curriculo-detalhado.html`) e EN (`curriculum-detailed.html`).
+ *
+ * Os quatro carregam `scripts/cv/cv-base.css` — fontes, paleta e componentes —
+ * e depois a folha da sua geometria, `cv.css` ou `cv-detalhado.css`. Editar a
+ * base mexe em todos; editar uma geometria mexe só no par dela.
  *
  * O Chrome headless é o motor porque já entende o CSS do currículo — a folha
  * usa as mesmas fontes variáveis e a mesma paleta do site, e qualquer outro
@@ -8,14 +13,17 @@
  *
  * Uso: node scripts/build-cv.mjs [--keep-open]
  *
- * Os dois PDFs saem da mesma sessão do Chrome: subir o navegador custa mais
- * que imprimir, e assim as duas folhas veem exatamente a mesma versão das
- * fontes. Cada uma é conferida em separado — o inglês costuma ser mais curto,
- * mas "costuma" não é garantia, e uma segunda página passa despercebida.
+ * Os quatro PDFs saem da mesma sessão do Chrome: subir o navegador custa mais
+ * que imprimir, e assim todas as folhas veem exatamente a mesma versão das
+ * fontes. Cada edição é conferida contra o número de páginas que declarou — o
+ * inglês costuma ser mais curto, mas "costuma" não é garantia, e uma página a
+ * mais passa despercebida. Na edição detalhada o excesso não vira página nova
+ * (o `.sheet` corta no `overflow: hidden`), então a conferência é dupla:
+ * a contagem aqui e o olho no PDF depois de mexer no texto.
  *
  * Os PDFs ficam versionados no repositório: o site é um export estático
  * servido pelo Cloudflare Pages, que não roda este script no deploy. Depois de
- * editar um HTML (ou o CSS, que afeta os dois), rode isto e faça commit dos
+ * editar um HTML (ou um CSS, que afeta mais de um), rode isto e faça commit dos
  * PDFs junto.
  */
 
@@ -29,17 +37,37 @@ import { pathToFileURL } from "node:url";
 
 const projectRoot = process.cwd();
 
-/** Os nomes de arquivo são públicos: aparecem no `download` do botão do site. */
+/**
+ * Os nomes de arquivo são públicos: aparecem no `download` do botão do site e
+ * na pasta de quem baixou. Por isso a edição detalhada tem nome no idioma do
+ * documento, e não um sufixo em português para quem lê em inglês.
+ *
+ * `pages` é o contrato de cada edição, verificado depois da impressão.
+ */
 const editions = [
   {
     lang: "pt",
+    pages: 1,
     source: join(projectRoot, "scripts", "cv", "curriculo.html"),
     target: join(projectRoot, "public", "cv", "lucas-jordao-cv.pdf"),
   },
   {
     lang: "en",
+    pages: 1,
     source: join(projectRoot, "scripts", "cv", "curriculum.html"),
     target: join(projectRoot, "public", "cv", "lucas-jordao-cv-en.pdf"),
+  },
+  {
+    lang: "pt",
+    pages: 2,
+    source: join(projectRoot, "scripts", "cv", "curriculo-detalhado.html"),
+    target: join(projectRoot, "public", "cv", "lucas-jordao-cv-detalhado.pdf"),
+  },
+  {
+    lang: "en",
+    pages: 2,
+    source: join(projectRoot, "scripts", "cv", "curriculum-detailed.html"),
+    target: join(projectRoot, "public", "cv", "lucas-jordao-cv-detailed.pdf"),
   },
 ];
 
@@ -282,9 +310,9 @@ async function main() {
 
     for (const edition of editions) {
       const pages = await render(client, edition);
-      if (pages !== 1) {
+      if (pages !== edition.pages) {
         console.warn(
-          `AVISO: o currículo ${edition.lang.toUpperCase()} saiu com ${pages} páginas. Corte conteúdo em ${edition.source}.`,
+          `AVISO: ${edition.source} saiu com ${pages} página(s), e não ${edition.pages}. Ajuste o conteúdo.`,
         );
         process.exitCode = 1;
       }

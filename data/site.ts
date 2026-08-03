@@ -31,13 +31,25 @@ export const profile = {
    * `scripts/cv/curriculo.html` (PT) e `curriculum.html` (EN). O botão de
    * download entrega a folha no idioma da página: quem chega pelo /en está
    * lendo em inglês e não deveria receber um PDF em português.
-   *
-   * O Lattes completo continua em `/cv/lucas-jordao-curriculo-lattes.pdf`,
-   * único em português — é documento oficial do CNPq, não tem versão vertida.
    */
   cv: {
     pt: "/cv/lucas-jordao-cv.pdf",
     en: "/cv/lucas-jordao-cv-en.pdf",
+  } satisfies Record<Lang, string>,
+  /**
+   * Currículo detalhado, de duas páginas, do mesmo build. Convive com o de uma
+   * página em vez de substituí-lo porque servem a momentos diferentes: a folha
+   * única é o que se anexa a uma mensagem fria no LinkedIn, e esta é o que se
+   * manda quando já existe uma conversa e alguém quer ver o detalhe técnico
+   * dos sistemas, da docência e da produção.
+   *
+   * O Lattes completo continua em `/cv/lucas-jordao-curriculo-lattes.pdf`,
+   * único em português — é documento oficial do CNPq, não tem versão vertida —
+   * e é o terceiro degrau: o exaustivo, que nenhuma das duas folhas tenta ser.
+   */
+  cvDetailed: {
+    pt: "/cv/lucas-jordao-cv-detalhado.pdf",
+    en: "/cv/lucas-jordao-cv-detailed.pdf",
   } satisfies Record<Lang, string>,
   lattesPdf: "/cv/lucas-jordao-curriculo-lattes.pdf",
   site: "https://lsbjordao.dev",

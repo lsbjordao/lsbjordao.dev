@@ -1,0 +1,140 @@
+/*
+ * Folha de anexo para candidaturas: justificativa de interesse, descrição de
+ * capacidades e referências profissionais.
+ *
+ * Carregada depois de `cv-base.css` e `cv-detalhado.css`, e só acrescenta o que
+ * a terceira folha precisa — a geometria de página, os componentes e a paleta
+ * vêm de lá. Um currículo de candidatura é o currículo detalhado mais um anexo,
+ * não um documento diferente.
+ *
+ * Os HTMLs que usam esta folha vivem em `candidaturas/`, fora do versionamento:
+ * trazem nome, cargo, telefone e e-mail de terceiros, e este repositório é
+ * público. O estilo fica aqui porque não tem dado pessoal nenhum e serve a
+ * qualquer candidatura futura.
+ */
+
+/* Com três folhas, não basta a primeira quebrar. Todas quebram menos a última,
+   e a regra continua valendo se um anexo crescer para uma quarta. */
+.sheet:not(:last-child) {
+  break-after: page;
+}
+
+/* ── Justificativa de interesse ───────────────────────────────────────── */
+
+.letter p {
+  margin: 0 0 2.2mm;
+  font-size: 8pt;
+  line-height: 1.5;
+}
+
+.letter p:last-child {
+  margin-bottom: 0;
+}
+
+.letter strong {
+  font-weight: 780;
+}
+
+/* ── Capacidades ──────────────────────────────────────────────────────── */
+
+.capabilities {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.4mm 6mm;
+}
+
+.capability strong {
+  display: block;
+  margin-bottom: 0.8mm;
+  color: var(--ink);
+  font-size: 7.6pt;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+}
+
+.capability p {
+  margin: 0;
+  font-size: 7.5pt;
+  line-height: 1.4;
+}
+
+/* O que a vaga pede e eu não tenho fica dito, não escondido: quem lê descobre
+   sozinho na entrevista, e descobrir sozinho custa mais caro do que ler aqui. */
+.gap {
+  padding: 2.6mm 3.4mm;
+  border-left: 2px solid var(--coral);
+  background: rgba(255, 118, 87, 0.08);
+}
+
+.gap p {
+  margin: 0;
+  font-size: 7.5pt;
+  line-height: 1.42;
+}
+
+/* ── Referências profissionais ────────────────────────────────────────── */
+
+.references {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+
+.reference {
+  padding: 3.4mm 4mm;
+  border: 1px solid var(--line);
+}
+
+.reference strong {
+  display: block;
+  font-size: 8.4pt;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+}
+
+.reference .post {
+  display: block;
+  margin-top: 0.6mm;
+  color: var(--muted);
+  font-size: 7.3pt;
+  line-height: 1.35;
+}
+
+.reference dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8mm 3mm;
+  margin: 2.4mm 0 0;
+  padding-top: 2.4mm;
+  border-top: 1px solid var(--line);
+}
+
+.reference dt {
+  color: var(--muted);
+  font-size: 6.3pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reference dd {
+  margin: 0;
+  font-size: 7.4pt;
+  word-break: break-word;
+}
+
+/*
+ * Marcador do que ainda falta preencher. Coral sólido, impossível de não ver no
+ * PDF: o pior desfecho possível deste documento é ele ser enviado com um campo
+ * de referência em branco.
+ */
+.fill {
+  display: inline-block;
+  padding: 0 1.4mm;
+  background: var(--coral);
+  color: #fff;
+  font-size: 6.8pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

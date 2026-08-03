@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Lucas Sá Barreto Jordão — Currículo detalhado</title>
+<link rel="stylesheet" href="cv-base.css">
+<link rel="stylesheet" href="cv-detalhado.css">
+</head>
+<body>
+
+<!--
+  Folha 1 — o currículo que se lê sozinho.
+
+  Mesma estrutura da versão de uma página, com bullets mais longos no lugar do
+  bloco "Destaques": prêmio, código aberto e produção ganham seção própria na
+  folha 2, e repeti-los aqui em resumo só gastaria espaço.
+-->
+<section class="sheet sheet--split">
+
+<aside class="side">
+  <div class="mark">
+    <span class="mark__initials">LJ</span>
+    <span class="mark__meta">
+      <strong>Lucas Jordão</strong>
+      Rio de Janeiro · Brasil
+    </span>
+  </div>
+
+  <section>
+    <h2>Contato</h2>
+    <div class="contact">
+      <a href="mailto:tucarj@gmail.com">tucarj@gmail.com</a>
+      <a href="https://www.linkedin.com/in/lucas-jord%C3%A3o-0349b616">linkedin.com/in/lucas-jordão</a>
+      <a href="https://github.com/lsbjordao">github.com/lsbjordao</a>
+      <a href="https://lsbjordao.dev">lsbjordao.dev</a>
+      <a href="https://lattes.cnpq.br/6445788694639027">lattes.cnpq.br/6445788694639027</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Formação</h2>
+    <div class="degree">
+      <strong>Graduação em Ciência de Dados</strong>
+      <small>Universidade Estácio de Sá</small>
+      <time>desde 2025 · conclusão jul/2027</time>
+    </div>
+    <div class="degree">
+      <strong>Pós-doutorado em Botânica</strong>
+      <small>Jardim Botânico do Rio de Janeiro</small>
+      <time>2019</time>
+    </div>
+    <div class="degree">
+      <strong>Doutorado em Botânica</strong>
+      <small>Jardim Botânico do Rio de Janeiro</small>
+      <time>2015 — 2019</time>
+    </div>
+    <div class="degree">
+      <strong>Mestrado em Ciências Biológicas</strong>
+      <small>Museu Nacional / UFRJ</small>
+      <time>2012 — 2014</time>
+    </div>
+    <div class="degree">
+      <strong>Ciências Biológicas</strong>
+      <small>Universidade Santa Úrsula<br>bacharelado e licenciatura</small>
+      <time>2007 · 2009</time>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tecnologias</h2>
+    <dl class="stack">
+      <div>
+        <dt>Linguagens</dt>
+        <dd>TypeScript · JavaScript · Python · R · SQL</dd>
+      </div>
+      <div>
+        <dt>Aplicações</dt>
+        <dd>Next.js · React · NestJS · Node.js · GraphQL · REST</dd>
+      </div>
+      <div>
+        <dt>Dados</dt>
+        <dd>Apache Airflow · dbt · BullMQ/Redis · Kafka · DuckDB · Trino · Superset</dd>
+      </div>
+      <div>
+        <dt>Bancos</dt>
+        <dd>PostgreSQL/PostGIS · MongoDB · Neo4j · Jena Fuseki</dd>
+      </div>
+      <div>
+        <dt>Infraestrutura</dt>
+        <dd>Docker · Git · GitLab CI/CD · Linux · GCP · AWS · Azure</dd>
+      </div>
+      <div>
+        <dt>Geoespacial</dt>
+        <dd>MapBiomas · Google Earth Engine · séries LULC · critérios IUCN</dd>
+      </div>
+      <div>
+        <dt>Processo</dt>
+        <dd>Lean Inception · Product Backlog Building · Scrum · Kanban · engenharia de requisitos</dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer>
+    <strong>Idiomas</strong>
+    Português nativo · inglês para leitura e escrita técnica
+    <br><br>
+    <strong>Disponibilidade</strong>
+    Imediata · remoto, híbrido ou Rio de Janeiro
+  </footer>
+</aside>
+
+<main class="main">
+  <header>
+    <h1 class="name">
+      Lucas Sá Barreto
+      <em>Jordão</em>
+    </h1>
+    <p class="role">
+      Engenharia de dados · Full stack · Geoespacial
+      <span>— Doutor em Botânica</span>
+    </p>
+  </header>
+
+  <p class="profile">
+    Doutor em Botânica que virou engenheiro. Passei seis anos construindo a
+    infraestrutura que sustenta a avaliação de risco de extinção da flora
+    brasileira: pipelines com Airflow e dbt, aplicações Next.js/NestJS sobre
+    PostgreSQL/PostGIS e análise geoespacial com MapBiomas. Sei o que o dado
+    significa antes de modelá-lo, e é isso que me faz projetar sistemas que a
+    equipe de domínio consegue usar sozinha. Procuro um time onde domínio, dados
+    e produto sejam a mesma conversa.
+  </p>
+
+  <section>
+    <h2>Experiência</h2>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>CNCFlora / Jardim Botânico do Rio de Janeiro</strong>
+        <time>2020 — 2026</time>
+      </div>
+      <p class="job__place">Rio de Janeiro · Brasil</p>
+
+      <div class="job__title">
+        <span>Analista de TI</span>
+        <time>2024 — 2026</time>
+      </div>
+      <ul>
+        <li>
+          Atuei da arquitetura à interface do <strong>Avalia–CNCFlora</strong>,
+          ambiente interno que reúne dados taxonômicos, análises geoespaciais,
+          gráficos e textos de apoio à avaliação: modelagem em
+          PostgreSQL/PostGIS, back-end NestJS expondo REST e GraphQL, front-end
+          Next.js e pipelines de CI/CD em GitLab.
+        </li>
+        <li>
+          Integrei ao Avalia o MapBiomas, as métricas de AOO e EOO, as
+          tendências de uso e cobertura do solo e a redação estruturada das
+          justificativas — o avaliador passou a produzir a análise e o texto no
+          mesmo lugar, sem planilha intermediária.
+        </li>
+        <li>
+          Projetei e implementei o ETL <strong>Bull–ProFlora</strong>, ligando o
+          ProFlora a filas assíncronas e tornando processamentos pesados
+          controláveis, repetíveis e auditáveis.
+        </li>
+        <li>
+          Conduzi a <strong>migração do acervo legado</strong>: orquestrei
+          extração e carga com Apache Airflow, modelei e validei as
+          transformações com dbt e disponibilizei o histórico recuperado na nova
+          base — dados que hoje alimentam o portal público do CNCFlora.
+        </li>
+        <li>
+          Levantei requisitos com Sphinx-Needs, mantendo rastreabilidade entre
+          necessidade e implementação, e criei o catálogo de serviços da equipe
+          em Backstage.
+        </li>
+      </ul>
+
+      <div class="job__title">
+        <span>Analista da Lista Vermelha</span>
+        <time>2020 — 2024</time>
+      </div>
+      <ul>
+        <li>
+          Desenvolvi rotinas geoespaciais que tornaram o critério B da IUCN
+          objetivo e reprodutível: regressão sobre séries do MapBiomas para
+          estimar declínio contínuo em AOO, EOO e habitat, e método de buffer
+          variável para semiautomatizar a contagem de <em>locations</em>.
+        </li>
+        <li>
+          Propus uma arquitetura estruturada para o <em>rationale</em>,
+          organizando o texto de justificativa de modo a atender de forma
+          consistente aos requisitos dos critérios — o que reduziu a variação
+          entre avaliadores e encurtou a revisão.
+        </li>
+        <li>
+          <strong>588 avaliações</strong> publicadas na Lista Vermelha da IUCN.
+        </li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>New York Botanical Garden</strong>
+        <time>2016 — 2017</time>
+      </div>
+      <p class="job__place">Nova York · Estados Unidos — Herbarium Digitization Intern</p>
+      <ul>
+        <li>
+          Digitalização de espécimes e curadoria de dados taxonômicos em um dos
+          maiores herbários do mundo, transformando acervo físico em dado
+          acessível — a origem do meu interesse por infraestrutura de
+          biodiversidade.
+        </li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>Docência</strong>
+        <time>2007 — 2026</time>
+      </div>
+      <p class="job__place">ENBT/JBRJ · UFMS · SEEDUC/RJ · Curso Bioforense</p>
+      <ul>
+        <li>
+          Nove turmas, cursos e disciplinas ministrados, da educação básica à
+          pós-graduação — filoinformática, legislação ambiental e avaliação de
+          risco de extinção —, com oito apostilas de acesso aberto publicadas em
+          Quarto. Detalhamento na folha seguinte.
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <!--
+    Sumário do que a folha 2 desenvolve. Existe porque esta folha circula
+    sozinha sempre que alguém imprime só a primeira: sem ela, o prêmio e o
+    código aberto sumiriam para quem lê uma página só.
+  -->
+  <section>
+    <h2>Destaques</h2>
+    <ul class="highlights">
+      <li>
+        <strong>Menção honrosa</strong> na 4ª edição do Prêmio MapBiomas (2022),
+        categoria Aplicações em Políticas Públicas.
+      </li>
+      <li>
+        Seis <strong>pacotes npm</strong> publicados e 53 repositórios públicos
+        de código aberto.
+      </li>
+      <li>
+        Oito apostilas de acesso aberto em Quarto, somando 74 capítulos, mais
+        uma chave de identificação interativa.
+      </li>
+      <li>
+        Oito bancas examinadoras e pareceres <em>ad hoc</em> para sete
+        periódicos científicos.
+      </li>
+    </ul>
+  </section>
+
+  <div class="numbers">
+    <div><strong>14</strong><span>artigos publicados</span></div>
+    <div><strong>08</strong><span>como primeiro autor</span></div>
+    <div><strong>06</strong><span>espécies novas descritas</span></div>
+    <div><strong>588</strong><span>avaliações na Lista Vermelha</span></div>
+  </div>
+</main>
+
+</section>
+
+<!--
+  Folha 2 — aprofundamento. Nada aqui repete a folha 1: sistemas com o detalhe
+  técnico que não cabe num bullet, o método autoral que sustenta o prêmio, o
+  código aberto nomeado e a produção acadêmica com periódico e ano.
+-->
+<section class="sheet sheet--flow">
+
+  <header class="band">
+    <span class="band__initials">LJ</span>
+    <span class="band__id">
+      <strong>Lucas Sá Barreto Jordão</strong>
+      <span>Engenharia de dados · Full stack · Geoespacial</span>
+    </span>
+    <span class="band__meta">
+      <strong>Página 2 de 2</strong>
+      lsbjordao.dev · tucarj@gmail.com
+    </span>
+  </header>
+
+  <div class="flow">
+
+    <section>
+      <h2>Sistemas que construí</h2>
+      <div class="systems">
+        <article class="system">
+          <div class="system__head">
+            <strong>Avalia–CNCFlora</strong>
+            <span>Aplicação interna</span>
+          </div>
+          <p class="system__stack">Next.js · NestJS · GraphQL · PostgreSQL/PostGIS · GitLab CI/CD</p>
+          <p>
+            Ambiente que reúne dados taxonômicos, análises geoespaciais, gráficos
+            e textos de apoio à avaliação segundo os critérios da IUCN. Modelei
+            os dados, construí o back-end e o front-end, implementei o CI/CD e
+            integrei MapBiomas, métricas de AOO e EOO, tendências de uso do solo
+            e a redação estruturada das justificativas.
+          </p>
+        </article>
+
+        <article class="system">
+          <div class="system__head">
+            <strong>Bull–ProFlora</strong>
+            <span>ETL em operação</span>
+          </div>
+          <p class="system__stack">BullMQ · Redis · Node.js · APIs · registros de execução</p>
+          <p>
+            ETL que conectou o ProFlora a filas assíncronas, tornando
+            processamentos pesados controláveis, repetíveis e auditáveis. A
+            camada de processamento e suas integrações foram minha entrega; o
+            painel de operação é o Bull Board, genérico do ecossistema Bull.
+          </p>
+        </article>
+
+        <article class="system">
+          <div class="system__head">
+            <strong>Resgate de dados legados</strong>
+            <span>Migração concluída</span>
+          </div>
+          <p class="system__stack">Apache Airflow · dbt · PostgreSQL · ProFlora</p>
+          <p>
+            Planejei e executei o resgate do acervo histórico do sistema legado.
+            Orquestrei extração e carga com Airflow, modelei e validei as
+            transformações com dbt e disponibilizei o legado recuperado na nova
+            base. Esses dados hoje alimentam o portal público do CNCFlora.
+          </p>
+        </article>
+
+        <article class="system">
+          <div class="system__head">
+            <strong>Painel de Acompanhamento</strong>
+            <span>Protótipo não adotado</span>
+          </div>
+          <p class="system__stack">Apps Script · Google APIs · mensageria · workflow</p>
+          <p>
+            Concebi e construí uma aplicação para tornar visíveis etapas,
+            responsáveis, pendências e progresso de centenas de avaliações em
+            tempo real. Não foi implantada institucionalmente: o fluxo
+            efetivamente usado permaneceu numa planilha que configurei com Apps
+            Script, APIs e mensageria, e que sustentou a operação até o fim do
+            período.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Método autoral · o critério B da IUCN, operacionalizado</h2>
+      <div class="methods">
+        <div class="method">
+          <strong>01 / Declínio contínuo</strong>
+          <p>
+            Regressão linear sobre a série histórica de uso e cobertura do solo
+            para estimar tendências de acréscimo ou decréscimo em AOO, EOO e
+            habitat.
+          </p>
+        </div>
+        <div class="method">
+          <strong>02 / Locations</strong>
+          <p>
+            Método de buffer variável para aglutinar ocorrências próximas e
+            semiautomatizar a contagem de situações de ameaça.
+          </p>
+        </div>
+        <div class="method">
+          <strong>03 / Rationale</strong>
+          <p>
+            Arquitetura estruturada para o texto de justificativa, organizando-o
+            de modo a atender de forma consistente aos requisitos dos critérios.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Código aberto</h2>
+      <ul class="packages">
+        <li>
+          <strong>@lsbjordao/type-taxon-script</strong>
+          <small>estruturas de dados tipadas para sistemática</small>
+        </li>
+        <li>
+          <strong>@lsbjordao/iucn-red-list-criteria-validator.js</strong>
+          <small>validação dos critérios da Lista Vermelha</small>
+        </li>
+        <li>
+          <strong>@lsbjordao/mapbiomas-alerta.js</strong>
+          <small>cliente da API de alertas de desmatamento</small>
+        </li>
+        <li>
+          <strong>@lsbjordao/genbank-js</strong>
+          <small>leitura de registros do GenBank</small>
+        </li>
+        <li>
+          <strong>@lsbjordao/ffb-js</strong>
+          <small>cliente da Flora e Funga do Brasil</small>
+        </li>
+        <li>
+          <strong>@lsbjordao/ibge-js</strong>
+          <small>malhas e dados territoriais do IBGE</small>
+        </li>
+      </ul>
+      <p class="note">
+        Seis pacotes publicados no npm e 53 repositórios públicos no GitHub.
+        O TypeTaxonScript, framework de dados tipados para sistemática, foi
+        publicado em <em>Biology Methods and Protocols</em> (2024).
+      </p>
+    </section>
+
+    <div class="split">
+      <section>
+        <h2>Docência e formação de pessoas</h2>
+        <ul class="records">
+          <li>
+            <strong>Tópicos Especiais: Introdução à Filoinformática</strong>
+            <span class="source">Escola Nacional de Botânica Tropical / JBRJ · pós-graduação</span>
+          </li>
+          <li>
+            <strong>Espécies ameaçadas: da política pública à avaliação do risco de extinção</strong>
+            <span class="source">Universidade Federal de Mato Grosso do Sul · remoto</span>
+          </li>
+          <li>
+            <strong>Botânica forense e legislação aplicada à proteção da flora</strong>
+            <span class="source">Curso Bioforense · preparatório para perito criminal</span>
+          </li>
+          <li>
+            <strong>Treinamento da equipe em avaliação de risco de extinção</strong>
+            <span class="source">CNCFlora / JBRJ</span>
+          </li>
+          <li>
+            Mais cinco atuações, da educação básica à monitoria universitária —
+            SEEDUC/RJ, Sociedade Educacional Laranjeiras, Horto Escola Artesanal
+            e Universidade Santa Úrsula.
+          </li>
+          <li>
+            <strong>Oito materiais de acesso aberto publicados em Quarto</strong>,
+            somando 74 capítulos, mais uma chave de identificação interativa.
+          </li>
+          <li>
+            Uma orientação de trabalho de conclusão de curso (IFRJ, 2023) e oito
+            bancas examinadoras de doutorado, mestrado e graduação.
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Produção acadêmica</h2>
+        <ul class="records">
+          <li>
+            <strong>TypeTaxonScript: sugarifying and enhancing data structures in
+            biological systematics and biodiversity research</strong>
+            <span class="source"><em>Biology Methods and Protocols</em> · 2024 · primeiro autor</span>
+          </li>
+          <li>
+            <strong>Advances in systematics of <em>Mimosa</em>: phylogeny and
+            biogeography of the Petiolovariabilis clade</strong>
+            <span class="source"><em>Botanical Journal of the Linnean Society</em> · 2025 · primeiro autor</span>
+          </li>
+          <li>
+            <strong>Precipitation is the main axis of tropical plant phylogenetic
+            turnover across space and time</strong>
+            <span class="source"><em>Science Advances</em> · 2023</span>
+          </li>
+          <li>
+            <strong>Toward a Census of <em>Mimosa</em> in the Atlantic Domain,
+            Southeastern Brazil</strong>
+            <span class="source"><em>Systematic Botany</em> · 2018 · primeiro autor</span>
+          </li>
+          <li>
+            Capítulo <strong>Fabaceae</strong> no <em>Livro Vermelho da Flora
+            Endêmica do Estado do Rio de Janeiro</em>
+            <span class="source">Andrea Jakobsson Estúdio · 2018</span>
+          </li>
+          <li>
+            14 artigos publicados e 2 aceitos, 8 como primeiro autor, 6 espécies
+            novas descritas. Pareceres <em>ad hoc</em> para sete periódicos,
+            entre eles <em>Systematic Botany</em> e <em>Database</em>.
+          </li>
+          <li>
+            Lista completa e verificável no Currículo Lattes.
+          </li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="award">
+      <span class="award__badge">
+        4ª edição · Prêmio MapBiomas
+        <strong>Menção honrosa</strong>
+        2022
+      </span>
+      <p>
+        <strong>O MapBiomas e a avaliação do risco de extinção da flora
+        brasileira</strong> — categoria Aplicações em Políticas Públicas.
+        Reconhecimento do trabalho que tornou a avaliação pelo critério B da
+        Lista Vermelha da IUCN mais objetiva, reprodutível e operacional.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+</body>
+</html>

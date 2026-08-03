@@ -1191,6 +1191,7 @@ export const pt = {
     primaryCta: "Falar comigo no LinkedIn",
     lattesCta: "Ver Currículo Lattes",
     cvCta: "Baixar currículo (1 página)",
+    cvDetailedCta: "Baixar currículo detalhado (2 páginas)",
     links: { github: "GitHub", lattes: "Currículo Lattes", blog: "Blog" },
     linkNote: {
       github: "53 repositórios públicos",

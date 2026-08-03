@@ -34,8 +34,10 @@ scripts/
   image-sizes.json larguras e qualidade — fonte única
   image-loader.ts  loader do next/image
   generate-images.mjs gera as variantes em public/_img/
+  cv/cv-base.css   fontes, paleta e componentes dos quatro currículos
   cv/curriculo.html currículo de uma página, em A4
-  build-cv.mjs     renderiza o currículo em public/cv/ com o Chrome headless
+  cv/curriculo-detalhado.html currículo de duas páginas
+  build-cv.mjs     renderiza os currículos em public/cv/ com o Chrome headless
 ```
 
 Português e inglês são **rotas estáticas separadas**, não uma troca em
@@ -60,28 +62,42 @@ próprio e não se traduz. Passar o cursor pré-visualiza, clicar fixa.
 Os DOIs foram conferidos um a um no Crossref. Item sem registro achado fica
 sem link e renderiza como texto: identificador inventado é pior que ausente.
 
-### Currículo de uma página
+### Currículos em PDF
 
-`npm run cv` renderiza as duas versões com o Chrome headless, usando as mesmas
+`npm run cv` renderiza as quatro edições com o Chrome headless, usando as mesmas
 fontes variáveis e a mesma paleta do site:
 
-| Fonte | Saída |
-| --- | --- |
-| `scripts/cv/curriculo.html` | `public/cv/lucas-jordao-cv.pdf` |
-| `scripts/cv/curriculum.html` | `public/cv/lucas-jordao-cv-en.pdf` |
+| Fonte | Saída | Páginas |
+| --- | --- | --- |
+| `scripts/cv/curriculo.html` | `public/cv/lucas-jordao-cv.pdf` | 1 |
+| `scripts/cv/curriculum.html` | `public/cv/lucas-jordao-cv-en.pdf` | 1 |
+| `scripts/cv/curriculo-detalhado.html` | `public/cv/lucas-jordao-cv-detalhado.pdf` | 2 |
+| `scripts/cv/curriculum-detailed.html` | `public/cv/lucas-jordao-cv-detailed.pdf` | 2 |
 
-O estilo é um só, em `scripts/cv/cv.css` — os HTMLs carregam a mesma folha e só
-guardam o texto. Mexer no CSS muda os dois PDFs; por isso o script conta as
-páginas de **cada** saída e falha se alguma passar de uma. O formato é a
-restrição, então ele é verificado, não confiado.
+São três degraus de profundidade, não três versões do mesmo documento: a folha
+única é o anexo de uma mensagem fria; a detalhada é o que se manda quando já há
+conversa e alguém quer ver os sistemas, a docência e a produção; e o Lattes é o
+exaustivo, que nenhuma das duas tenta ser.
 
-O botão de download do site entrega a folha no idioma da página: `profile.cv` em
-`data/site.ts` é um mapa por idioma, e o `/en` não deveria devolver um PDF em
-português.
+O CSS é dividido por responsabilidade. `cv-base.css` traz fontes, paleta e todos
+os componentes, e é carregado pelos quatro documentos — mexer nele muda os
+quatro PDFs. Depois vem a folha da geometria: `cv.css` (uma página) ou
+`cv-detalhado.css` (duas). Tamanho de fonte fica na base quando é a identidade do
+componente e é sobrescrito na geometria quando a folha aperta.
+
+Cada edição declara quantas páginas deve ter, e o script confere a saída contra
+essa declaração. Na edição detalhada as duas folhas são explícitas no HTML —
+dois `.sheet` de 297mm — em vez de quebra automática, que moveria a dobra a cada
+edição do texto. O que transborda é cortado pelo `overflow: hidden` e some **sem
+virar página nova**: depois de mexer no texto, olhe o PDF, não só a contagem.
+
+Os botões de download do site entregam a folha no idioma da página: `profile.cv`
+e `profile.cvDetailed` em `data/site.ts` são mapas por idioma, e o `/en` não
+deveria devolver um PDF em português.
 
 Os PDFs são versionados: o deploy é um export estático e não roda este script.
-Depois de editar um HTML (ou o CSS, que afeta os dois), rode `npm run cv` e faça
-commit dos PDFs junto. O Lattes completo continua em
+Depois de editar um HTML (ou um CSS, que afeta mais de um), rode `npm run cv` e
+faça commit dos PDFs junto. O Lattes completo continua em
 `public/cv/lucas-jordao-curriculo-lattes.pdf`, só em português — é documento
 oficial do CNPq e não tem versão vertida.
 

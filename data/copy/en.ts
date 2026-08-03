@@ -1161,6 +1161,7 @@ export const en: Copy = {
     primaryCta: "Message me on LinkedIn",
     lattesCta: "View Lattes CV",
     cvCta: "Download CV (1 page)",
+    cvDetailedCta: "Download detailed CV (2 pages)",
     links: { github: "GitHub", lattes: "Lattes CV", blog: "Blog" },
     linkNote: {
       github: "53 public repositories",
