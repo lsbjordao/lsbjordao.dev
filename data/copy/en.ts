@@ -7,7 +7,7 @@ export const en: Copy = {
     title:
       "Lucas S.B. Jordão — Data engineering, full stack and geospatial for biodiversity",
     description:
-      "PhD and MSc in Botany. Six years building the infrastructure behind Brazil's plant extinction-risk assessments: Airflow and dbt pipelines, Next.js/NestJS applications with REST and GraphQL APIs, and geospatial analysis with PostGIS and MapBiomas. Available for new roles.",
+      "PhD and MSc in Botany. Six years building the infrastructure behind Brazil's plant extinction-risk assessments: Airflow and dbt pipelines, Next.js/NestJS applications with REST and GraphQL APIs, and geospatial analysis with PostGIS and MapBiomas. Available for new opportunities.",
     ogTitle: "Lucas S.B. Jordão — Botany at systems scale",
     ogDescription:
       "PhD in Botany and engineer. Pipelines, applications and geospatial analysis for biodiversity and conservation.",
@@ -44,8 +44,8 @@ export const en: Copy = {
     notas: "Writing",
     blog: "Blog",
     mobileLocation: "Rio de Janeiro · Brazil",
-    mobileAvailability: "Available for new roles",
-    status: "Available for new roles",
+    mobileAvailability: "Open to opportunities",
+    status: "Open to opportunities",
     statusHref: "#contato",
     brandTagline: "Data science and engineering · Full stack · Botany",
   },
@@ -59,7 +59,7 @@ export const en: Copy = {
     secondaryCta: "Find my profile in the key",
     availability: {
       label: "Status",
-      value: "Available for new roles",
+      value: "Available for new opportunities",
       modalityLabel: "Setup",
       modality: "Remote, hybrid or Rio de Janeiro",
       startLabel: "Availability",
@@ -169,7 +169,7 @@ export const en: Copy = {
     resultLabel: "Determination",
     stackLabel: "Stack",
     evidenceLabel: "Evidence on this page",
-    hireLabel: "Talk to me about this role",
+    hireLabel: "Talk to me about this position",
     seeAll: "See all four tracks",
     couplets: {
       "1": {
@@ -1145,10 +1145,10 @@ export const en: Copy = {
       emphasis: "living, integrated infrastructure.",
     },
     intro:
-      "I'm available for new roles and interested in teams where biodiversity, data and digital product have to work as one thing. I reply on LinkedIn within one business day.",
+      "I'm available for new opportunities and interested in teams where biodiversity, data and digital product have to work as one thing. I reply on LinkedIn within one business day.",
     cardLabel: "What I'm looking for",
     looking: [
-      { label: "Roles", value: "Data engineering · Full stack · Geospatial · Applied research" },
+      { label: "Positions", value: "Data engineering · Full stack · Geospatial · Applied research" },
       {
         label: "Education",
         value:
