@@ -62,14 +62,28 @@ sem link e renderiza como texto: identificador inventado é pior que ausente.
 
 ### Currículo de uma página
 
-`npm run cv` renderiza `scripts/cv/curriculo.html` em
-`public/cv/lucas-jordao-cv.pdf` com o Chrome headless, usando as mesmas fontes
-variáveis e a mesma paleta do site. O script conta as páginas do PDF e falha se
-passar de uma — o formato é a restrição, então ele é verificado, não confiado.
+`npm run cv` renderiza as duas versões com o Chrome headless, usando as mesmas
+fontes variáveis e a mesma paleta do site:
 
-O PDF é versionado: o deploy é um export estático e não roda este script. Depois
-de editar o HTML, rode `npm run cv` e faça commit do PDF junto. O Lattes
-completo continua em `public/cv/lucas-jordao-curriculo-lattes.pdf`.
+| Fonte | Saída |
+| --- | --- |
+| `scripts/cv/curriculo.html` | `public/cv/lucas-jordao-cv.pdf` |
+| `scripts/cv/curriculum.html` | `public/cv/lucas-jordao-cv-en.pdf` |
+
+O estilo é um só, em `scripts/cv/cv.css` — os HTMLs carregam a mesma folha e só
+guardam o texto. Mexer no CSS muda os dois PDFs; por isso o script conta as
+páginas de **cada** saída e falha se alguma passar de uma. O formato é a
+restrição, então ele é verificado, não confiado.
+
+O botão de download do site entrega a folha no idioma da página: `profile.cv` em
+`data/site.ts` é um mapa por idioma, e o `/en` não deveria devolver um PDF em
+português.
+
+Os PDFs são versionados: o deploy é um export estático e não roda este script.
+Depois de editar um HTML (ou o CSS, que afeta os dois), rode `npm run cv` e faça
+commit dos PDFs junto. O Lattes completo continua em
+`public/cv/lucas-jordao-curriculo-lattes.pdf`, só em português — é documento
+oficial do CNPq e não tem versão vertida.
 
 ### Imagens responsivas
 

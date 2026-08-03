@@ -1501,7 +1501,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
                 >
                   {c.contact.lattesCta} <Arrow diagonal />
                 </a>
-                <a className="button button--outline" href={profile.cv} download>
+                <a className="button button--outline" href={profile.cv[lang]} download>
                   {c.contact.cvCta} <Arrow />
                 </a>
               </div>

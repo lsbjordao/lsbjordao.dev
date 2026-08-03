@@ -1099,7 +1099,7 @@ export const en: Copy = {
       },
       dataScience: {
         title: "Formalising the engineering",
-        text: "A second degree, in Data Science, to give name and method to what was already daily practice: modelling, statistics and data engineering.",
+        text: "A second degree, in Data Science, at Universidade Estácio de Sá, to give name and method to what was already daily practice: modelling, statistics and data engineering. Expected completion in July 2027.",
       },
       now: {
         title: "Looking for the next team",
@@ -1151,7 +1151,8 @@ export const en: Copy = {
       { label: "Roles", value: "Data engineering · Full stack · Geospatial · Applied research" },
       {
         label: "Education",
-        value: "PhD and MSc in Botany · BSc in Data Science (in progress)",
+        value:
+          "PhD and MSc in Botany · BSc in Data Science at Estácio, completing July 2027",
       },
       { label: "Setup", value: "Remote, hybrid or on-site in Rio de Janeiro" },
       { label: "Availability", value: "Immediate" },

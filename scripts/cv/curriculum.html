@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lucas Sá Barreto Jordão — CV</title>
+<link rel="stylesheet" href="cv.css">
+</head>
+<body>
+
+<aside class="side">
+  <div class="mark">
+    <span class="mark__initials">LJ</span>
+    <span class="mark__meta">
+      <strong>Lucas Jordão</strong>
+      Rio de Janeiro · Brazil
+    </span>
+  </div>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="contact">
+      <a href="mailto:tucarj@gmail.com">tucarj@gmail.com</a>
+      <a href="https://www.linkedin.com/in/lucas-jord%C3%A3o-0349b616">linkedin.com/in/lucas-jordão</a>
+      <a href="https://github.com/lsbjordao">github.com/lsbjordao</a>
+      <a href="https://lsbjordao.dev">lsbjordao.dev</a>
+      <a href="https://lattes.cnpq.br/6445788694639027">lattes.cnpq.br/6445788694639027</a>
+    </div>
+  </section>
+
+  <section>
+    <h2>Education</h2>
+    <div class="degree">
+      <strong>BSc in Data Science</strong>
+      <small>Universidade Estácio de Sá</small>
+      <time>since 2025 · graduating Jul 2027</time>
+    </div>
+    <div class="degree">
+      <strong>Postdoctoral research in Botany</strong>
+      <small>Rio de Janeiro Botanical Garden</small>
+      <time>2019</time>
+    </div>
+    <div class="degree">
+      <strong>PhD in Botany</strong>
+      <small>Rio de Janeiro Botanical Garden</small>
+      <time>2015 — 2019</time>
+    </div>
+    <div class="degree">
+      <strong>MSc in Biological Sciences</strong>
+      <small>Museu Nacional / UFRJ</small>
+      <time>2012 — 2014</time>
+    </div>
+    <div class="degree">
+      <strong>Biological Sciences</strong>
+      <small>Universidade Santa Úrsula<br>BSc and licentiate</small>
+      <time>2007 · 2009</time>
+    </div>
+  </section>
+
+  <section>
+    <h2>Technologies</h2>
+    <dl class="stack">
+      <div>
+        <dt>Programming</dt>
+        <dd>TypeScript · JavaScript · Python · R · SQL</dd>
+      </div>
+      <div>
+        <dt>Applications</dt>
+        <dd>Next.js · React · NestJS · Node.js · GraphQL · REST</dd>
+      </div>
+      <div>
+        <dt>Data</dt>
+        <dd>Apache Airflow · dbt · BullMQ/Redis · Kafka · DuckDB · Trino · Superset</dd>
+      </div>
+      <div>
+        <dt>Databases</dt>
+        <dd>PostgreSQL/PostGIS · MongoDB · Neo4j · Jena Fuseki</dd>
+      </div>
+      <div>
+        <dt>Infrastructure</dt>
+        <dd>Docker · Git · GitLab CI/CD · Linux · GCP · AWS · Azure</dd>
+      </div>
+      <div>
+        <dt>Geospatial</dt>
+        <dd>MapBiomas · Google Earth Engine · LULC series · IUCN criteria</dd>
+      </div>
+      <div>
+        <dt>Process</dt>
+        <dd>Lean Inception · Product Backlog Building · Scrum · Kanban · requirements engineering</dd>
+      </div>
+    </dl>
+  </section>
+
+  <footer>
+    <strong>Languages</strong>
+    Portuguese native · English for technical reading and writing
+    <br><br>
+    <strong>Availability</strong>
+    Immediate · remote, hybrid or Rio de Janeiro
+  </footer>
+</aside>
+
+<main class="main">
+  <header>
+    <h1 class="name">
+      Lucas Sá Barreto
+      <em>Jordão</em>
+    </h1>
+    <p class="role">
+      Data engineering · Full stack · Geospatial
+      <span>— PhD in Botany</span>
+    </p>
+  </header>
+
+  <p class="profile">
+    A botanist with a PhD who became an engineer. I spent six years building the
+    infrastructure behind Brazil's plant extinction-risk assessments: Airflow
+    and dbt pipelines, Next.js/NestJS applications over PostgreSQL/PostGIS, and
+    geospatial analysis with MapBiomas. I'm looking for a team where domain,
+    data and product are the same conversation.
+  </p>
+
+  <section>
+    <h2>Experience</h2>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>CNCFlora / Rio de Janeiro Botanical Garden</strong>
+        <time>2020 — 2026</time>
+      </div>
+      <p class="job__place">Rio de Janeiro · Brazil</p>
+
+      <div class="job__title">
+        <span>IT Analyst</span>
+        <time>2024 — 2026</time>
+      </div>
+      <ul>
+        <li>
+          Worked from architecture to interface on <strong>Avalia–CNCFlora</strong>,
+          the internal assessment environment: PostgreSQL/PostGIS modelling, a
+          NestJS back end exposing REST and GraphQL, a Next.js front end and
+          GitLab CI/CD.
+        </li>
+        <li>
+          Designed and implemented the <strong>Bull–ProFlora</strong> ETL,
+          connecting ProFlora to asynchronous queues and making heavy processing
+          repeatable, observable and auditable.
+        </li>
+        <li>
+          Led the <strong>legacy collection migration</strong> with Apache
+          Airflow and dbt; the recovered data now feeds CNCFlora's public
+          portal.
+        </li>
+        <li>
+          Gathered requirements with Sphinx-Needs, keeping traceability between
+          need and implementation, and built the team's service catalogue in
+          Backstage.
+        </li>
+      </ul>
+
+      <div class="job__title">
+        <span>Red List Analyst</span>
+        <time>2020 — 2024</time>
+      </div>
+      <ul>
+        <li>
+          Built geospatial routines that made IUCN criterion B objective and
+          reproducible: regression over MapBiomas series to estimate continuing
+          decline in AOO, EOO and habitat, and a variable-buffer method to
+          semi-automate the counting of <em>locations</em>.
+        </li>
+        <li>
+          <strong>588 assessments</strong> published on the IUCN Red List.
+        </li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>New York Botanical Garden</strong>
+        <time>2016 — 2017</time>
+      </div>
+      <p class="job__place">New York · United States — Herbarium Digitization Intern</p>
+      <ul>
+        <li>
+          Specimen digitisation and taxonomic data curation, turning a physical
+          collection into accessible data.
+        </li>
+      </ul>
+    </article>
+
+    <article class="job">
+      <div class="job__head">
+        <strong>Teaching</strong>
+        <time>2007 — 2026</time>
+      </div>
+      <p class="job__place">ENBT/JBRJ · UFMS · SEEDUC/RJ · Bioforense course</p>
+      <ul>
+        <li>
+          Nine classes, courses and modules taught, from secondary school to
+          postgraduate level — phyloinformatics, environmental law and
+          extinction-risk assessment —, with eight open-access course books
+          published in Quarto.
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <section>
+    <h2>Highlights</h2>
+    <ul class="highlights">
+      <li>
+        <strong>Honourable mention</strong> at the 4th MapBiomas Award (2022),
+        Public Policy Applications category.
+      </li>
+      <li>
+        <strong>TypeTaxonScript</strong>: a typed-data framework for
+        systematics, published in <em>Biology Methods and Protocols</em>.
+      </li>
+      <li>
+        Six published <strong>npm packages</strong> and 53 public open-source
+        repositories.
+      </li>
+      <li>
+        Eight examining committees and <em>ad hoc</em> peer review for seven
+        scientific journals.
+      </li>
+    </ul>
+  </section>
+
+  <div class="numbers">
+    <div><strong>14</strong><span>published papers</span></div>
+    <div><strong>08</strong><span>as first author</span></div>
+    <div><strong>06</strong><span>new species described</span></div>
+    <div><strong>588</strong><span>Red List assessments</span></div>
+  </div>
+</main>
+
+</body>
+</html>

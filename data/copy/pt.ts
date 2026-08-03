@@ -1129,7 +1129,7 @@ export const pt = {
       },
       dataScience: {
         title: "Formalizando a engenharia",
-        text: "Segunda graduação, em Ciência de Dados, para dar nome e método ao que já era prática diária: modelagem, estatística e engenharia de dados.",
+        text: "Segunda graduação, em Ciência de Dados, na Universidade Estácio de Sá, para dar nome e método ao que já era prática diária: modelagem, estatística e engenharia de dados. Conclusão prevista para julho de 2027.",
       },
       now: {
         title: "Procurando o próximo time",
@@ -1182,7 +1182,7 @@ export const pt = {
       {
         label: "Formação",
         value:
-          "Doutorado e mestrado em Botânica · graduação em Ciência de Dados (em curso)",
+          "Doutorado e mestrado em Botânica · graduação em Ciência de Dados na Estácio, conclusão em julho de 2027",
       },
       { label: "Modalidade", value: "Remoto, híbrido ou presencial no Rio de Janeiro" },
       { label: "Disponibilidade", value: "Imediata" },

@@ -28,10 +28,17 @@ export const profile = {
   blog: "https://lsbjordao.github.io/",
   /**
    * Currículo de uma página, gerado por `npm run cv` a partir de
-   * `scripts/cv/curriculo.html`. O Lattes completo continua em
-   * `/cv/lucas-jordao-curriculo-lattes.pdf`, mas quem recruta quer uma folha.
+   * `scripts/cv/curriculo.html` (PT) e `curriculum.html` (EN). O botão de
+   * download entrega a folha no idioma da página: quem chega pelo /en está
+   * lendo em inglês e não deveria receber um PDF em português.
+   *
+   * O Lattes completo continua em `/cv/lucas-jordao-curriculo-lattes.pdf`,
+   * único em português — é documento oficial do CNPq, não tem versão vertida.
    */
-  cv: "/cv/lucas-jordao-cv.pdf",
+  cv: {
+    pt: "/cv/lucas-jordao-cv.pdf",
+    en: "/cv/lucas-jordao-cv-en.pdf",
+  } satisfies Record<Lang, string>,
   lattesPdf: "/cv/lucas-jordao-curriculo-lattes.pdf",
   site: "https://lsbjordao.dev",
 };
@@ -845,7 +852,7 @@ export const timeline: Array<{ id: TimelineId; year: string }> = [
   { id: "masters", year: "2012—14" },
   { id: "phd", year: "2015—19" },
   { id: "cncflora", year: "2020—26" },
-  { id: "dataScience", year: "2025—" },
+  { id: "dataScience", year: "2025—27" },
   { id: "now", year: "2026" },
 ];
 

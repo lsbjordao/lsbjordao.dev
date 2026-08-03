@@ -1,5 +1,6 @@
 /**
- * Renderiza `scripts/cv/curriculo.html` em `public/cv/lucas-jordao-cv.pdf`.
+ * Renderiza os currículos de uma página em `public/cv/`: `curriculo.html` (PT)
+ * e `curriculum.html` (EN), que compartilham `scripts/cv/cv.css`.
  *
  * O Chrome headless é o motor porque já entende o CSS do currículo — a folha
  * usa as mesmas fontes variáveis e a mesma paleta do site, e qualquer outro
@@ -7,9 +8,15 @@
  *
  * Uso: node scripts/build-cv.mjs [--keep-open]
  *
- * O PDF fica versionado no repositório: o site é um export estático servido
- * pelo Cloudflare Pages, que não roda este script no deploy. Depois de editar
- * o HTML, rode isto e faça commit do PDF junto.
+ * Os dois PDFs saem da mesma sessão do Chrome: subir o navegador custa mais
+ * que imprimir, e assim as duas folhas veem exatamente a mesma versão das
+ * fontes. Cada uma é conferida em separado — o inglês costuma ser mais curto,
+ * mas "costuma" não é garantia, e uma segunda página passa despercebida.
+ *
+ * Os PDFs ficam versionados no repositório: o site é um export estático
+ * servido pelo Cloudflare Pages, que não roda este script no deploy. Depois de
+ * editar um HTML (ou o CSS, que afeta os dois), rode isto e faça commit dos
+ * PDFs junto.
  */
 
 import { spawn, spawnSync } from "node:child_process";
@@ -21,8 +28,21 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const projectRoot = process.cwd();
-const source = join(projectRoot, "scripts", "cv", "curriculo.html");
-const target = join(projectRoot, "public", "cv", "lucas-jordao-cv.pdf");
+
+/** Os nomes de arquivo são públicos: aparecem no `download` do botão do site. */
+const editions = [
+  {
+    lang: "pt",
+    source: join(projectRoot, "scripts", "cv", "curriculo.html"),
+    target: join(projectRoot, "public", "cv", "lucas-jordao-cv.pdf"),
+  },
+  {
+    lang: "en",
+    source: join(projectRoot, "scripts", "cv", "curriculum.html"),
+    target: join(projectRoot, "public", "cv", "lucas-jordao-cv-en.pdf"),
+  },
+];
+
 const port = 9422;
 
 const candidates = [
@@ -176,8 +196,45 @@ function connectDevTools(wsUrl) {
   });
 }
 
+/**
+ * Imprime uma edição na aba já aberta e devolve quantas páginas saíram. A
+ * espera por `document.fonts.ready` se repete a cada navegação: o Chrome
+ * reavalia o @font-face por documento, e sem isso a segunda folha sai com
+ * métrica de fallback.
+ */
+async function render(client, { source, target }) {
+  await client.send("Page.navigate", { url: pathToFileURL(source).href });
+  await wait(1800);
+
+  await client.send("Runtime.evaluate", {
+    expression: "document.fonts.ready.then(() => true)",
+    awaitPromise: true,
+  });
+  await wait(400);
+
+  const { data } = await client.send("Page.printToPDF", {
+    printBackground: true,
+    preferCSSPageSize: true,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+  });
+
+  await writeFile(target, Buffer.from(data, "base64"));
+
+  const pdf = await readFile(target);
+  const pages = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
+  console.log(
+    `PDF gerado: ${target} · ${(pdf.length / 1024).toFixed(0)} kB · ${pages} página(s)`,
+  );
+  return pages;
+}
+
 async function main() {
-  if (!existsSync(source)) throw new Error(`fonte não encontrada: ${source}`);
+  for (const { source } of editions) {
+    if (!existsSync(source)) throw new Error(`fonte não encontrada: ${source}`);
+  }
 
   const chromeBinary = findChrome();
   if (!chromeBinary) {
@@ -220,39 +277,17 @@ async function main() {
     const client = await connectDevTools(page.webSocketDebuggerUrl);
     await client.send("Page.enable");
     await client.send("Runtime.enable");
-    await client.send("Page.navigate", { url: pathToFileURL(source).href });
-    await wait(1800);
-
-    // As fontes variáveis carregam por @font-face; sem esperar por elas o PDF
-    // sai com métrica de fallback e o conteúdo estoura a página.
-    await client.send("Runtime.evaluate", {
-      expression: "document.fonts.ready.then(() => true)",
-      awaitPromise: true,
-    });
-    await wait(400);
-
-    const { data } = await client.send("Page.printToPDF", {
-      printBackground: true,
-      preferCSSPageSize: true,
-      marginTop: 0,
-      marginBottom: 0,
-      marginLeft: 0,
-      marginRight: 0,
-    });
 
     await mkdir(join(projectRoot, "public", "cv"), { recursive: true });
-    await writeFile(target, Buffer.from(data, "base64"));
 
-    const pdf = await readFile(target);
-    const pages = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
-    console.log(
-      `PDF gerado: ${target} · ${(pdf.length / 1024).toFixed(0)} kB · ${pages} página(s)`,
-    );
-    if (pages !== 1) {
-      console.warn(
-        `AVISO: o currículo saiu com ${pages} páginas. Corte conteúdo em scripts/cv/curriculo.html.`,
-      );
-      process.exitCode = 1;
+    for (const edition of editions) {
+      const pages = await render(client, edition);
+      if (pages !== 1) {
+        console.warn(
+          `AVISO: o currículo ${edition.lang.toUpperCase()} saiu com ${pages} páginas. Corte conteúdo em ${edition.source}.`,
+        );
+        process.exitCode = 1;
+      }
     }
 
     client.close();
