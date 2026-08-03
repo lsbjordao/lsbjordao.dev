@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node scripts/prepare-sites.mjs",
+    "contributions": "node scripts/fetch-contributions.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit"
   },

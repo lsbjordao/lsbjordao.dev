@@ -12,6 +12,9 @@
   --muted: #6e766f;
   --sans: "Manrope Variable", "Helvetica Neue", Arial, sans-serif;
   --serif: "Newsreader Variable", Georgia, serif;
+  /* Chaves de determinação e etiquetas de herbário são artefatos datilografados.
+     A monoespaçada carrega essa textura sem custar mais uma fonte baixada. */
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Roboto Mono", Menlo, monospace;
   --page-pad: clamp(1.25rem, 3.2vw, 3.75rem);
   --ease: cubic-bezier(0.2, 0.72, 0.25, 1);
 }
@@ -87,6 +90,38 @@ a {
   outline-offset: 4px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 50%;
+  z-index: 200;
+  padding: 0.7rem 1.2rem;
+  border-radius: 99rem;
+  background: var(--acid);
+  color: var(--ink-deep);
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: translate(-50%, -250%);
+  transition: transform 250ms var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+}
+
 .scroll-progress {
   position: fixed;
   inset: 0 0 auto;
@@ -149,6 +184,8 @@ a {
   font-size: 0.59rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  /* Quebrar aqui empurraria a altura do cabeçalho e desalinharia o menu. */
+  white-space: nowrap;
 }
 
 .nav {
@@ -200,8 +237,14 @@ a {
   display: none;
 }
 
-.header-status {
+.header-tools {
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.header-status {
   display: flex;
   align-items: center;
   gap: 0.55rem;
@@ -210,15 +253,55 @@ a {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  transition: color 250ms ease;
 }
 
-.header-status span {
+.header-status:hover {
+  color: var(--white);
+}
+
+.header-status > span {
   width: 0.48rem;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--acid);
   box-shadow: 0 0 0 0 rgba(217, 255, 99, 0.5);
   animation: pulse 2.4s infinite;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 99rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  transition:
+    border-color 250ms ease,
+    background 250ms ease;
+}
+
+.lang-switch:hover {
+  border-color: var(--acid);
+  background: rgba(217, 255, 99, 0.1);
+}
+
+.lang-switch__current {
+  color: var(--acid);
+}
+
+.lang-switch__current::after {
+  content: "/";
+  margin-left: 0.4rem;
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.lang-switch__next {
+  color: rgba(255, 255, 255, 0.42);
 }
 
 .menu-toggle {
@@ -349,6 +432,50 @@ a {
   align-items: center;
   gap: 1.6rem;
   flex-wrap: wrap;
+}
+
+/* Termos concretos que um recrutador procura antes de qualquer outra coisa. */
+.availability {
+  max-width: 34rem;
+  margin: 2.4rem 0 0;
+  padding-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem 2.4rem;
+  border-top: 1px solid var(--line-light);
+}
+
+.availability div {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.availability dt {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.availability dd {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.availability__dot {
+  width: 0.45rem;
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  background: var(--acid);
+  box-shadow: 0 0 0 0 rgba(217, 255, 99, 0.5);
+  animation: pulse 2.4s infinite;
 }
 
 .button {
@@ -652,18 +779,29 @@ button:hover > .icon--diagonal {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   border-bottom: 1px solid var(--line);
   background: var(--paper-warm);
 }
 
 .stat {
+  grid-column: span 3;
   min-height: 10.5rem;
   padding: 2rem var(--page-pad);
   border-right: 1px solid var(--line);
   display: flex;
   align-items: flex-end;
   gap: 1rem;
+}
+
+.stat:nth-child(4) {
+  border-right: 0;
+}
+
+/* São oito números em duas fileiras de quatro. A largura vem só de
+   `span 3`: a fileira de baixo não precisa de vão próprio. */
+.stat:nth-child(n + 5) {
+  border-top: 1px solid var(--line);
 }
 
 .stat:last-child {
@@ -764,6 +902,444 @@ button:hover > .icon--diagonal {
   color: #4f5950;
   font-size: 0.86rem;
   line-height: 1.7;
+}
+
+/* ── Chave de determinação ────────────────────────────────────────────────
+   O elemento-assinatura da página. Um taxonomista identifica um espécime
+   percorrendo couplets até chegar a um nome; aqui quem contrata percorre os
+   mesmos couplets até chegar à trilha profissional que resolve o problema
+   dele. A etiqueta à direita é o artefato de papel que um herbário grampeia
+   na exsicata depois que o nome é decidido. */
+.determination {
+  position: relative;
+  overflow: hidden;
+}
+
+.determination__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(217, 255, 99, 0.07), transparent 26rem),
+    radial-gradient(circle at 4% 88%, rgba(255, 118, 87, 0.06), transparent 22rem);
+}
+
+.determination__header {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: end;
+  gap: 3rem;
+}
+
+.determination__intro {
+  max-width: 34rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.88rem;
+  line-height: 1.78;
+}
+
+.determination__board {
+  position: relative;
+  z-index: 1;
+  margin-top: 3.75rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
+  align-items: start;
+  gap: 2.5rem;
+}
+
+.key-panel {
+  padding: 1.9rem 2rem 1.6rem;
+  border: 1px solid var(--line-light);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.key-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--line-light);
+  color: rgba(255, 255, 255, 0.45);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.key-panel__restart {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--coral);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.key-ladder {
+  margin-top: 1.4rem;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+  /* A numeração da chave são os marks 1a/1b — não os contadores do <ol>. */
+  list-style: none;
+}
+
+.key-ladder__step {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  gap: 0.6rem;
+  align-items: baseline;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.76rem;
+  line-height: 1.6;
+}
+
+.key-ladder__mark {
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+}
+
+.key-ladder__question {
+  margin-bottom: 1rem;
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 1.7vw, 1.5rem);
+  font-style: italic;
+  letter-spacing: -0.01em;
+}
+
+.key-ladder__leads {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.key-lead {
+  width: 100%;
+  padding: 1.05rem 1.15rem;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr) 1.4rem;
+  gap: 0.6rem;
+  align-items: start;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-left: 2px solid rgba(255, 255, 255, 0.16);
+  background: none;
+  cursor: pointer;
+  transition:
+    border-color 250ms var(--ease),
+    background 250ms var(--ease),
+    transform 250ms var(--ease);
+}
+
+.key-lead:hover {
+  border-color: rgba(217, 255, 99, 0.4);
+  border-left-color: var(--acid);
+  background: rgba(217, 255, 99, 0.06);
+  transform: translateX(4px);
+}
+
+.key-lead__mark {
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+}
+
+.key-lead__body {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.key-lead__text {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+.key-lead__body small {
+  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  line-height: 1.5;
+}
+
+.key-lead__go {
+  justify-self: end;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  transition: color 250ms ease;
+}
+
+.key-lead:hover .key-lead__go {
+  color: var(--acid);
+}
+
+.key-panel__skip {
+  margin-top: 1.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 250ms ease;
+}
+
+.key-panel__skip:hover {
+  color: var(--acid);
+}
+
+.key-panel__skip span {
+  color: var(--acid);
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+/* A etiqueta de determinação: papel real sobre o fundo escuro. */
+.slip {
+  position: relative;
+  padding: 1.9rem 1.9rem 2rem;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 1.4rem 3.5rem rgba(0, 0, 0, 0.35);
+  transform: rotate(-0.5deg);
+  transition: transform 450ms var(--ease);
+}
+
+.slip::before {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border: 1px solid rgba(16, 37, 27, 0.16);
+  pointer-events: none;
+}
+
+.slip.is-determined {
+  transform: rotate(0deg);
+}
+
+.slip:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 6px;
+}
+
+.slip__head {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(16, 37, 27, 0.2);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.slip__code {
+  padding: 0.2rem 0.5rem;
+  background: var(--ink);
+  color: var(--acid);
+}
+
+.slip h3 {
+  position: relative;
+  margin-top: 1.3rem;
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 2.6vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.slip__tagline {
+  position: relative;
+  margin-top: 0.55rem;
+  color: var(--coral);
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.slip__body {
+  position: relative;
+  margin-top: 1.2rem;
+  color: #4d5750;
+  font-size: 0.79rem;
+  line-height: 1.75;
+}
+
+.slip__section {
+  position: relative;
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed rgba(16, 37, 27, 0.22);
+}
+
+.slip__section > span {
+  display: block;
+  margin-bottom: 0.7rem;
+  color: #6f7770;
+  font-family: var(--mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.slip__section ul:not(.tags) {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: start;
+}
+
+.slip__section ul:not(.tags) a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-bottom: 0.12rem;
+  border-bottom: 1px solid rgba(16, 37, 27, 0.25);
+  font-size: 0.76rem;
+  font-weight: 650;
+  transition: color 200ms ease;
+}
+
+.slip__section ul:not(.tags) a:hover {
+  color: var(--coral);
+}
+
+.slip__section ul:not(.tags) .icon {
+  width: 0.85rem;
+}
+
+.slip__section .tags {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.slip__cta {
+  position: relative;
+  width: 100%;
+  margin-top: 1.7rem;
+}
+
+.slip__empty {
+  position: relative;
+  min-height: 19rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.slip__stamp {
+  padding: 0.5rem 1.1rem;
+  border: 1px dashed rgba(16, 37, 27, 0.35);
+  color: rgba(16, 37, 27, 0.45);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.slip__rules {
+  width: 60%;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.slip__rules span {
+  height: 1px;
+  background: rgba(16, 37, 27, 0.18);
+}
+
+.slip__rules span:last-child {
+  width: 55%;
+}
+
+.slip__empty p {
+  color: rgba(16, 37, 27, 0.4);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.track-grid {
+  position: relative;
+  z-index: 1;
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line-light);
+  background: var(--line-light);
+}
+
+.track-card {
+  padding: 1.7rem 1.6rem 1.9rem;
+  display: flex;
+  flex-direction: column;
+  background: var(--ink-deep);
+}
+
+.track-card__code {
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+}
+
+.track-card h3 {
+  margin-top: 0.9rem;
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.track-card__tagline {
+  margin-top: 0.35rem;
+  color: var(--coral);
+  font-family: var(--serif);
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+.track-card > p:last-of-type {
+  margin-top: 0.9rem;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.75rem;
+  line-height: 1.7;
+}
+
+.track-card .tags li {
+  border-color: rgba(255, 255, 255, 0.16);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .research-feature {
@@ -950,6 +1526,7 @@ button:hover > .icon--diagonal {
 }
 
 .case h2,
+.determination h2,
 .work h2,
 .trajectory h2,
 .notes h2,
@@ -962,6 +1539,7 @@ button:hover > .icon--diagonal {
 }
 
 .case h2 em,
+.determination h2 em,
 .work h2 em,
 .trajectory h2 em,
 .notes h2 em,
@@ -1037,7 +1615,7 @@ button:hover > .icon--diagonal {
 
 .system-map__flow {
   display: grid;
-  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
   align-items: stretch;
 }
 
@@ -1130,8 +1708,179 @@ button:hover > .icon--diagonal {
   transition: transform 700ms var(--ease);
 }
 
+.system__media--prototype img {
+  padding: 1rem;
+  object-fit: contain;
+  object-position: center;
+}
+
+.system__media--contain img {
+  object-fit: contain;
+  object-position: center;
+}
+
+.system__media--magnifiable {
+  cursor: crosshair;
+}
+
+.system__magnifier {
+  position: absolute;
+  z-index: 3;
+  width: clamp(8rem, 12vw, 10.5rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 2px solid var(--acid);
+  border-radius: 50%;
+  background-color: #19251e;
+  background-repeat: no-repeat;
+  box-shadow:
+    0 0 0 0.3rem rgba(7, 19, 13, 0.45),
+    0 1.2rem 2.8rem rgba(0, 0, 0, 0.38);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.82);
+  transition:
+    opacity 160ms ease,
+    transform 220ms var(--ease);
+}
+
+.system__magnifier::before,
+.system__magnifier::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgba(217, 255, 99, 0.62);
+  transform: translate(-50%, -50%);
+}
+
+.system__magnifier::before {
+  width: 1.2rem;
+  height: 1px;
+}
+
+.system__magnifier::after {
+  width: 1px;
+  height: 1.2rem;
+}
+
+.system__media--magnifiable.is-magnifying .system__magnifier {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.system__media-image--slide {
+  animation: system-image-in 420ms ease both;
+}
+
+.system-gallery__controls {
+  position: absolute;
+  z-index: 4;
+  right: 1rem;
+  bottom: 1rem;
+  max-width: calc(100% - 2rem);
+  min-height: 2.6rem;
+  padding: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 99rem;
+  color: var(--white);
+  background: rgba(7, 19, 13, 0.86);
+  backdrop-filter: blur(12px);
+}
+
+.system-gallery__controls > button {
+  width: 2rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border: 0;
+  border-radius: 50%;
+  color: var(--white);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease;
+}
+
+.system-gallery__controls > button:hover,
+.system-gallery__controls > button:focus-visible {
+  color: var(--ink-deep);
+  background: var(--acid);
+}
+
+.system-gallery__pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.system-gallery__pagination button {
+  width: 1.15rem;
+  height: 1.5rem;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.system-gallery__pagination button span {
+  width: 0.3rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.42);
+  transition:
+    width 180ms ease,
+    background-color 180ms ease;
+}
+
+.system-gallery__pagination button.is-active span {
+  width: 0.9rem;
+  border-radius: 99rem;
+  background: var(--acid);
+}
+
+.system-gallery__counter {
+  min-width: 3.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+@keyframes system-image-in {
+  from {
+    opacity: 0.28;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (pointer: coarse) {
+  .system__media--magnifiable {
+    cursor: default;
+  }
+
+  .system__magnifier {
+    display: none;
+  }
+}
+
 .system:hover .system__media img {
   transform: scale(1.025);
+}
+
+.system:hover .system__media--magnifiable img {
+  transform: none;
 }
 
 .legacy-migration {
@@ -1254,6 +2003,7 @@ button:hover > .icon--diagonal {
 
 .system__status {
   position: absolute;
+  z-index: 4;
   top: 1rem;
   left: 1rem;
   padding: 0.55rem 0.75rem;
@@ -1267,6 +2017,7 @@ button:hover > .icon--diagonal {
 
 .view-switch {
   position: absolute;
+  z-index: 4;
   right: 1rem;
   bottom: 1rem;
   padding: 0.25rem;
@@ -1333,46 +2084,30 @@ button:hover > .icon--diagonal {
   width: 0.85rem;
 }
 
-.system details {
-  margin-top: 2rem;
-  border-top: 1px solid var(--line-light);
-  border-bottom: 1px solid var(--line-light);
+/* A autoria é o argumento principal desta seção — ela fica aberta, não dobrada
+   dentro de um <details> que a maioria dos leitores nunca abre. */
+.contribution {
+  margin-top: 1.8rem;
+  padding: 1.15rem 1.3rem;
+  border-left: 2px solid var(--acid);
+  background: rgba(217, 255, 99, 0.05);
 }
 
-.system summary {
-  padding: 1rem 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 0.63rem;
-  font-weight: 750;
-  letter-spacing: 0.07em;
-  list-style: none;
+.contribution > span {
+  display: block;
+  margin-bottom: 0.6rem;
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.system summary::-webkit-details-marker {
-  display: none;
-}
-
-.system summary span {
-  color: var(--acid);
-  font-size: 1rem;
-  line-height: 1;
-  transition: transform 250ms ease;
-}
-
-.system details[open] summary span {
-  transform: rotate(45deg);
-}
-
-.system details p {
-  padding: 0 0 1.35rem;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 0.77rem;
-  line-height: 1.7;
+.contribution > p {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.72;
 }
 
 .tags {
@@ -1425,6 +2160,17 @@ button:hover > .icon--diagonal {
 .mapbiomas-award__media img {
   object-fit: cover;
   object-position: center;
+}
+
+.mapbiomas-award__media .mapbiomas-award__backdrop {
+  filter: blur(26px) saturate(0.72) brightness(0.56);
+  transform: scale(1.1);
+}
+
+.mapbiomas-award__media .mapbiomas-award__image {
+  z-index: 1;
+  padding: clamp(0.8rem, 1.8vw, 1.6rem);
+  object-fit: contain;
 }
 
 .mapbiomas-award__media > span {
@@ -1486,18 +2232,24 @@ button:hover > .icon--diagonal {
 .mapbiomas-award__methods {
   margin-top: 2.3rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-top: 1px solid var(--line-light);
   border-bottom: 1px solid var(--line-light);
 }
 
 .mapbiomas-award__methods article {
-  padding: 1.4rem 1.4rem 1.5rem 0;
+  padding: 1.4rem 1.4rem 1.5rem;
+}
+
+.mapbiomas-award__methods article:first-child {
+  padding-left: 0;
+}
+
+.mapbiomas-award__methods article:last-child {
+  padding-right: 0;
 }
 
 .mapbiomas-award__methods article + article {
-  padding-right: 0;
-  padding-left: 1.4rem;
   border-left: 1px solid var(--line-light);
 }
 
@@ -1611,6 +2363,17 @@ button:hover > .icon--diagonal {
   margin-top: 4.5rem;
 }
 
+/* Os três projetos Quarto formam uma família visual: em telas largas eles
+   ficam menores e agrupados, mas voltam a quebrar quando falta espaço. */
+.project-card--compact {
+  grid-column: span 4;
+  margin-top: 0 !important;
+}
+
+.project-card--compact-first {
+  grid-column: 1 / span 4;
+}
+
 .project-card__link {
   flex: 1;
   display: flex;
@@ -1644,12 +2407,47 @@ button:hover > .icon--diagonal {
     filter 750ms var(--ease);
 }
 
-.project-card:nth-child(4) .project-card__media img,
-.project-card:nth-child(6) .project-card__media img,
-.project-card:nth-child(7) .project-card__media img {
+/* Imagens que são marca/identidade, não captura de tela: precisam caber
+   inteiras em vez de serem cortadas. Vem de `fit: "contain"` nos dados — se
+   dependesse de :nth-child, quebraria ao reordenar e ao filtrar (dentro de um
+   filtro os cards recebem outras posições). */
+.project-card--contain .project-card__media img {
   object-fit: contain;
   padding: 7%;
   background: #dfe4db;
+}
+
+.project-card--reduced .project-card__media img {
+  padding: 4%;
+  object-fit: contain;
+  background: var(--ink);
+}
+
+.project-card.project-card--reduced:hover .project-card__media img {
+  transform: scale(1.015);
+}
+
+.project-card--compact .project-card__media,
+.project-card--compact.project-card--2 .project-card__media {
+  min-height: clamp(14rem, 19vw, 19rem);
+}
+
+.project-card--compact .project-card__content {
+  min-height: 16rem;
+  padding: 1.4rem;
+}
+
+.project-card--compact .project-card__content h3 {
+  font-size: clamp(1.65rem, 2.2vw, 2.5rem);
+}
+
+.project-card--compact .project-card__description {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.project-card--compact .project-card__description .tags {
+  justify-content: flex-start;
 }
 
 .project-card:hover .project-card__media img {
@@ -2021,6 +2819,176 @@ button:hover > .icon--diagonal {
   color: var(--ink-deep);
 }
 
+/* Material didático — estante de lombadas.
+   A espessura de cada lombada vem do nº de capítulos (`--spine-width`, calculada
+   em `data/teaching.ts`). A expansão é puro CSS: a lombada é um link e cresce em
+   `flex-basis` no hover e no foco, então o teclado percorre a estante como o
+   mouse percorre. */
+
+.teaching {
+  background: var(--paper-warm);
+}
+
+.teaching__header {
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  display: grid;
+  grid-template-columns: 1fr 23rem;
+  align-items: end;
+  gap: 4rem;
+}
+
+.teaching h2 em {
+  color: var(--ink);
+}
+
+.teaching__intro {
+  padding-bottom: 0.5rem;
+  color: #596159;
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+/* A borda inferior é a prateleira: atravessa a seção inteira, então o espaço
+   à direita das lombadas lê como estante vazia, não como sobra de layout. */
+.shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: clamp(20rem, 30vw, 26rem);
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 2px solid var(--ink);
+}
+
+.shelf__tally {
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.spine {
+  position: relative;
+  /* Encolhe quando a vizinha abre, para a estante caber em telas estreitas. */
+  flex: 0 1 var(--spine-width);
+  height: 100%;
+  min-width: 2.4rem;
+  overflow: hidden;
+  border-radius: 3px 3px 0 0;
+  background: var(--accent);
+  box-shadow: 0 0.6rem 1rem -0.7rem rgba(7, 19, 13, 0.5);
+  color: var(--accent-ink);
+  transition: flex-basis 0.5s var(--ease);
+}
+
+.spine:hover,
+.spine:focus-visible {
+  flex-basis: 20rem;
+  flex-shrink: 0;
+  outline: none;
+}
+
+/* O anel fica fora da lombada porque as cores vão do quase-preto ao ácido:
+   nenhum contorno interno seria visível nas duas pontas da paleta. */
+.spine:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--paper-warm),
+    0 0 0 5px var(--ink);
+}
+
+.spine__vertical {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1.1rem 0.4rem;
+  transition: opacity 0.28s var(--ease);
+}
+
+.spine:hover .spine__vertical,
+.spine:focus-visible .spine__vertical {
+  opacity: 0;
+}
+
+.spine__num,
+.spine__mark {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  opacity: 0.88;
+}
+
+.spine__title-v {
+  writing-mode: vertical-rl;
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Largura fixa: o painel não deve refluir enquanto a lombada abre. */
+.spine__open {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 20rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 1.35rem;
+  opacity: 0;
+  transition: opacity 0.3s 0.12s var(--ease);
+}
+
+.spine:hover .spine__open,
+.spine:focus-visible .spine__open {
+  opacity: 1;
+}
+
+.spine__eyebrow {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  opacity: 0.88;
+}
+
+.spine__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1.22;
+}
+
+.spine__topics {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  opacity: 0.92;
+}
+
+.spine__topics li::before {
+  content: "· ";
+  opacity: 0.6;
+}
+
+.spine__cta {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 32%, transparent);
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .technology-stack {
   position: relative;
   overflow: hidden;
@@ -2085,7 +3053,7 @@ button:hover > .icon--diagonal {
   align-items: baseline;
   gap: 0.8rem;
   color: rgba(255, 255, 255, 0.64);
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 0.64rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2127,7 +3095,7 @@ button:hover > .icon--diagonal {
 .technology-group > span,
 .technology-group small {
   color: rgba(255, 255, 255, 0.45);
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2237,7 +3205,7 @@ button:hover > .icon--diagonal {
 
 .technology-chip__icon > strong {
   color: var(--acid);
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 1.2rem;
   font-weight: 500;
 }
@@ -2254,7 +3222,7 @@ button:hover > .icon--diagonal {
 
 .technology-chip__label small {
   color: rgba(255, 255, 255, 0.43);
-  font-family: var(--font-mono);
+  font-family: var(--mono);
   font-size: 0.48rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -2266,11 +3234,417 @@ button:hover > .icon--diagonal {
   }
 }
 
+/* ── Fenologia ────────────────────────────────────────────────────────────
+   Quatro faixas de ano sobre papel. As medidas da grade saem todas de
+   `--cell`: as colunas de semana, o passo do eixo de meses e a posição do
+   tooltip. Trocar esse único valor reescala o gráfico inteiro. */
+
+.phenology {
+  background: var(--paper);
+}
+
+.phenology__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  margin-top: clamp(1.6rem, 3vw, 2.6rem);
+}
+
+.phenology__header h2 {
+  margin-top: 1.1rem;
+  font-size: clamp(2.4rem, 4.4vw, 4.1rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+
+.phenology__header h2 em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 380;
+}
+
+.phenology__intro {
+  display: grid;
+  gap: 1rem;
+  max-width: 40ch;
+}
+
+.phenology__intro p {
+  color: #4d564f;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.phenology__note {
+  padding-left: 0.9rem;
+  border-left: 1px solid var(--line);
+  color: var(--muted) !important;
+  font-size: 0.74rem !important;
+  line-height: 1.55 !important;
+}
+
+.phenology__chart {
+  --cell: clamp(10px, 1vw, 16px);
+  --cell-gap: 2px;
+  --cell-step: calc(var(--cell) + var(--cell-gap));
+  --year-col: 3.6rem;
+  --total-col: 7rem;
+  --band-gap: 1.1rem;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+}
+
+/* A grade estoura a largura da página em telas estreitas; rolar é preferível
+   a encolher a célula até ela deixar de ser legível.
+
+   `overflow-x: auto` obriga o eixo vertical a também recortar, e o tooltip da
+   primeira linha de células nasce acima da faixa. O padding abre a folga para
+   ele caber dentro da caixa de recorte; a margem negativa devolve a grade ao
+   alinhamento do resto da página. O valor lateral fica abaixo do `--page-pad`
+   mínimo (1.25rem) para que a folga nunca crie rolagem horizontal no corpo. */
+.phenology__scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2.6rem 1rem 0.5rem;
+  margin: -2.6rem -1rem 0;
+}
+
+.phenology__grid {
+  display: grid;
+  gap: clamp(0.7rem, 1.4vw, 1.4rem);
+  width: max-content;
+  min-width: 100%;
+}
+
+.phenology__months {
+  display: grid;
+  grid-template-columns: repeat(var(--phenology-columns), var(--cell));
+  gap: var(--cell-gap);
+  margin-left: calc(var(--year-col) + var(--band-gap));
+  margin-right: calc(var(--total-col) + var(--band-gap));
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+}
+
+.phenology__months span {
+  grid-row: 1;
+  white-space: nowrap;
+}
+
+.phenology__band {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--year-col) max-content var(--total-col);
+  gap: var(--band-gap);
+  align-items: center;
+  padding: 0.4rem 0;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateX(-0.6rem);
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease),
+    background-color 250ms var(--ease);
+}
+
+.phenology__chart.is-visible .phenology__band {
+  opacity: 1;
+  transform: none;
+}
+
+.phenology__chart.is-visible .phenology__band:nth-child(3) {
+  transition-delay: 90ms;
+}
+
+.phenology__chart.is-visible .phenology__band:nth-child(4) {
+  transition-delay: 180ms;
+}
+
+.phenology__chart.is-visible .phenology__band:nth-child(5) {
+  transition-delay: 270ms;
+}
+
+.phenology__band:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 6px;
+}
+
+.phenology__year {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.phenology__cells {
+  display: grid;
+  grid-template-columns: repeat(var(--phenology-columns), var(--cell));
+  grid-template-rows: repeat(var(--phenology-rows), var(--cell));
+  gap: var(--cell-gap);
+}
+
+.phenology__cell {
+  width: var(--cell);
+  height: var(--cell);
+  border-radius: 1.5px;
+  background: rgba(16, 37, 27, 0.07);
+  transition: transform 140ms var(--ease);
+}
+
+.phenology__cell[data-level="1"] {
+  background: rgba(16, 37, 27, 0.24);
+}
+
+.phenology__cell[data-level="2"] {
+  background: rgba(16, 37, 27, 0.47);
+}
+
+.phenology__cell[data-level="3"] {
+  background: rgba(16, 37, 27, 0.74);
+}
+
+/* Os 5% de dias mais intensos. O ácido não é um degrau a mais na rampa de
+   tinta — é um evento, e o anel escuro impede que ele leia como "menos". */
+.phenology__cell[data-level="4"] {
+  background: var(--acid);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.phenology__cells .phenology__cell:hover {
+  transform: scale(1.55);
+}
+
+.phenology__total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  text-align: right;
+}
+
+.phenology__total strong {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.4vw, 2.2rem);
+  font-weight: 430;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+}
+
+.phenology__total small {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.phenology__tooltip {
+  position: absolute;
+  z-index: 3;
+  bottom: calc(100% - var(--tooltip-row) * var(--cell-step) + 0.4rem);
+  left: calc(
+    var(--year-col) + var(--band-gap) + var(--tooltip-column) * var(--cell-step)
+  );
+  display: grid;
+  gap: 0.12rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 3px;
+  background: var(--ink-deep);
+  color: var(--white);
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.phenology__tooltip strong {
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.phenology__tooltip span {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+}
+
+.phenology__legend {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.8rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.phenology__legend-peak {
+  margin-left: auto;
+  text-transform: none;
+  letter-spacing: 0.04em;
+}
+
+.phenology__legend-peak::before {
+  content: "";
+  display: inline-block;
+  width: var(--cell);
+  height: var(--cell);
+  margin-right: 0.45rem;
+  border-radius: 1.5px;
+  background: var(--acid);
+  box-shadow: inset 0 0 0 1px var(--ink);
+  vertical-align: -0.15em;
+}
+
+.phenology__stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: clamp(3rem, 6vw, 4.5rem) 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.phenology__stats > div {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.7rem;
+  padding: 1.8rem 1.4rem 0 0;
+  border-right: 1px solid var(--line);
+}
+
+.phenology__stats > div:last-child {
+  border-right: 0;
+}
+
+.phenology__stats dt {
+  max-width: 11rem;
+  color: #596159;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.phenology__stats dd {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  font-weight: 430;
+  letter-spacing: -0.07em;
+  line-height: 0.78;
+}
+
+.phenology__source {
+  margin-top: 2.2rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .phenology__header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* A grade rola na horizontal em tela estreita, e o total de cada ano ficaria
+     fora da área visível — justamente o número que a seção existe para mostrar.
+     Ele sobe para a coluna fixa da esquerda, embaixo do ano. */
+  .phenology__chart {
+    --year-col: 4.4rem;
+    --total-col: 0rem;
+    --band-gap: 0.7rem;
+  }
+
+  .phenology__months {
+    margin-right: 0;
+  }
+
+  /* A linha do ano ocupa a altura do texto e o total estica pelo resto da
+     faixa: juntos formam um bloco opaco contínuo, sem frestas por onde as
+     células apareçam ao passar por baixo. */
+  .phenology__band {
+    grid-template-columns: var(--year-col) max-content;
+    grid-template-rows: auto 1fr;
+    /* Sem folga entre as linhas o ano e o total encostam e o bloco opaco fica
+       inteiriço; a folga entre colunas continua separando texto e grade. */
+    column-gap: var(--band-gap);
+    row-gap: 0;
+    align-items: stretch;
+  }
+
+  /* Presa à borda do scroll: sem isso o ano e o total somem assim que o dedo
+     arrasta a grade para ver os meses seguintes.
+
+     O deslocamento negativo cobre também a calha de 1rem que `.phenology__scroll`
+     usa como folga do tooltip — o encosto do sticky é a borda interna do
+     padding, e sem isso as células passariam visíveis por ali. */
+  .phenology__year,
+  .phenology__total {
+    position: sticky;
+    left: -1rem;
+    z-index: 2;
+    margin-left: -1rem;
+    padding-left: 1rem;
+    padding-right: 0.6rem;
+    background: var(--paper);
+  }
+
+  .phenology__year {
+    display: flex;
+    grid-area: 1 / 1;
+    align-items: flex-end;
+  }
+
+  .phenology__total {
+    grid-area: 2 / 1;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 0.4rem;
+    text-align: left;
+  }
+
+  .phenology__total strong {
+    font-size: 1.6rem;
+  }
+
+  .phenology__cells {
+    grid-area: 1 / 2 / 3 / 3;
+  }
+
+  .phenology__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .phenology__stats > div {
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .phenology__stats > div:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .phenology__legend-peak {
+    display: none;
+  }
+}
+
 .trajectory {
   min-height: 100svh;
   padding: 0;
   display: grid;
   grid-template-columns: 42% 58%;
+  align-items: start;
   background: var(--paper-warm);
 }
 
@@ -2278,34 +3652,238 @@ button:hover > .icon--diagonal {
   position: sticky;
   top: 0;
   height: 100svh;
+  isolation: isolate;
   overflow: hidden;
   background: var(--ink);
 }
 
-.trajectory__image::after {
-  content: "";
+.trajectory-carousel__slides,
+.trajectory-carousel__slide {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(7, 19, 13, 0.74), transparent 55%);
 }
 
-.trajectory__image img {
+.trajectory-carousel__slide {
+  z-index: -3;
+  margin: 0;
+  opacity: 0;
+  transform: scale(1.025);
+  transition:
+    opacity 1.15s ease,
+    transform 6.5s ease;
+}
+
+.trajectory-carousel__slide.is-active {
+  z-index: -2;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.trajectory-carousel__photo,
+.trajectory-carousel__backdrop {
   object-fit: cover;
-  object-position: center;
-  filter: saturate(0.75);
 }
 
-.trajectory__image > span {
+.trajectory-carousel__photo {
+  filter: saturate(0.78) contrast(1.04) brightness(0.88);
+}
+
+.trajectory-carousel__backdrop {
+  filter: blur(32px) saturate(0.7) brightness(0.55);
+  transform: scale(1.14);
+}
+
+.trajectory-carousel__slide.is-contain .trajectory-carousel__photo {
+  padding: 5.5rem 2rem 12.5rem;
+  object-fit: contain;
+  filter: saturate(0.82) contrast(1.03) brightness(0.9);
+}
+
+.trajectory-carousel__slide.is-contain.is-zoom-medium .trajectory-carousel__photo {
+  transform: scale(1.2);
+}
+
+.trajectory-carousel__shade {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 19, 13, 0.58), transparent 24%),
+    linear-gradient(0deg, rgba(7, 19, 13, 0.95) 0%, rgba(7, 19, 13, 0.54) 30%, transparent 66%),
+    linear-gradient(90deg, rgba(7, 19, 13, 0.28), transparent 70%);
+  pointer-events: none;
+}
+
+.trajectory-carousel__topline {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  left: 2rem;
+  padding-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  font-weight: 650;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.trajectory-carousel__statement {
+  position: absolute;
+  top: clamp(7.5rem, 16vh, 11rem);
+  right: 2rem;
+  left: 2rem;
+  max-width: 7ch;
+  color: var(--white);
+  font-size: clamp(3.7rem, 6.2vw, 7rem);
+  font-weight: 570;
+  letter-spacing: -0.075em;
+  line-height: 0.83;
+  text-wrap: balance;
+}
+
+.trajectory-carousel__statement em {
+  display: block;
+  color: var(--acid);
+  font-family: var(--serif);
+  font-weight: 420;
+}
+
+.trajectory-carousel__statement.is-lab {
+  font-size: clamp(3.2rem, 5vw, 5.2rem);
+}
+
+.trajectory-carousel__statement.is-herbaria {
+  font-size: clamp(3.5rem, 5.5vw, 6.2rem);
+}
+
+.trajectory-carousel__caption {
   position: absolute;
   z-index: 2;
   right: 2rem;
-  bottom: 2rem;
+  bottom: 6.25rem;
   left: 2rem;
-  color: rgba(255, 255, 255, 0.73);
-  font-size: 0.57rem;
-  font-weight: 750;
+  display: grid;
+  animation: carousel-caption-in 650ms var(--ease);
+}
+
+.trajectory-carousel__caption span,
+.trajectory-carousel__caption small {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.52rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.trajectory-carousel__caption span {
+  color: var(--coral);
+}
+
+.trajectory-carousel__caption strong {
+  max-width: 32rem;
+  margin: 0.38rem 0 0.2rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: var(--serif);
+  font-size: clamp(1.05rem, 1.55vw, 1.38rem);
+  font-weight: 460;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.trajectory-carousel__caption small {
+  color: rgba(255, 255, 255, 0.46);
+  font-family: var(--mono);
+}
+
+.trajectory-carousel__controls {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.trajectory-carousel__controls > button {
+  width: 2.45rem;
+  height: 2.45rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: var(--white);
+  background: rgba(7, 19, 13, 0.34);
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition:
+    color 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.trajectory-carousel__controls > button:hover {
+  border-color: var(--acid);
+  color: var(--ink-deep);
+  background: var(--acid);
+}
+
+.trajectory-carousel__pagination {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.trajectory-carousel__pagination button {
+  min-width: 0;
+  height: 2.45rem;
+  padding: 0 0.16rem;
+  flex: 1;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.trajectory-carousel__pagination button > span {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  display: block;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.trajectory-carousel__pagination button > span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--acid);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.trajectory-carousel__pagination button.is-active > span::after {
+  animation: trajectory-carousel-progress 5.6s linear forwards;
+}
+
+.trajectory-carousel.is-paused .trajectory-carousel__pagination button.is-active > span::after,
+.trajectory-carousel:hover .trajectory-carousel__pagination button.is-active > span::after,
+.trajectory-carousel:focus-within .trajectory-carousel__pagination button.is-active > span::after {
+  animation-play-state: paused;
+}
+
+.trajectory-carousel__pause {
+  margin-left: 0.25rem;
+  font-size: 0.55rem;
+  letter-spacing: -0.08em;
 }
 
 .trajectory__content {
@@ -2313,7 +3891,94 @@ button:hover > .icon--diagonal {
 }
 
 .trajectory h2 {
-  margin: 4rem 0 5rem;
+  margin: 4rem 0 0;
+}
+
+.trajectory__intro {
+  max-width: 39rem;
+  margin-top: 2.5rem;
+  color: #4f5950;
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 1.65vw, 1.55rem);
+  line-height: 1.45;
+}
+
+.trajectory__experiences {
+  margin-top: 4.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.trajectory-experience {
+  padding: 2.1rem 0 2.35rem;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.trajectory-experience > span {
+  padding-top: 0.18rem;
+  color: var(--coral);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.trajectory-experience > div > p:first-child {
+  color: var(--coral);
+  font-size: 0.54rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.trajectory-experience h3 {
+  margin-top: 0.55rem;
+  font-family: var(--serif);
+  font-size: clamp(1.55rem, 2.2vw, 2.15rem);
+  font-weight: 470;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.trajectory-experience small {
+  margin-top: 0.45rem;
+  display: block;
+  color: #737b74;
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.trajectory-experience > div > p:last-child {
+  max-width: 38rem;
+  margin-top: 1rem;
+  color: #586158;
+  font-size: 0.76rem;
+  line-height: 1.72;
+}
+
+.timeline__label {
+  margin-top: clamp(5rem, 8vw, 7.5rem);
+  padding-bottom: 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2rem;
+  color: var(--ink);
+  font-size: 0.62rem;
+  font-weight: 760;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.timeline__label small {
+  color: #747c75;
+  font-family: var(--mono);
+  font-size: 0.52rem;
+  font-weight: 600;
 }
 
 .timeline {
@@ -2326,6 +3991,22 @@ button:hover > .icon--diagonal {
   grid-template-columns: 8rem 1fr;
   gap: 2rem;
   border-bottom: 1px solid var(--line);
+}
+
+.timeline__item.is-current time {
+  color: var(--coral);
+}
+
+.timeline__item.is-current h3::after {
+  content: "";
+  display: inline-block;
+  width: 0.42rem;
+  height: 0.42rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: var(--coral);
+  animation: pulse-coral 2.4s infinite;
 }
 
 .timeline__item time {
@@ -2349,6 +4030,19 @@ button:hover > .icon--diagonal {
   color: #586158;
   font-size: 0.78rem;
   line-height: 1.68;
+}
+
+@keyframes trajectory-carousel-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes carousel-caption-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.6rem);
+  }
 }
 
 .notes {
@@ -2427,23 +4121,24 @@ button:hover > .icon--diagonal {
 }
 
 .contact {
-  min-height: 82svh;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   color: var(--white);
   background:
     radial-gradient(circle at 50% 50%, rgba(217, 255, 99, 0.09), transparent 28rem),
     var(--ink-deep);
 }
 
+.contact__grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  align-items: start;
+  gap: 3.5rem;
+}
+
 .contact__mark {
-  position: absolute;
-  top: 2.5rem;
-  left: var(--page-pad);
+  margin-bottom: 1.8rem;
   color: var(--acid);
 }
 
@@ -2459,27 +4154,118 @@ button:hover > .icon--diagonal {
 .contact h2 {
   position: relative;
   z-index: 2;
-  font-size: clamp(3.5rem, 7.2vw, 7.6rem);
+  font-size: clamp(2.6rem, 5vw, 4.6rem);
 }
 
 .contact__intro {
   position: relative;
   z-index: 2;
   max-width: 39rem;
-  margin-top: 2.5rem;
+  margin-top: 1.8rem;
   color: rgba(255, 255, 255, 0.63);
   font-size: 0.9rem;
   line-height: 1.75;
 }
 
-.contact__links {
+.contact__actions {
   position: relative;
   z-index: 2;
-  margin-top: 2.5rem;
+  margin-top: 2.2rem;
   display: flex;
-  justify-content: center;
   gap: 0.7rem;
   flex-wrap: wrap;
+}
+
+.icon--brand {
+  width: 1rem;
+  flex: none;
+}
+
+.contact__secondary {
+  position: relative;
+  z-index: 2;
+  margin-top: 2.6rem;
+  border-top: 1px solid var(--line-light);
+}
+
+.contact__secondary a {
+  padding: 1.1rem 0.2rem;
+  display: grid;
+  grid-template-columns: minmax(6rem, auto) minmax(0, 1fr) auto 1.2rem;
+  align-items: center;
+  gap: 1.2rem;
+  border-bottom: 1px solid var(--line-light);
+  transition: padding-left 250ms var(--ease);
+}
+
+.contact__secondary a:hover {
+  padding-left: 0.9rem;
+}
+
+.contact__secondary strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.contact__secondary small {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.7rem;
+}
+
+.contact__secondary code {
+  color: rgba(255, 255, 255, 0.38);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+}
+
+.contact__secondary .icon {
+  width: 0.95rem;
+  color: var(--acid);
+}
+
+/* Cartão de termos: o que um recrutador precisa checar em cinco segundos. */
+.looking {
+  position: relative;
+  z-index: 2;
+  padding: 1.7rem 1.7rem 1.9rem;
+  border: 1px solid rgba(217, 255, 99, 0.28);
+  background: rgba(217, 255, 99, 0.05);
+}
+
+.looking__head {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(217, 255, 99, 0.22);
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.looking dl {
+  margin: 0;
+  display: grid;
+  gap: 1.15rem;
+  padding-top: 1.3rem;
+}
+
+.looking dt {
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.looking dd {
+  margin: 0.35rem 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.8rem;
+  line-height: 1.6;
 }
 
 .contact__orbit {
@@ -2563,8 +4349,26 @@ footer > p {
   text-align: center;
 }
 
-.back-to-top {
+.footer__links {
   justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.footer__links a {
+  transition: color 200ms ease;
+}
+
+.footer__links a:not(.back-to-top) {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.footer__links a:not(.back-to-top):hover {
+  color: var(--acid);
+}
+
+.back-to-top {
   color: var(--white);
 }
 
@@ -2584,6 +4388,16 @@ footer > p {
 @keyframes pulse {
   60% {
     box-shadow: 0 0 0 0.45rem rgba(217, 255, 99, 0);
+  }
+}
+
+@keyframes pulse-coral {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
   }
 }
 
@@ -2722,6 +4536,14 @@ footer > p {
     grid-template-columns: 0.9fr 1.1fr;
   }
 
+  .project-card--compact {
+    grid-column: span 6;
+  }
+
+  .project-card--compact-first {
+    grid-column: 1 / span 6;
+  }
+
   .project-card__description {
     grid-template-columns: 1fr;
   }
@@ -2810,12 +4632,23 @@ footer > p {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .stat:nth-child(2) {
+  .stat {
+    grid-column: auto;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat:nth-child(n + 5) {
+    grid-column: auto;
+    border-top: 0;
+  }
+
+  .stat:nth-child(2n) {
     border-right: 0;
   }
 
-  .stat:nth-child(-n + 2) {
-    border-bottom: 1px solid var(--line);
+  .stat:last-child {
+    border-bottom: 0;
   }
 
   .manifesto {
@@ -2935,6 +4768,49 @@ footer > p {
     gap: 2rem;
   }
 
+  .teaching__header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* No toque não existe hover: a estante deita e todos os livros ficam
+     abertos, com a lombada virando o próprio bloco de cor. */
+  .shelf {
+    flex-direction: column;
+    /* Em coluna, `align-items` passa a reger a horizontal: sem isto as lombadas
+       herdam a largura da estante em pé e ficam escalonadas. */
+    align-items: stretch;
+    height: auto;
+    gap: 0.6rem;
+    border-bottom: 0;
+  }
+
+  .shelf__tally {
+    text-align: left;
+  }
+
+  .spine,
+  .spine:hover,
+  .spine:focus-visible {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    min-height: 11.5rem;
+    border-radius: 3px;
+  }
+
+  .spine__vertical {
+    display: none;
+  }
+
+  .spine__open,
+  .spine:hover .spine__open {
+    position: static;
+    width: 100%;
+    opacity: 1;
+    transition: none;
+  }
+
   .project-filter {
     overflow-x: auto;
     scrollbar-width: none;
@@ -2958,6 +4834,15 @@ footer > p {
   .project-card__media,
   .project-card--2 .project-card__media {
     min-height: 70vw;
+  }
+
+  .project-card--compact .project-card__media,
+  .project-card--compact.project-card--2 .project-card__media {
+    min-height: min(55vw, 22rem);
+  }
+
+  .project-card--compact .project-card__content {
+    min-height: 15rem;
   }
 
   .project-card__related {
@@ -3026,11 +4911,11 @@ footer > p {
 
   .trajectory__image {
     position: relative;
-    height: 70svh;
+    height: 78svh;
   }
 
   .trajectory h2 {
-    margin-bottom: 3rem;
+    margin-top: 3rem;
   }
 
   .notes__header {
@@ -3346,7 +5231,54 @@ footer > p {
   }
 
   .trajectory__image {
-    height: 58svh;
+    height: 68svh;
+    min-height: 34rem;
+  }
+
+  .trajectory-carousel__topline,
+  .trajectory-carousel__statement,
+  .trajectory-carousel__caption,
+  .trajectory-carousel__controls {
+    right: 1.25rem;
+    left: 1.25rem;
+  }
+
+  .trajectory-carousel__topline {
+    top: 1.25rem;
+  }
+
+  .trajectory-carousel__statement {
+    top: 6.5rem;
+    font-size: clamp(3.8rem, 17vw, 5.6rem);
+  }
+
+  .trajectory-carousel__statement.is-lab {
+    font-size: clamp(2.9rem, 13vw, 3.6rem);
+  }
+
+  .trajectory-carousel__statement.is-herbaria {
+    font-size: clamp(3.2rem, 15vw, 4.3rem);
+  }
+
+  .trajectory-carousel__caption {
+    bottom: 5.35rem;
+  }
+
+  .trajectory-carousel__controls {
+    bottom: 1.25rem;
+  }
+
+  .trajectory-carousel__slide.is-contain .trajectory-carousel__photo {
+    padding: 4.5rem 1.25rem 10rem;
+  }
+
+  .trajectory__experiences {
+    margin-top: 3.5rem;
+  }
+
+  .trajectory-experience {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.8rem;
   }
 
   .contact__links {
@@ -3369,6 +5301,118 @@ footer > p {
   }
 }
 
+/* ── Responsivo das seções novas ─────────────────────────────────────────
+   Declarado depois dos breakpoints originais para vencer no cascade sem
+   editá-los em três lugares. */
+/* Entre ~1100px e ~1250px a legenda do cabeçalho encosta no menu (a coluna do
+   meio é `auto` e come a folga). Some com ela nessa faixa; o eyebrow da hero,
+   logo abaixo, carrega a lista completa de qualquer modo. */
+@media (max-width: 1250px) {
+  .brand__meta small {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  /* O seletor de idioma continua visível no mobile: é a única forma de trocar
+     de língua, então precisa de coluna própria ao lado do botão de menu. */
+  .site-header {
+    grid-template-columns: 1fr auto auto;
+  }
+
+  .determination__header,
+  .determination__board,
+  .contact__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .determination__header {
+    gap: 1.8rem;
+  }
+
+  .determination__board {
+    gap: 1.8rem;
+  }
+
+  .slip {
+    transform: none;
+  }
+
+  .slip__empty {
+    min-height: 12rem;
+  }
+}
+
+@media (max-width: 820px) {
+  .availability {
+    gap: 1.2rem 1.8rem;
+  }
+
+  .key-panel {
+    padding: 1.4rem 1.2rem 1.2rem;
+  }
+
+  .key-lead {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    padding: 0.9rem 0.95rem;
+  }
+
+  .key-lead__go {
+    display: none;
+  }
+
+  .key-ladder__step {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .slip {
+    padding: 1.4rem 1.35rem 1.6rem;
+  }
+
+  .contact__secondary a {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.35rem 1rem;
+  }
+
+  .contact__secondary small {
+    grid-column: 1 / -1;
+  }
+
+  .contact__secondary code {
+    display: none;
+  }
+
+  footer {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  footer > p {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .footer__links {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 520px) {
+  .availability {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .contact__actions .button {
+    width: 100%;
+  }
+
+  .lang-switch {
+    padding: 0.35rem 0.55rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -3379,8 +5423,27 @@ footer > p {
     transition-duration: 0.01ms !important;
   }
 
+  .slip,
+  .slip__stamp {
+    transform: none;
+  }
+
+  .key-lead:hover {
+    transform: none;
+  }
+
   [data-reveal] {
     opacity: 1;
+    transform: none;
+  }
+
+  /* As faixas animam por conta própria, fora do mecanismo de `data-reveal`. */
+  .phenology__band {
+    opacity: 1;
+    transform: none;
+  }
+
+  .phenology__cells .phenology__cell:hover {
     transform: none;
   }
 

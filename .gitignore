@@ -9,3 +9,4 @@ raw/
 .env*
 !.env.example
 screenshots/
+.superpowers/

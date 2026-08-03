@@ -171,7 +171,9 @@ const coac = await evaluate(`(() => {
   button.click();
   return new Promise((resolve) => requestAnimationFrame(() => {
     const system = [...document.querySelectorAll(".system")]
-      .find((node) => node.querySelector("h3")?.textContent.includes("CoAC"));
+      .find((node) =>
+        node.querySelector("h3")?.textContent.includes("Painel de Acompanhamento")
+      );
     resolve(system?.querySelector("img")?.alt);
   }));
 })()`);
@@ -185,6 +187,18 @@ const legacyMigration = await evaluate(`(() => {
     dbt: system?.querySelector('img[src*="dbt"]')?.getAttribute("src"),
     portal: system?.querySelector('a[href*="cncflora.jbrj.gov.br"]')?.href,
     text: system?.textContent
+  };
+})()`);
+
+const workArchitecture = await evaluate(`(() => {
+  const map = document.querySelector(".system-map");
+  const legacy = [...document.querySelectorAll(".system")]
+    .find((node) => node.querySelector(".system__meta > span")?.textContent === "04");
+  return {
+    nodes: map?.querySelectorAll(".flow-node").length,
+    hasResgatar: map?.textContent.includes("RESGATAR"),
+    legacyNumber: legacy?.querySelector(".system__meta")?.textContent,
+    legacyTitle: legacy?.querySelector("h3")?.textContent
   };
 })()`);
 
@@ -235,6 +249,7 @@ const report = {
   filter,
   coac,
   legacyMigration,
+  workArchitecture,
   technologies,
   menu,
   runtimeErrors
@@ -275,6 +290,10 @@ const failed =
   !legacyMigration.dbt ||
   !legacyMigration.portal?.startsWith("https://cncflora.jbrj.gov.br") ||
   !legacyMigration.text?.includes("executei sozinho") ||
+  workArchitecture.nodes !== 4 ||
+  workArchitecture.hasResgatar ||
+  !workArchitecture.legacyNumber?.includes("04") ||
+  workArchitecture.legacyTitle !== "Resgate de dados legados" ||
   technologies.groups !== 4 ||
   technologies.items !== 41 ||
   technologies.uniqueItems !== 41 ||
