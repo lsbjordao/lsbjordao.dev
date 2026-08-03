@@ -129,6 +129,8 @@ a {
   height: 3px;
   background: var(--coral);
   transform-origin: left;
+  /* Estado inicial: sem isto a barra aparece cheia até o script hidratar. */
+  transform: scaleX(0);
   pointer-events: none;
 }
 

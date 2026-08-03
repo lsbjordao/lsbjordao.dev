@@ -2,6 +2,7 @@ node_modules/
 .next/
 dist/
 out/
+public/_img/
 .DS_Store
 *.log
 *.tsbuildinfo

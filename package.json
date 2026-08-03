@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/generate-images.mjs",
     "dev": "next dev",
+    "images": "node scripts/generate-images.mjs",
+    "prebuild": "node scripts/generate-images.mjs",
     "build": "next build && node scripts/prepare-sites.mjs",
     "contributions": "node scripts/fetch-contributions.mjs",
     "start": "next start",

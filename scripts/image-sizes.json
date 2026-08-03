@@ -1,0 +1,6 @@
+{
+  "comment": "Fonte única das larguras. next.config.ts as declara para o next/image e generate-images.mjs gera exatamente estes arquivos — uma largura pedida sem variante correspondente vira 404.",
+  "deviceSizes": [640, 960, 1280, 1920],
+  "imageSizes": [34, 68, 136],
+  "quality": 74
+}

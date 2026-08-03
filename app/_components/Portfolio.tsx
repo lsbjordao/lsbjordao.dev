@@ -35,6 +35,7 @@ import {
 import { copy as allCopy } from "@/data/copy";
 import ExperienceCarousel from "./ExperienceCarousel";
 import Phenology from "./Phenology";
+import ScrollProgress from "./ScrollProgress";
 import Teaching from "./Teaching";
 
 type Filter = "all" | ProjectCategoryId;
@@ -97,11 +98,11 @@ export default function Portfolio({ lang }: { lang: Lang }) {
   const [activeFilter, setActiveFilter] = useState<Filter>("all");
   const [trackingMode, setTrackingMode] = useState<"app" | "operation">("app");
   const [systemSlides, setSystemSlides] = useState<Partial<Record<SystemId, number>>>({});
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   const [path, setPath] = useState<Array<{ coupletId: CoupletId; leadIndex: number }>>([]);
   const [showAllTracks, setShowAllTracks] = useState(false);
   const determinationRef = useRef<HTMLDivElement>(null);
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
 
   const updateSystemMagnifier = useCallback(
     (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -212,21 +213,6 @@ export default function Portfolio({ lang }: { lang: Lang }) {
   );
 
   useEffect(() => {
-    const updateProgress = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(max > 0 ? window.scrollY / max : 0);
-    };
-
-    updateProgress();
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    window.addEventListener("resize", updateProgress);
-    return () => {
-      window.removeEventListener("scroll", updateProgress);
-      window.removeEventListener("resize", updateProgress);
-    };
-  }, []);
-
-  useEffect(() => {
     const items = document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -247,6 +233,19 @@ export default function Portfolio({ lang }: { lang: Lang }) {
   useEffect(() => {
     document.body.classList.toggle("menu-is-open", menuOpen);
     return () => document.body.classList.remove("menu-is-open");
+  }, [menuOpen]);
+
+  // O menu aberto é um overlay em tela cheia: sem Escape, quem navega por
+  // teclado fica sem saída além de tabular a lista inteira.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      menuToggleRef.current?.focus();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [menuOpen]);
 
   const closeMenu = () => setMenuOpen(false);
@@ -278,10 +277,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         {c.a11y.skipToContent}
       </a>
 
-      <div
-        className="scroll-progress"
-        style={{ transform: `scaleX(${scrollProgress})` }}
-      />
+      <ScrollProgress />
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label={c.a11y.brand}>
@@ -334,6 +330,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         <button
           className="menu-toggle"
           type="button"
+          ref={menuToggleRef}
           aria-label={menuOpen ? c.a11y.closeMenu : c.a11y.openMenu}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((open) => !open)}
@@ -343,7 +340,9 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         </button>
       </header>
 
-      <main id="conteudo">
+      {/* O overlay do menu cobre a página, mas sem `inert` o conteúdo atrás
+          continua tabulável e o foco some para links invisíveis. */}
+      <main id="conteudo" inert={menuOpen}>
         <section className="hero" id="top">
           <div className="hero__copy">
             <p className="eyebrow">{c.hero.eyebrow}</p>
@@ -1474,7 +1473,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         </section>
       </main>
 
-      <footer>
+      <footer inert={menuOpen}>
         <div className="footer__brand">
           <span>{profile.initials}</span>
           <p>
