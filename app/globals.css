@@ -4229,6 +4229,159 @@ button:hover > .icon--diagonal {
   }
 }
 
+/* Linhagem — o cladograma da trajetória.
+   Faixa escura própria: o diagrama precisa da largura inteira para os rótulos
+   monoespaçados continuarem legíveis, e o fundo escuro é o que separa o
+   argumento (a topologia) do registro cronológico logo abaixo. */
+.lineage {
+  overflow: hidden;
+}
+
+.frond {
+  position: absolute;
+  top: -12%;
+  right: -14%;
+  width: min(820px, 78vw);
+  height: auto;
+  color: #edf4f8;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+.clado {
+  position: relative;
+  z-index: 1;
+  max-width: 78rem;
+  margin: 0 auto;
+}
+
+.clado__head {
+  max-width: 44rem;
+}
+
+.clado__eyebrow {
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.clado__title {
+  margin-top: 1.1rem;
+  font-size: clamp(1.9rem, 3.6vw, 3.1rem);
+  font-weight: 580;
+  letter-spacing: -0.04em;
+  line-height: 1.03;
+}
+
+.clado__lede {
+  margin-top: 1.35rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.65;
+}
+
+/* Abaixo de ~880px o diagrama não cabe sem encolher a tipografia até o
+   ilegível. Rolar na horizontal preserva a leitura; o SVG nunca é espremido. */
+.clado__hint {
+  display: none;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  color: var(--acid);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+
+/* Abaixo do `min-width` do SVG o diagrama passa a rolar; só aí a dica faz
+   sentido. Acima disso ela seria ruído sobre algo que já cabe inteiro. */
+@media (max-width: 58rem) {
+  .clado__hint {
+    display: block;
+  }
+
+  .clado__hint + .clado__frame {
+    margin-top: 0.9rem;
+  }
+}
+
+.clado__frame {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.clado__svg {
+  display: block;
+  width: 100%;
+  min-width: 880px;
+  height: auto;
+}
+
+.clado__edge {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.42);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.clado__guide {
+  stroke: rgba(255, 255, 255, 0.42);
+  stroke-width: 1;
+  stroke-dasharray: 1 6;
+  opacity: 0.5;
+}
+
+.clado__node {
+  fill: var(--ink);
+  stroke: var(--white);
+  stroke-width: 1.6;
+}
+
+.clado__node--now,
+.clado__fusion {
+  fill: var(--acid);
+  stroke: var(--acid);
+}
+
+.clado__label,
+.clado__lane,
+.clado__year,
+.clado__reticulation {
+  font-family: var(--mono);
+}
+
+.clado__label {
+  font-size: 11px;
+  fill: var(--white);
+}
+
+.clado__label-year {
+  fill: rgba(255, 255, 255, 0.55);
+}
+
+.clado__label-name--fusion {
+  fill: var(--acid);
+}
+
+.clado__lane {
+  font-size: 9.5px;
+  fill: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.14em;
+}
+
+.clado__year {
+  font-size: 10px;
+  fill: rgba(255, 255, 255, 0.55);
+}
+
+.clado__reticulation {
+  font-size: 10px;
+  fill: var(--acid);
+  letter-spacing: 0.14em;
+}
+
 .trajectory {
   min-height: 100svh;
   padding: 0;

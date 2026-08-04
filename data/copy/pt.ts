@@ -917,6 +917,36 @@ export const pt = {
     heading: { line1: "Do espécime", line2: "à ", emphasis: "infraestrutura." },
     intro:
       "Antes dos pipelines, vieram as trilhas, as bancadas e as coleções. Foi ali que aprendi a observar com rigor, registrar contexto e transformar evidência dispersa em conhecimento que outras pessoas conseguem usar.",
+    cladogram: {
+      eyebrow: "Linhagem",
+      title: "A carreira é reticulada, não linear",
+      lede: "Duas linhagens correm em paralelo por uma década — a sistemática de plantas e a curadoria digital de coleções — e se fundem em 2020, quando avaliar risco de extinção passou a exigir taxonomia e engenharia de dados ao mesmo tempo.",
+      scrollHint: "Arraste o diagrama para o lado para ver até 2026.",
+      reticulation: "reticulação",
+      ariaLabel:
+        "Cladograma da trajetória profissional de 2003 a 2026, mostrando as linhagens de docência, botânica, coleções e dados, com um evento de reticulação em 2020.",
+      lanes: {
+        teaching: "DOCÊNCIA",
+        botany: "BOTÂNICA",
+        collections: "COLEÇÕES",
+        data: "DADOS",
+      },
+      nodes: {
+        biology: "Ciências Biológicas · USU",
+        internship: "Estágio · JBRJ",
+        bachelor: "Bacharelado",
+        masters: "Mestrado · UFRJ/Museu Nacional",
+        phd: "Doutorado + pós-doc · JBRJ",
+        teacher: "Professor de Ciências",
+        seeduc: "SEEDUC/RJ · Horto Escola",
+        reflora: "REFLORA · Herbário RB",
+        nybg: "NYBG · digitalização",
+        redList: "Analista da Lista Vermelha",
+        itAnalyst: "Analista de TI",
+        now: "hoje",
+        dataScience: "Ciência de Dados · UNESA",
+      },
+    },
     statement: {
       field: { before: "Aprendi no ", emphasis: "campo." },
       lab: { before: "Aprendi no ", emphasis: "laboratório." },

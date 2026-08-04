@@ -36,7 +36,9 @@ import {
   type TrackId,
 } from "@/data/site";
 import { copy as allCopy } from "@/data/copy";
+import Cladogram from "./Cladogram";
 import ExperienceCarousel from "./ExperienceCarousel";
+import Frond from "./Frond";
 import Phenology from "./Phenology";
 import ScrollProgress from "./ScrollProgress";
 import StatBoard from "./StatBoard";
@@ -1348,6 +1350,13 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         </section>
 
         <Phenology lang={lang} />
+
+        {/* A leitura filogenética da trajetória vem antes da leitura cronológica:
+            ela é o argumento; a linha do tempo abaixo é o registro. */}
+        <section className="lineage section section--dark" id="linhagem">
+          <Frond />
+          <Cladogram lang={lang} />
+        </section>
 
         <section className="trajectory section" id="trajetoria">
           <ExperienceCarousel lang={lang} />

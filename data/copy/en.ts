@@ -887,6 +887,36 @@ export const en: Copy = {
     heading: { line1: "From the specimen", line2: "to the ", emphasis: "infrastructure." },
     intro:
       "Before the pipelines came the trails, benches and collections. That is where I learned to observe rigorously, preserve context and turn scattered evidence into knowledge other people can use.",
+    cladogram: {
+      eyebrow: "Lineage",
+      title: "The career is reticulate, not linear",
+      lede: "Two lineages run in parallel for a decade — plant systematics and the digital curation of collections — and merge in 2020, when assessing extinction risk began to demand taxonomy and data engineering at the same time.",
+      scrollHint: "Drag the diagram sideways to reach 2026.",
+      reticulation: "reticulation",
+      ariaLabel:
+        "Cladogram of a professional trajectory from 2003 to 2026, showing the teaching, botany, collections and data lineages, with a reticulation event in 2020.",
+      lanes: {
+        teaching: "TEACHING",
+        botany: "BOTANY",
+        collections: "COLLECTIONS",
+        data: "DATA",
+      },
+      nodes: {
+        biology: "Biological Sciences · USU",
+        internship: "Internship · JBRJ",
+        bachelor: "BSc",
+        masters: "MSc · UFRJ/Museu Nacional",
+        phd: "PhD + postdoc · JBRJ",
+        teacher: "Science teacher",
+        seeduc: "SEEDUC/RJ · Horto Escola",
+        reflora: "REFLORA · RB Herbarium",
+        nybg: "NYBG · digitisation",
+        redList: "Red List analyst",
+        itAnalyst: "IT analyst",
+        now: "today",
+        dataScience: "Data Science · UNESA",
+      },
+    },
     statement: {
       field: { before: "I learned in the ", emphasis: "field." },
       lab: { before: "I learned in the ", emphasis: "laboratory." },
