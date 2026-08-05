@@ -43,6 +43,7 @@ export const pt = {
     aulas: "Aulas",
     trajetoria: "Trajetória",
     cv: "CV",
+    contato: "Contato",
     blog: "Blog",
     mobileLocation: "Rio de Janeiro · Brasil",
     mobileAvailability: "Disponível para propostas",

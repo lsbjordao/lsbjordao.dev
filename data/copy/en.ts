@@ -42,6 +42,7 @@ export const en: Copy = {
     aulas: "Courses",
     trajetoria: "Career",
     cv: "CV",
+    contato: "Contact",
     blog: "Blog",
     mobileLocation: "Rio de Janeiro · Brazil",
     mobileAvailability: "Open to opportunities",

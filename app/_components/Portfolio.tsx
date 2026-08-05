@@ -322,6 +322,9 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           <a href="#curriculo-grafo" onClick={closeMenu}>
             {c.nav.cv}
           </a>
+          <a href="#contato" onClick={closeMenu}>
+            {c.nav.contato}
+          </a>
           <div className="nav__mobile-foot">
             <span>{c.nav.mobileLocation}</span>
             <span>{c.nav.mobileAvailability}</span>
