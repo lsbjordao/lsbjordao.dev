@@ -5,9 +5,10 @@
  * desfocada, sem contorno duro. Não ilustra nada em particular; é o grupo em
  * que o trabalho taxonômico aconteceu, aparecendo como textura.
  *
- * A geração é pseudoaleatória mas determinística — mesma semente, mesmo
- * desenho em toda renderização. Isso importa duas vezes: o SVG do servidor
- * bate com o do cliente (sem erro de hidratação), e a arte não "pisca"
+ * A geração é pseudoaleatória mas determinística — mesma entrada, mesmo
+ * ângulo, não importa quantas vezes o componente é invocado. Isso importa
+ * duas vezes: o SVG do servidor bate com o do cliente (sem erro de
+ * hidratação, mesmo com o duplo-render do Strict Mode), e a arte não "pisca"
  * diferente a cada visita.
  */
 
@@ -18,13 +19,18 @@ const VIEW_H = 700;
 const RAQUIS = 300;
 const PINNAE = 9;
 
-/** Congelador do acaso: LCG simples, semeado uma vez por render. */
-function makeRandom(seed: number) {
-  let state = seed;
-  return () => {
-    state = (state * 1103515245 + 12345) & 0x7fffffff;
-    return state / 0x7fffffff;
-  };
+/** Hash puro: mesmos números de entrada sempre produzem a mesma saída, sem
+    estado compartilhado entre chamadas — ao contrário de um gerador
+    sequencial, não se desalinha se o React invocar o render mais de uma vez. */
+function pseudoRandom(...parts: number[]) {
+  let h = 0x9e3779b9;
+  for (const part of parts) {
+    h = Math.imul(h ^ part, 2654435761);
+    h = (h << 13) | (h >>> 19);
+  }
+  h = Math.imul(h ^ (h >>> 16), 2246822519);
+  h ^= h >>> 13;
+  return (h >>> 0) / 0xffffffff;
 }
 
 type FrondSpec = {
@@ -43,7 +49,7 @@ const FRONDS: FrondSpec[] = [
   { x: 30, y: 330, rotate: -18, scale: 0.8, opacity: 0.3, blur: "softer" },
 ];
 
-function Leaf({ spec, random }: { spec: FrondSpec; random: () => number }) {
+function Leaf({ spec, leafIndex }: { spec: FrondSpec; leafIndex: number }) {
   const pinnae = [];
 
   for (let p = 0; p < PINNAE; p += 1) {
@@ -54,7 +60,7 @@ function Leaf({ spec, random }: { spec: FrondSpec; random: () => number }) {
     const length = 56 + 60 * Math.sin(Math.PI * t);
 
     for (const side of [-1, 1]) {
-      const angle = side * (52 + random() * 12);
+      const angle = side * (52 + pseudoRandom(leafIndex, p, side) * 12);
       const leaflets = Math.round(length / 6.4);
       pinnae.push(
         <g
@@ -104,8 +110,6 @@ function Leaf({ spec, random }: { spec: FrondSpec; random: () => number }) {
 }
 
 export default function Frond({ className = "frond" }: { className?: string }) {
-  const random = makeRandom(20260803);
-
   return (
     <svg className={className} viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} aria-hidden="true">
       <defs>
@@ -117,7 +121,7 @@ export default function Frond({ className = "frond" }: { className?: string }) {
         </filter>
       </defs>
       {FRONDS.map((spec, index) => (
-        <Leaf key={index} spec={spec} random={random} />
+        <Leaf key={index} spec={spec} leafIndex={index} />
       ))}
     </svg>
   );
