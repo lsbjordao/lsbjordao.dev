@@ -42,7 +42,7 @@ export const pt = {
     projetos: "Projetos",
     aulas: "Aulas",
     trajetoria: "Trajetória",
-    notas: "Notas",
+    cv: "CV",
     blog: "Blog",
     mobileLocation: "Rio de Janeiro · Brasil",
     mobileAvailability: "Disponível para propostas",
@@ -263,10 +263,7 @@ export const pt = {
         name: "Taxonomia computacional",
         tagline: "Descrição vira dado tipado.",
         body: "Concebi e publiquei o TypeTaxonScript, um framework que representa caracteres morfológicos como dados tipados, validáveis e versionáveis. É a ponte entre modelagem de domínio e conhecimento científico — e a base de uma agenda de pesquisa em que botânica e engenharia de software são uma prática só.",
-        evidence: [
-          { label: "TypeTaxonScript, Biology Methods and Protocols", href: "#projetos" },
-          { label: "Publicações e notas técnicas", href: "#notas" },
-        ],
+        evidence: [{ label: "TypeTaxonScript, Biology Methods and Protocols", href: "#projetos" }],
       },
     },
   },
@@ -1168,31 +1165,26 @@ export const pt = {
     },
   },
 
-  notes: {
-    index: "08 / NOTAS & PUBLICAÇÕES",
-    heading: { line1: "Pensamento em", emphasis: "forma pública." },
-    cta: "Visitar o blog",
-    items: {
-      ffb: {
-        date: "14 JUL 2026",
-        title: "Flora e Funga do Brasil — Cronologia",
-        category: "Produto digital",
+  cvGraph: {
+    index: "08 / CURRÍCULO EM GRAFO",
+    eyebrow: "Duas lentes, o mesmo grafo",
+    heading: { line1: "O currículo", emphasis: "além da árvore." },
+    lead: "Um currículo costuma organizar a trajetória profissional como uma árvore: formação, experiências, habilidades e produções distribuídas em categorias. Mas uma vida profissional é muito mais interligada. Projetos conectam tecnologias, métodos, pessoas, instituições e competências. Ao representar essas relações como um grafo, conhecimentos antes implícitos tornam-se visíveis, revelando novas formas de explorar, compreender e descobrir uma trajetória.",
+    linkLabel: "mesma base de conhecimento",
+    modes: {
+      query: {
+        kicker: "Interface 01 · consulta",
+        title: "Currículo consultável",
+        description:
+          "Uma interface textual para perguntar pelo currículo como quem pergunta a uma pessoa: por projeto, tecnologia, período ou competência.",
+        cta: "Consultar o currículo",
       },
-      quartoWriting: {
-        date: "15 JUN 2026",
-        title: "Improving Scientific Writing in Quarto with Real-Time Feedback",
-        category: "Open source",
-      },
-      tts: {
-        date: "14 MAR 2024",
-        title:
-          "TypeTaxonScript: enhancing data structures in biological systematics",
-        category: "Artigo científico",
-      },
-      mapbiomas: {
-        date: "01 AGO 2022",
-        title: "MapBiomas e a avaliação do risco de extinção da flora brasileira",
-        category: "Política pública",
+      graph: {
+        kicker: "Interface 02 · grafo",
+        title: "Currículo em rede",
+        description:
+          "A mesma informação como um grafo interativo, navegável em 2D e 3D — nós e conexões em vez de categorias fechadas.",
+        cta: "Explorar o grafo",
       },
     },
   },

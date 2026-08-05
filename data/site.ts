@@ -141,7 +141,7 @@ export const tracks: Array<{
       "filogenética",
       "FAIR / ciência aberta",
     ],
-    evidence: [{ href: "#projetos" }, { href: "#notas" }],
+    evidence: [{ href: "#projetos" }],
   },
 ];
 
@@ -868,18 +868,6 @@ export const timeline: Array<{ id: TimelineId; year: string }> = [
   { id: "now", year: "2026" },
 ];
 
-export type PostId = "ffb" | "quartoWriting" | "tts" | "mapbiomas";
-
-export const posts: Array<{ id: PostId; href: string }> = [
-  { id: "ffb", href: "https://lsbjordao.github.io/posts/FFB-cronologia/" },
-  {
-    id: "quartoWriting",
-    href: "https://lsbjordao.github.io/posts/Quarto-scientific-writing/",
-  },
-  { id: "tts", href: "https://doi.org/10.1093/biomethods/bpae017" },
-  { id: "mapbiomas", href: "https://lsbjordao.github.io/posts/Premio-MapBiomas/" },
-];
-
 export const mapbiomasAward = {
   image: "/images/mapbiomas-award.jpg",
   pdf: "https://brasil.mapbiomas.org/wp-content/uploads/sites/4/2023/08/MencaoHonrosa_CategoriaDestaqueAplicacoesEmPoliticasPublicas_LucasSBJordao.pdf",
@@ -887,3 +875,9 @@ export const mapbiomasAward = {
 };
 
 export const publicPortal = "https://cncflora.jbrj.gov.br/";
+
+/** Os dois projetos que apresentam o mesmo currículo como interface de consulta e como grafo interativo. */
+export const cvGraphLinks = {
+  query: "https://lsbjordao.github.io/cv",
+  graph: "https://lsbjordao.github.io/cv-graph/",
+};

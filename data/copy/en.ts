@@ -41,7 +41,7 @@ export const en: Copy = {
     projetos: "Projects",
     aulas: "Courses",
     trajetoria: "Career",
-    notas: "Writing",
+    cv: "CV",
     blog: "Blog",
     mobileLocation: "Rio de Janeiro · Brazil",
     mobileAvailability: "Open to opportunities",
@@ -244,10 +244,7 @@ export const en: Copy = {
         name: "Computational taxonomy",
         tagline: "Descriptions become typed data.",
         body: "I conceived and published TypeTaxonScript, a framework that represents morphological characters as typed, validatable, versionable data. It is the bridge between domain modelling and scientific knowledge — and the basis of a research agenda where botany and software engineering are a single practice.",
-        evidence: [
-          { label: "TypeTaxonScript, Biology Methods and Protocols", href: "#projetos" },
-          { label: "Publications and technical notes", href: "#notas" },
-        ],
+        evidence: [{ label: "TypeTaxonScript, Biology Methods and Protocols", href: "#projetos" }],
       },
     },
   },
@@ -1138,31 +1135,26 @@ export const en: Copy = {
     },
   },
 
-  notes: {
-    index: "08 / WRITING & PUBLICATIONS",
-    heading: { line1: "Thinking in", emphasis: "public form." },
-    cta: "Visit the blog",
-    items: {
-      ffb: {
-        date: "14 JUL 2026",
-        title: "Flora e Funga do Brasil — Chronology",
-        category: "Digital product",
+  cvGraph: {
+    index: "08 / CV AS A GRAPH",
+    eyebrow: "Two lenses, the same graph",
+    heading: { line1: "The CV", emphasis: "beyond the tree." },
+    lead: "A CV usually organises a career as a tree: education, experience, skills and output sorted into categories. But a professional life is far more interconnected. Projects link technologies, methods, people, institutions and competencies. Representing these relations as a graph makes previously implicit knowledge visible, revealing new ways to explore, understand and discover a career.",
+    linkLabel: "the same knowledge base",
+    modes: {
+      query: {
+        kicker: "Interface 01 · query",
+        title: "A queryable CV",
+        description:
+          "A text interface for asking about the CV the way you'd ask a person: by project, technology, period or skill.",
+        cta: "Query the CV",
       },
-      quartoWriting: {
-        date: "15 JUN 2026",
-        title: "Improving Scientific Writing in Quarto with Real-Time Feedback",
-        category: "Open source",
-      },
-      tts: {
-        date: "14 MAR 2024",
-        title:
-          "TypeTaxonScript: enhancing data structures in biological systematics",
-        category: "Scientific paper",
-      },
-      mapbiomas: {
-        date: "01 AUG 2022",
-        title: "MapBiomas and extinction-risk assessment of the Brazilian flora",
-        category: "Public policy",
+      graph: {
+        kicker: "Interface 02 · graph",
+        title: "A networked CV",
+        description:
+          "The same information as an interactive graph, browsable in 2D and 3D — nodes and connections instead of closed categories.",
+        cta: "Explore the graph",
       },
     },
   },

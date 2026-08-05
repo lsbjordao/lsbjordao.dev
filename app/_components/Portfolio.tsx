@@ -19,7 +19,6 @@ import {
   key as determinationKey,
   languages,
   mapbiomasAward,
-  posts,
   profile,
   projects,
   publicPortal,
@@ -37,6 +36,7 @@ import {
 } from "@/data/site";
 import { copy as allCopy } from "@/data/copy";
 import Cladogram from "./Cladogram";
+import CvGraph from "./CvGraph";
 import ExperienceCarousel from "./ExperienceCarousel";
 import Frond from "./Frond";
 import Phenology from "./Phenology";
@@ -319,8 +319,8 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           <a href="#trajetoria" onClick={closeMenu}>
             {c.nav.trajetoria}
           </a>
-          <a href="#notas" onClick={closeMenu}>
-            {c.nav.notas}
+          <a href="#curriculo-grafo" onClick={closeMenu}>
+            {c.nav.cv}
           </a>
           <div className="nav__mobile-foot">
             <span>{c.nav.mobileLocation}</span>
@@ -1435,43 +1435,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section className="notes section" id="notas">
-          <div className="section-index">{c.notes.index}</div>
-          <header className="notes__header" data-reveal>
-            <h2>
-              {c.notes.heading.line1}
-              <br />
-              <em>{c.notes.heading.emphasis}</em>
-            </h2>
-            <a
-              href={profile.blog}
-              target="_blank"
-              rel="noreferrer"
-              className="text-link text-link--dark"
-            >
-              {c.notes.cta} <Arrow />
-            </a>
-          </header>
-          <div className="post-list">
-            {posts.map((post, index) => (
-              <a
-                href={post.href}
-                target="_blank"
-                rel="noreferrer"
-                className="post"
-                key={post.id}
-              >
-                <span className="post__index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="post__date">{c.notes.items[post.id].date}</span>
-                <h3>{c.notes.items[post.id].title}</h3>
-                <span className="post__category">{c.notes.items[post.id].category}</span>
-                <span className="post__arrow">
-                  <Arrow diagonal />
-                </span>
-              </a>
-            ))}
-          </div>
-        </section>
+        <CvGraph lang={lang} />
 
         <section className="contact section" id="contato">
           <div className="contact__orbit contact__orbit--one" />
