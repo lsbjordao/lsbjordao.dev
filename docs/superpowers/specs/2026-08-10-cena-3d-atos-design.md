@@ -97,29 +97,46 @@ que separe os dois.
 
 ### A saída
 
-Os fundos escuros ficam levemente translúcidos.
+O fundo escuro continua **opaco**, mas muda de elemento: sai do `background` da
+seção e vai para um pseudo-elemento em `z-index: -1`.
 
 ```text
 body (paper, ground)                    já existe, não muda
   └ canvas   fixed · inset 0 · z-index 0 · pointer-events none · aria-hidden
   └ .site-header  z-index 40            já existe, fica acima
   └ main
-      .hero            background: rgba(7, 19, 13, .88)    era var(--ink-deep)
-      .section         transparente                        não muda
-      .section--dark   background: rgba(16, 37, 27, .88)   era var(--ink)
-      .research-feature__media  rgba(16, 37, 27, .88)      era var(--ink)
+      .hero                     background: transparent
+        .hero::after            z-index -1 · o gradiente + var(--ink-deep)
+      .section                  transparente                  não muda
+      .section--dark            background: transparent
+        .section--dark::before  z-index -1 · var(--ink)
+      .research-feature__media  background: transparent
+        ::before                z-index -1 · var(--ink)
 ```
 
-Uma regra nova, para o canvas, e três fundos ajustados de opaco para 88% —
-nenhuma mudança estrutural. Os `z-index` internos das
-seções (1 a 4) não competem com o canvas: as seções têm `z-index: auto`, e a
-ordem do DOM resolve — canvas primeiro, seções depois, texto sempre em cima.
+Funciona por ordem de pintura no contexto raiz: descendentes de `z-index`
+negativo pintam antes de descendentes com `z-index` 0 ou `auto`. Como nenhuma
+dessas seções cria contexto de empilhamento — todas são `position: relative`
+com `z-index: auto` — o pseudo-elemento negativo **escapa para a raiz** e pinta
+abaixo do canvas. Depois vem o canvas em `z-index: 0`, e por último o conteúdo
+da seção, que é `auto` e vem depois na árvore. Tinta, cena, texto, nessa ordem.
 
-Dois efeitos colaterais, ambos desejáveis. Em seção escura a camada de 88% de
-tinta fica **entre** o brilho e o texto, então o contraste do texto branco está
-garantido por construção e o brilho lê como vindo de dentro do escuro — que é o
-que campo escuro parece. Em seção papel o canvas pinta sobre o papel com alpha
-reto e o texto pinta por cima. As bordas entre seções continuam duras.
+Isso exige uma disciplina: **nenhuma dessas seções pode ganhar `isolation`,
+`transform`, `filter`, `opacity` menor que 1, `will-change` ou `contain`** — cada
+um deles criaria contexto de empilhamento e prenderia o fundo acima do canvas,
+apagando a cena naquela seção. `overflow: hidden` é seguro e já está em uso.
+
+A alternativa que eu havia especificado antes — deixar os fundos a 88% de
+opacidade — está **descartada por medição**: 88% de `--ink` sobre o papel do
+`body` dá `#2b3d33` em vez de `#10251b`, e `--ink-deep` dá `#232d27` em vez de
+`#07130d`. Os escuros da página lavariam, e o brilho ficaria reduzido a 12%.
+
+O preço da versão correta é que o brilho passa a pintar direto atrás do texto
+branco, sem camada amortecendo — e por isso o teto de alpha do registro lâmina é
+0,30, não 0,55. Ver Registros.
+
+Em seção papel nada disso se aplica: o canvas pinta sobre o papel do `body` com
+alpha reto e o texto pinta por cima. As bordas entre seções continuam duras.
 
 ### Sem `mix-blend-mode`
 
@@ -257,10 +274,24 @@ Nenhuma cor nova entra na paleta.
 
 | | prancha (papel) | lâmina (escuro) |
 | --- | --- | --- |
-| traço | `--ink` α 0.10–0.18 | `--acid` / `--coral` α 0.35–0.6 |
-| blending | normal, alpha reto | aditivo |
-| pontos | tinta, α 0.12 | sprite com halo |
-| teto | cobertura mantém papel ≥ `#e8e6de` | camada de 88% de tinta garante branco ≥ 7:1 |
+| traço | `--ink` α **0.14** | `--acid` α **0.30** |
+| halo | α 0 — não contribui | `--coral` α **0.30** |
+| blending | normal, alpha reto | aditivo (só o halo) |
+| pior caso medido | corpo `--ink` a **10.65:1** | branco a **4.88:1** |
+
+Os tetos vêm de medição, não de gosto, e o pior caso é o honesto: cobertura
+total no alpha de pico. `app/_3d/registers.test.ts` calcula a luminância relativa
+WCAG dos dois casos e falha abaixo de 4.5:1 — mexer nos alphas quebra o teste, e é
+para quebrar.
+
+O critério antigo — "cobertura mantém papel ≥ `#e8e6de`" — foi **descartado por
+ser mal definido**: um traço visível *tem* que escurecer os pixels que cobre,
+senão não é traço. O que importa é o texto, que pinta acima do canvas, continuar
+legível sobre o pior fundo local. É isso que está medido agora.
+
+Há um teste na direção contrária também, exigindo que o branco fique **abaixo**
+de 7:1: margem de contraste sobrando significa cena mais tímida do que precisa
+ser, e isso é desperdício silencioso.
 
 O brilho não vem de `UnrealBloomPass`. Vem de blending aditivo mais um sprite de
 halo gerado em canvas 2D em runtime — nada baixado. É o que mantém o bundle no
