@@ -34,10 +34,11 @@ página que argumenta rigor.
 
 ### Prancha ↔ lâmina
 
-A geometria tem dois registros, escolhidos pelo ato e não pelo CSS:
+A geometria tem dois registros, decididos no material e não no CSS:
 
 - **prancha** — traço de tinta sobre papel, como ilustração botânica que ganhou
   volume. Conversa direta com o SVG determinístico do `Frond.tsx` que já existe.
+
 - **lâmina** — campo escuro de microscopia: material emissivo, blending aditivo,
   partículas em suspensão.
 
@@ -158,8 +159,9 @@ type Act = {
   frame?: () => Element | null;
   /** Geometria em caixa unitária. Chamado uma vez, fora do rAF. */
   build(ctx: ActContext): Object3D;
-  /** progress 0→1 dentro do ato; t em segundos desde o mount. */
-  update(t: number, progress: number): void;
+  /** progress 0→1 dentro do ato; t em segundos desde o mount. O registro chega
+      por parâmetro porque é do scroll, não do ato. */
+  update(t: number, progress: number, register: RegisterUniforms): void;
   /** Estação da câmera, em coordenadas do ato. */
   station(progress: number): { position: Vector3; target: Vector3 };
   /** Legenda da barra de escala, por idioma. */
@@ -190,6 +192,7 @@ mesmo gerador em duas projeções.
 - ráquis e pinas: `LineSegments`
 - folíolos: `InstancedMesh` de um quad, ~970 instâncias (3 folhas × 9 pinas × 2
   lados × ~18 folíolos)
+
 - pólen: `Points`
 
 **Tigmonastia.** *Mimosa* é a planta sensitiva: fecha os folíolos ao toque. O
@@ -275,9 +278,16 @@ Uma `PerspectiveCamera`, fov 38. Posição e alvo perseguem `station(progress)` 
 ato ativo com mola criticamente amortecida, sem overshoot, para que jitter de
 scroll não sacuda o quadro.
 
-`progress` sai de `IntersectionObserver` nas âncoras — o mesmo mecanismo que o
-`data-reveal` já usa em `Portfolio.tsx` — e é **lido dentro do rAF**, nunca no
-handler de scroll. Um único rAF na página inteira para a cena.
+`progress` **não** vem de `IntersectionObserver`. IO entrega callback por
+threshold cruzado, não posição contínua: aproximar progresso 0→1 com ele exigiria
+dezenas de thresholds e ainda daria degraus. Em vez disso, o diretor mede o rect
+de cada âncora uma vez (no mount e a cada `resize`) e calcula
+`progress = (scrollY + innerHeight / 2 - top) / height` **dentro do rAF**.
+
+Duas consequências que importam: `getBoundingClientRect` só é chamado ao medir,
+nunca por frame, então não há reflow no loop; e `resize` remede o layout sem
+reconstruir geometria nenhuma. Um único rAF na página inteira para a cena, e
+nenhum handler de scroll que escreva estado.
 
 ## Barra de escala
 
@@ -347,6 +357,7 @@ Cada critério dá um número ou um diff. Nenhum é "ficou bom".
 
 - Reordenar seções para obter uma escada de escala monotônica. A ordem do
   conteúdo é argumento de contratação e não se subordina ao 3D.
+
 - Escurecer as seções papel.
 - Substituir o `Cladogram.tsx` 2D, a foto do hero ou o `Frond.tsx`.
 - Post-processing (bloom, DOF, sombras).
