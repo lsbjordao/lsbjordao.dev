@@ -27,7 +27,7 @@ export const pt = {
   stage: {
     label: "Escala",
     scale: {
-      branch: "5 cm",
+      branch: "",
       key: "",
       trichome: "200 µm",
       territory: "1000 km",

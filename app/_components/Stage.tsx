@@ -35,9 +35,14 @@ export default function Stage({ lang }: { lang: Lang }) {
 
     const boot = async () => {
       try {
-        const { createDirector } = await import("../_3d/director");
+        const [{ createDirector }, { createBranchAct }] = await Promise.all([
+          import("../_3d/director"),
+          import("../_3d/acts/branch"),
+        ]);
         if (cancelled) return;
-        director = createDirector(canvas, { onAct: setAct, reducedMotion, compact });
+        const d = createDirector(canvas, { onAct: setAct, reducedMotion, compact });
+        d.add(createBranchAct());
+        director = d;
       } catch {
         // Contexto que não sobe não é erro do visitante: a página inteira
         // funciona sem a cena, então o silêncio aqui é deliberado.

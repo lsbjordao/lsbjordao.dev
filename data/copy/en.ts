@@ -19,7 +19,7 @@ export const en: Copy = {
   stage: {
     label: "Scale",
     scale: {
-      branch: "5 cm",
+      branch: "",
       key: "",
       trichome: "200 µm",
       territory: "1000 km",
