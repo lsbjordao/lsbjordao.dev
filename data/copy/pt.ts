@@ -777,6 +777,7 @@ export const pt = {
           title: "Desenvolvimento full stack",
           items: [
             "Aplicações web de ponta a ponta",
+            "Aplicações mobile com React Native e Expo",
             "APIs REST e GraphQL com NestJS",
             "Componentização em React e Svelte",
             "Modelagem e evolução de esquema",

@@ -741,6 +741,7 @@ export const en: Copy = {
           title: "Full stack development",
           items: [
             "End-to-end web applications",
+            "Mobile applications with React Native and Expo",
             "REST and GraphQL APIs with NestJS",
             "Componentisation in React and Svelte",
             "Schema modelling and migration",

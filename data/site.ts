@@ -433,6 +433,8 @@ export const technologyGroups: Array<{
       { name: "R", icon: "/images/tech/r.svg" },
       { name: "Node.js", icon: "/images/tech/nodejs.svg" },
       { name: "React", icon: "/images/tech/react.svg" },
+      { name: "React Native", icon: "/images/tech/reactnative.svg" },
+      { name: "Expo", icon: "/images/tech/expo.svg", monochrome: true },
       { name: "Svelte", icon: "/images/tech/svelte.svg" },
       { name: "Next.js", icon: "/images/tech/nextdotjs.svg", monochrome: true },
       { name: "Nextra", icon: "/images/tech/nextra.svg", monochrome: true },
