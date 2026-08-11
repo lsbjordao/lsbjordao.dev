@@ -18,6 +18,7 @@ import {
   heroImage,
   key as determinationKey,
   languages,
+  lulcHabitatShowcase,
   mapbiomasAward,
   profile,
   projects,
@@ -1025,6 +1026,71 @@ export default function Portfolio({ lang }: { lang: Lang }) {
               </div>
             </div>
           </aside>
+        </section>
+
+        <section className="lulc-feature section" id="lulc-habitat">
+          <div className="section-index">{c.lulcHabitat.index}</div>
+
+          <header className="lulc-feature__header" data-reveal>
+            <div>
+              <p className="eyebrow">{c.lulcHabitat.eyebrow}</p>
+              <h2>
+                {c.lulcHabitat.heading.line1}
+                <br />
+                <em>{c.lulcHabitat.heading.emphasis}</em>
+              </h2>
+            </div>
+            <div className="lulc-feature__abstract">
+              <span className="lulc-feature__status">{c.lulcHabitat.status}</span>
+              <p>{c.lulcHabitat.lead}</p>
+            </div>
+          </header>
+
+          <div className="lulc-feature__capabilities" data-reveal>
+            {c.lulcHabitat.features.map((feature) => (
+              <article key={feature.number}>
+                <span>{feature.number}</span>
+                <h3>{feature.title}</h3>
+                <p>{feature.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="lulc-feature__gallery" data-reveal>
+            <p className="lulc-feature__dev-note">{c.lulcHabitat.devNote}</p>
+            <div className="lulc-feature__screens">
+              {lulcHabitatShowcase.screens.map((screen, index) => {
+                const screenCopy = c.lulcHabitat.screens[screen.id];
+
+                return (
+                  <figure
+                    className={index === 0 ? "lulc-screen lulc-screen--primary" : "lulc-screen"}
+                    key={screen.id}
+                  >
+                    <div className="lulc-screen__media">
+                      <Image
+                        src={screen.image}
+                        alt={screenCopy.alt}
+                        fill
+                        sizes={
+                          index === 0
+                            ? "(max-width: 820px) 100vw, 92vw"
+                            : "(max-width: 820px) 100vw, 46vw"
+                        }
+                      />
+                    </div>
+                    <figcaption>
+                      <span>{String(index + 1).padStart(2, "0")} / 03</span>
+                      <strong>{screenCopy.title}</strong>
+                      {screen.devMode && (
+                        <small className="lulc-screen__dev-mode">{c.lulcHabitat.devMode}</small>
+                      )}
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
         <section className="work section" id="projetos" data-register="prancha">

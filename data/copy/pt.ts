@@ -452,6 +452,57 @@ export const pt = {
     },
   },
 
+  lulcHabitat: {
+    index: "02.1 / MENÇÃO ESPECIAL",
+    eyebrow: "LULC Habitat · aplicação colaborativa",
+    heading: {
+      line1: "Um sistema pronto para",
+      emphasis: "evoluir em colaboração.",
+    },
+    status: "DESENVOLVIDO · EM STAND-BY",
+    lead:
+      "O aplicativo está funcional e publicado. Está em stand-by porque sua próxima etapa deve ser construída junto aos colaboradores que irão usá-lo, incorporando o fluxo real de validação e governança dos dados.",
+    devNote:
+      "As telas de painel e marcação preservam o badge DEV MODE do ambiente em que foram registradas.",
+    features: [
+      {
+        number: "01",
+        title: "Atualização em tempo real",
+        text: "Canais do Supabase Realtime sobre WebSocket sincronizam marcações, status, divergências e atribuições entre sessões abertas.",
+      },
+      {
+        number: "02",
+        title: "Preenchimento pelo teclado",
+        text: "Um modo dedicado permite navegar por classes e campos com setas, Enter, espaço e atalhos, agilizando a marcação sem depender do mouse.",
+      },
+      {
+        number: "03",
+        title: "Revisão por pares",
+        text: "Marcações podem ser verificadas e revisadas por colaboradores, criando um caminho explícito para convergir ao melhor dado com autoria e histórico.",
+      },
+      {
+        number: "04",
+        title: "Conflitos sem perda de dados",
+        text: "Uma divergência vira uma proposta comentada; o dado vigente permanece preservado até o colaborador responsável aceitar ou rejeitar a mudança.",
+      },
+    ],
+    screens: {
+      auth: {
+        title: "Autenticação e recuperação de acesso",
+        alt: "Tela de autenticação do LULC Habitat com login, cadastro e recuperação de senha",
+      },
+      dashboard: {
+        title: "Painel colaborativo e auditável",
+        alt: "Painel do LULC Habitat em modo de desenvolvimento com progresso, atribuições e resultados por colaborador",
+      },
+      annotation: {
+        title: "Marcação e revisão de habitat",
+        alt: "Tela do LULC Habitat em modo de desenvolvimento para marcar e revisar classes MapBiomas por espécie",
+      },
+    },
+    devMode: "DEV MODE",
+  },
+
   work: {
     index: "03 / TRABALHO SELECIONADO",
     heading: { line1: "Projetos que fazem", line2: "o conhecimento ", emphasis: "circular." },
@@ -494,6 +545,13 @@ export const pt = {
           "Séries históricas de cobertura e uso do solo convertidas em evidências quantitativas para avaliações do risco de extinção.",
         imageAlt:
           "Gráficos de cobertura natural e uso alternativo do solo para Leguminosae",
+      },
+      lulcHabitat: {
+        title: "LULC Habitat",
+        kicker: "Acesso colaborativo seguro",
+        description:
+          "Aplicação web colaborativa com login, verificação e autorização de usuários, sessões baseadas em JWT, recuperação de senha e e-mails transacionais automatizados com Supabase Auth, Resend e SMTP.",
+        imageAlt: "Identidade visual do projeto LULC Habitat",
       },
       ffb: {
         title: "FFB Cronologia",
@@ -751,7 +809,7 @@ export const pt = {
       languages: "Linguagens & interfaces",
       dataPipelines: "Dados & pipelines",
       knowledge: "Conhecimento & semântica",
-      infrastructure: "Infraestrutura & cloud",
+      infrastructure: "Infraestrutura, cloud & acesso",
       publishing: "Publicação & métodos",
     },
     skills: {
@@ -781,7 +839,7 @@ export const pt = {
             "APIs REST e GraphQL com NestJS",
             "Componentização em React e Svelte",
             "Modelagem e evolução de esquema",
-            "Autenticação, autorização e auditoria",
+            "Segurança de aplicações web — autenticação e autorização, JWT, sessões, recuperação de senha e e-mails transacionais com Supabase Auth e Resend (LULC-Habitat)",
             "Renderização estática, SSR e performance",
             "Testes automatizados e revisão de código",
           ],

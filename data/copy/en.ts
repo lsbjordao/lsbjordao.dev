@@ -424,6 +424,57 @@ export const en: Copy = {
     },
   },
 
+  lulcHabitat: {
+    index: "02.1 / SPECIAL MENTION",
+    eyebrow: "LULC Habitat · collaborative application",
+    heading: {
+      line1: "A system ready to",
+      emphasis: "evolve through collaboration.",
+    },
+    status: "BUILT · ON STANDBY",
+    lead:
+      "The application is functional and published. It is on standby because its next stage should be built together with the collaborators who will use it, incorporating the real data-validation and governance workflow.",
+    devNote:
+      "The dashboard and annotation screens retain the DEV MODE badge from the environment in which they were captured.",
+    features: [
+      {
+        number: "01",
+        title: "Real-time updates",
+        text: "Supabase Realtime channels over WebSocket synchronise annotations, statuses, divergences, and assignments across open sessions.",
+      },
+      {
+        number: "02",
+        title: "Keyboard-driven entry",
+        text: "A dedicated mode lets users navigate classes and fields with arrows, Enter, Space, and shortcuts, speeding up annotation without relying on a mouse.",
+      },
+      {
+        number: "03",
+        title: "Peer review",
+        text: "Annotations can be checked and reviewed by collaborators, creating an explicit path towards the best data with authorship and history.",
+      },
+      {
+        number: "04",
+        title: "Conflicts without data loss",
+        text: "A divergence becomes a commented proposal; the current data remains preserved until the responsible collaborator accepts or rejects the change.",
+      },
+    ],
+    screens: {
+      auth: {
+        title: "Authentication and access recovery",
+        alt: "LULC Habitat authentication screen with login, sign-up, and password recovery",
+      },
+      dashboard: {
+        title: "Collaborative, auditable dashboard",
+        alt: "LULC Habitat dashboard in development mode with progress, assignments, and results by collaborator",
+      },
+      annotation: {
+        title: "Habitat annotation and review",
+        alt: "LULC Habitat screen in development mode for annotating and reviewing MapBiomas classes by species",
+      },
+    },
+    devMode: "DEV MODE",
+  },
+
   work: {
     index: "03 / SELECTED WORK",
     heading: { line1: "Projects that keep", line2: "knowledge ", emphasis: "in circulation." },
@@ -466,6 +517,13 @@ export const en: Copy = {
           "Land-cover and land-use time series converted into quantitative evidence for extinction-risk assessments.",
         imageAlt:
           "Charts of natural cover and alternative land use for Leguminosae",
+      },
+      lulcHabitat: {
+        title: "LULC Habitat",
+        kicker: "Secure collaborative access",
+        description:
+          "Collaborative web application with login, user verification and authorisation, JWT-based sessions, password recovery, and automated transactional email with Supabase Auth, Resend, and SMTP.",
+        imageAlt: "Visual identity of the LULC Habitat project",
       },
       ffb: {
         title: "FFB Chronology",
@@ -716,7 +774,7 @@ export const en: Copy = {
       languages: "Languages & interfaces",
       dataPipelines: "Data & pipelines",
       knowledge: "Knowledge & semantics",
-      infrastructure: "Infrastructure & cloud",
+      infrastructure: "Infrastructure, cloud & access",
       publishing: "Publishing & methods",
     },
     skills: {
@@ -746,7 +804,7 @@ export const en: Copy = {
             "REST and GraphQL APIs with NestJS",
             "Componentisation in React and Svelte",
             "Schema modelling and migration",
-            "Authentication, authorisation and audit trails",
+            "Web application security — authentication and authorisation, JWT, sessions, password recovery, and transactional email with Supabase Auth and Resend (LULC-Habitat)",
             "Static rendering, SSR and performance",
             "Automated testing and code review",
           ],

@@ -109,6 +109,9 @@ export const tracks: Array<{
       "REST",
       "PostgreSQL/PostGIS",
       "MongoDB",
+      "Supabase Auth",
+      "JWT",
+      "Resend / SMTP",
       "Backstage",
       "Sphinx-Needs",
       "Docker",
@@ -189,6 +192,7 @@ export type ProjectId =
   | "ttsMimosa"
   | "ttsMimosaDocs"
   | "lulc"
+  | "lulcHabitat"
   | "ffb"
   | "curva"
   | "quartoWriting"
@@ -267,8 +271,17 @@ export const projects: Array<{
     fit: "contain",
   },
   {
-    id: "ffb",
+    id: "lulcHabitat",
     number: "05",
+    image: "/images/lulc-habitat-auth.webp",
+    href: "https://lulc-habitat.lsbjordao.dev",
+    category: "software",
+    tags: ["Supabase Auth", "JWT", "Resend", "SMTP"],
+    fit: "contain",
+  },
+  {
+    id: "ffb",
+    number: "06",
     image: "/images/ffb-cronologia.webp",
     href: "https://lsbjordao-ffb-cronologia.hf.space/#/ranking",
     category: "software",
@@ -289,7 +302,7 @@ export const projects: Array<{
   },
   {
     id: "curva",
-    number: "06",
+    number: "07",
     image: "/images/curva-calculadora.webp",
     href: "https://lsbjordao.github.io/Calculadora-Curva/",
     category: "software",
@@ -305,7 +318,7 @@ export const projects: Array<{
   },
   {
     id: "quartoWriting",
-    number: "07",
+    number: "08",
     image: "/images/quarto-writing.webp",
     href: "https://github.com/lsbjordao/quarto-scientific-writing",
     category: "openScience",
@@ -314,7 +327,7 @@ export const projects: Array<{
   },
   {
     id: "quartoFocus",
-    number: "08",
+    number: "09",
     image: "/images/quarto-focus.webp",
     href: "https://github.com/lsbjordao/quarto-focus-mode",
     category: "openScience",
@@ -323,7 +336,7 @@ export const projects: Array<{
   },
   {
     id: "quartoConditional",
-    number: "09",
+    number: "10",
     image: "/images/quarto-conditional-vars.webp",
     href: "https://lsbjordao.github.io/quarto-conditional-vars/",
     category: "openScience",
@@ -332,7 +345,7 @@ export const projects: Array<{
   },
   {
     id: "quartoCiteThis",
-    number: "10",
+    number: "11",
     image: "/images/quarto-cite-this.webp",
     href: "https://lsbjordao.github.io/quarto-cite-this/",
     category: "openScience",
@@ -340,6 +353,26 @@ export const projects: Array<{
     fit: "contain",
   },
 ];
+
+export const lulcHabitatShowcase = {
+  screens: [
+    {
+      id: "auth",
+      image: "/images/lulc-habitat-auth.webp",
+      devMode: false,
+    },
+    {
+      id: "dashboard",
+      image: "/images/lulc-habitat-1.webp",
+      devMode: true,
+    },
+    {
+      id: "annotation",
+      image: "/images/lulc-habitat-2.webp",
+      devMode: true,
+    },
+  ],
+} as const;
 
 export type SystemId = "tracking" | "bull" | "avalia" | "legacy";
 
@@ -497,6 +530,10 @@ export const technologyGroups: Array<{
       { name: "Google Cloud", icon: "/images/tech/googlecloud.svg", monochrome: true },
       { name: "AWS", icon: "/images/tech/amazonwebservices.svg", monochrome: true },
       { name: "Azure", icon: "/images/tech/microsoftazure.svg", monochrome: true },
+      { name: "Supabase Auth", icon: "/images/tech/supabase.svg" },
+      { name: "JWT", icon: "/images/tech/jsonwebtokens.svg", monochrome: true },
+      { name: "Resend", icon: "/images/tech/resend.svg", monochrome: true },
+      { name: "SMTP", icon: "/images/tech/smtp.svg", monochrome: true },
     ],
   },
   {
