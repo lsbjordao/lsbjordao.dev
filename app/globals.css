@@ -185,9 +185,11 @@ a {
   color: rgba(255, 255, 255, 0.56);
   font-size: 0.59rem;
   letter-spacing: 0.08em;
+  line-height: 1.35;
   text-transform: uppercase;
-  /* Quebrar aqui empurraria a altura do cabeçalho e desalinharia o menu. */
-  white-space: nowrap;
+  /* A quebra editorial separa posicionamento e produto sem deixar o navegador
+     criar uma terceira linha em pontos imprevisíveis. */
+  white-space: pre;
 }
 
 .nav {
@@ -6203,10 +6205,10 @@ footer > p {
 /* ── Responsivo das seções novas ─────────────────────────────────────────
    Declarado depois dos breakpoints originais para vencer no cascade sem
    editá-los em três lugares. */
-/* Entre ~1100px e ~1250px a legenda do cabeçalho encosta no menu (a coluna do
-   meio é `auto` e come a folga). Some com ela nessa faixa; o eyebrow da hero,
-   logo abaixo, carrega a lista completa de qualquer modo. */
-@media (max-width: 1250px) {
+/* Abaixo desta largura, até as duas linhas editoriais encostariam no menu (a
+   coluna do meio é `auto` e come a folga). Some com a legenda; o eyebrow da
+   hero continua visível com o posicionamento em negócio e produto. */
+@media (max-width: 1300px) {
   .brand__meta small {
     display: none;
   }

@@ -59,11 +59,12 @@ export const en: Copy = {
     mobileAvailability: "Open to opportunities",
     status: "Open to opportunities",
     statusHref: "#contato",
-    brandTagline: "Data science and engineering · Full stack · Botany",
+    brandTagline:
+      "Solution engineering\nData · software · biodiversity",
   },
 
   hero: {
-    eyebrow: "Data engineering · Full stack · Geospatial · Data science · Botany",
+    eyebrow: "Business analyst · Product discovery and engineering · Biodiversity conservation",
     headline: { line1: "Botany", line2: "at the scale of", line3: "systems." },
     intro:
       "I'm Lucas S.B. Jordão, MSc and PhD in Botany. I spent twenty years learning how knowledge about plants is produced, and six building the infrastructure that turns it into decisions — pipelines, applications and geospatial analysis for Brazil's plant extinction-risk assessments.",

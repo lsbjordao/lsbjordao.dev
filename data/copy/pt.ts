@@ -68,14 +68,14 @@ export const pt = {
     mobileAvailability: "Disponível para propostas",
     status: "Disponível para propostas",
     statusHref: "#contato",
-    /** Legenda do cabeçalho — curta o bastante para caber em uma linha ao lado
-        do menu. A lista completa fica no eyebrow da hero. */
-    brandTagline: "Ciência e engenharia de dados · Full stack · Botânica",
+    /** Competência agregadora e domínios em duas linhas; as competências de
+        negócio e produto ficam no eyebrow para as mensagens se complementarem. */
+    brandTagline:
+      "Engenharia de soluções tecnológicas\nDados · software · biodiversidade",
   },
 
   hero: {
-    eyebrow:
-      "Engenharia de dados · Full stack · Geoespacial · Ciência de dados · Botânica",
+    eyebrow: "Analista de negócios · Descoberta e engenharia de produto · Conservação da biodiversidade",
     headline: { line1: "Botânica", line2: "em escala de", line3: "sistemas." },
     intro:
       "Sou Lucas S.B. Jordão, mestre e doutor em Botânica. Passei vinte anos aprendendo como o conhecimento sobre plantas é produzido e seis construindo a infraestrutura que o transforma em decisão — pipelines, aplicações e análise geoespacial para a avaliação do risco de extinção da flora brasileira.",
