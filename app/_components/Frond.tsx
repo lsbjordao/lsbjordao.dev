@@ -12,26 +12,14 @@
  * diferente a cada visita.
  */
 
+import { pseudoRandom } from "../_3d/random";
+
 const VIEW_W = 900;
 const VIEW_H = 700;
 
 /** Comprimento da ráquis e número de pinas de uma folha. */
 const RAQUIS = 300;
 const PINNAE = 9;
-
-/** Hash puro: mesmos números de entrada sempre produzem a mesma saída, sem
-    estado compartilhado entre chamadas — ao contrário de um gerador
-    sequencial, não se desalinha se o React invocar o render mais de uma vez. */
-function pseudoRandom(...parts: number[]) {
-  let h = 0x9e3779b9;
-  for (const part of parts) {
-    h = Math.imul(h ^ part, 2654435761);
-    h = (h << 13) | (h >>> 19);
-  }
-  h = Math.imul(h ^ (h >>> 16), 2246822519);
-  h ^= h >>> 13;
-  return (h >>> 0) / 0xffffffff;
-}
 
 type FrondSpec = {
   x: number;
