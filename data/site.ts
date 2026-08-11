@@ -548,7 +548,7 @@ export const skillGroups: Array<{ id: SkillGroupId; code: string }> = [
   { id: "platform", code: "PLT–OPS" },
   { id: "geo", code: "GEO–CON" },
   { id: "analysis", code: "ANA–DEC" },
-  { id: "product", code: "PRD–AGL" },
+  { id: "product", code: "SOL–ENG" },
 ];
 
 export type PackageId =
