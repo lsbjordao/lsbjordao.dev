@@ -16,6 +16,17 @@ export const en: Copy = {
     switchLabel: "Language",
   },
 
+  stage: {
+    label: "Scale",
+    scale: {
+      branch: "5 cm",
+      key: "",
+      trichome: "200 µm",
+      territory: "1000 km",
+      clade: "",
+    },
+  },
+
   a11y: {
     skipToContent: "Skip to content",
     brand: "LJ — Lucas Jordão, home",

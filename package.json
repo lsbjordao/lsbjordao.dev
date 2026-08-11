@@ -12,6 +12,7 @@
     "contributions": "node scripts/fetch-contributions.mjs",
     "cv": "node scripts/build-cv.mjs",
     "start": "next start",
+    "bundle": "node scripts/check-bundle.mjs",
     "test": "node --test \"app/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"
   },

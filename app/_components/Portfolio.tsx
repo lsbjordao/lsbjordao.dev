@@ -41,6 +41,7 @@ import ExperienceCarousel from "./ExperienceCarousel";
 import Frond from "./Frond";
 import Phenology from "./Phenology";
 import ScrollProgress from "./ScrollProgress";
+import Stage from "./Stage";
 import StatBoard from "./StatBoard";
 import Teaching from "./Teaching";
 
@@ -293,6 +294,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
       </a>
 
       <ScrollProgress />
+      <Stage lang={lang} />
 
       <header className="site-header">
         <a className="brand" href="#top" aria-label={c.a11y.brand}>
@@ -361,7 +363,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
       {/* O overlay do menu cobre a página, mas sem `inert` o conteúdo atrás
           continua tabulável e o foco some para links invisíveis. */}
       <main id="conteudo" inert={menuOpen}>
-        <section className="hero" id="top">
+        <section className="hero" id="top" data-register="lamina">
           <div className="hero__copy">
             <p className="eyebrow">{c.hero.eyebrow}</p>
             <h1>
@@ -453,7 +455,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
 
         <StatBoard lang={lang} />
 
-        <section className="manifesto section" id="manifesto">
+        <section className="manifesto section" id="manifesto" data-register="prancha">
           <div className="section-index">{c.manifesto.index}</div>
           <div className="manifesto__content" data-reveal>
             <p className="manifesto__lead">{c.manifesto.lead}</p>
@@ -471,7 +473,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
 
         {/* Signature element: the recruiter runs a dichotomous key — the
             taxonomist's own instrument — to determine which profile they need. */}
-        <section className="determination section section--dark" id="contratar">
+        <section className="determination section section--dark" id="contratar" data-register="lamina">
           <div className="determination__grain" />
           <div className="section-index section-index--light">{c.key.index}</div>
 
@@ -645,7 +647,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           )}
         </section>
 
-        <section className="research-feature" id="tricomas">
+        <section className="research-feature" id="tricomas" data-register="prancha">
           <div className="research-feature__media" data-reveal>
             <picture>
               <source
@@ -703,7 +705,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           </div>
         </section>
 
-        <section className="case section section--dark" id="cncflora">
+        <section className="case section section--dark" id="cncflora" data-register="lamina">
           <div className="case__grain" />
           <div className="section-index section-index--light">{c.case.index}</div>
 
@@ -1025,7 +1027,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           </aside>
         </section>
 
-        <section className="work section" id="projetos">
+        <section className="work section" id="projetos" data-register="prancha">
           <div className="section-index">{c.work.index}</div>
           <header className="work__header" data-reveal>
             <h2>
@@ -1234,7 +1236,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
 
         <Teaching lang={lang} />
 
-        <section className="technology-stack section" id="tecnologias">
+        <section className="technology-stack section" id="tecnologias" data-register="prancha">
           <div className="technology-stack__glow" aria-hidden="true" />
           <div className="section-index section-index--light">{c.technology.index}</div>
 
@@ -1356,12 +1358,12 @@ export default function Portfolio({ lang }: { lang: Lang }) {
 
         {/* A leitura filogenética da trajetória vem antes da leitura cronológica:
             ela é o argumento; a linha do tempo abaixo é o registro. */}
-        <section className="lineage section section--dark" id="linhagem">
+        <section className="lineage section section--dark" id="linhagem" data-register="lamina">
           <Frond />
           <Cladogram lang={lang} />
         </section>
 
-        <section className="trajectory section" id="trajetoria">
+        <section className="trajectory section" id="trajetoria" data-register="prancha">
           <ExperienceCarousel lang={lang} />
           <div className="trajectory__content">
             <div className="section-index">{c.trajectory.index}</div>
@@ -1440,7 +1442,7 @@ export default function Portfolio({ lang }: { lang: Lang }) {
 
         <CvGraph lang={lang} />
 
-        <section className="contact section" id="contato">
+        <section className="contact section" id="contato" data-register="prancha">
           <div className="contact__orbit contact__orbit--one" />
           <div className="contact__orbit contact__orbit--two" />
           <div className="section-index section-index--light">{c.contact.index}</div>

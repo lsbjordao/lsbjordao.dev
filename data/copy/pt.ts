@@ -16,6 +16,25 @@ export const pt = {
     switchLabel: "Idioma",
   },
 
+  /**
+   * Barra de escala da cena 3D. É ela que faz a sequência de atos ser argumento
+   * e não galeria — prancha de herbário tem barra de escala.
+   *
+   * String vazia é ato de estrutura abstrata: a chave e o cladograma não têm
+   * escala métrica, e ali a barra some em vez de mostrar um travessão que não
+   * quer dizer nada. Unidade do SI não se traduz; só o rótulo traduz.
+   */
+  stage: {
+    label: "Escala",
+    scale: {
+      branch: "5 cm",
+      key: "",
+      trichome: "200 µm",
+      territory: "1000 km",
+      clade: "",
+    },
+  },
+
   a11y: {
     skipToContent: "Pular para o conteúdo",
     brand: "LJ — Lucas Jordão, início",
