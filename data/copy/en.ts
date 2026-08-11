@@ -20,6 +20,7 @@ export const en: Copy = {
     label: "Scale",
     scale: {
       branch: "",
+      consulting: "",
       key: "",
       trichome: "200 µm",
       territory: "1000 km",
@@ -48,6 +49,7 @@ export const en: Copy = {
 
   nav: {
     contratar: "Skills",
+    metodo: "Method",
     cncflora: "Flora Conservation",
     projetos: "Projects",
     aulas: "Courses",
@@ -262,6 +264,91 @@ export const en: Copy = {
     },
   },
 
+  consulting: {
+    index: "02 / SOLUTION ENGINEERING",
+    eyebrow: "Consulting · from uncertainty to evidence",
+    heading: {
+      before: "From uncertainty",
+      emphasis: "to a defensible solution.",
+    },
+    intro:
+      "Good consulting does not begin with a framework. It begins with the decision that needs to be made — then builds enough evidence for product, architecture, investment and risk to make sense together.",
+    principleLabel: "Working principle",
+    principle:
+      "The first deliverable is not code: it is reducing the uncertainties that could make the code wrong.",
+    scene: {
+      label: "Living decision model",
+      input: "signals · hypotheses · constraints",
+      output: "product · architecture · plan",
+      uncertainty: "uncertainty",
+      evidence: "evidence",
+      live: "Three.js · real-time model",
+      hint: "Scroll through it or choose a stage",
+    },
+    steps: [
+      {
+        code: "01",
+        verb: "Frame",
+        title: "Which decision needs to be made?",
+        body:
+          "I align the problem, expected outcome, sponsor, users, institutional limits and what must be true for the investment to be worthwhile.",
+        artifact: "problem · outcomes · actors · boundaries",
+      },
+      {
+        code: "02",
+        verb: "Investigate",
+        title: "The real work, not the ideal process.",
+        body:
+          "I combine interviews, documents, data, observation and workshops to reveal rules, exceptions, dependencies and knowledge that still lives only in people's heads.",
+        artifact: "domain stories · journeys · data inventory",
+      },
+      {
+        code: "03",
+        verb: "Model",
+        title: "Name things before drawing screens.",
+        body:
+          "I organise language, domain, flows and verifiable requirements. Traceability links each decision to its need, evidence and acceptance criterion.",
+        artifact: "conceptual model · requirements · rules · traceability",
+      },
+      {
+        code: "04",
+        verb: "Decide",
+        title: "Options before architecture.",
+        body:
+          "I compare product cuts and technical alternatives by fit, maintainability, security, interoperability, total cost and reversibility.",
+        artifact: "MVP · scenarios · ADRs · evolutionary architecture",
+      },
+      {
+        code: "05",
+        verb: "Prove",
+        title: "An expensive doubt becomes a short experiment.",
+        body:
+          "Prototypes and spikes test adoption, data, integrations or technology before a fragile hypothesis becomes an expensive commitment.",
+        artifact: "prototype · spike · evidence · residual risk",
+      },
+      {
+        code: "06",
+        verb: "Evolve",
+        title: "Build with memory and feedback.",
+        body:
+          "Backlogs, tests, observability and versioned decisions keep understanding alive through delivery, operation and change — when new facts inevitably appear.",
+        artifact: "roadmap · criteria · operation · learning",
+      },
+    ],
+    outcome: {
+      label: "Discovery output",
+      title: "Enough confidence to invest — without pretending uncertainty reached zero.",
+      body:
+        "The result is an approvable product cut, priority requirements, minimum architecture, explicit risks and a build range grounded in visible assumptions.",
+      cards: [
+        { value: "01", label: "priority problem" },
+        { value: "MVP", label: "explicit boundary" },
+        { value: "≠ 0", label: "visible residual risk" },
+      ],
+      cta: "Talk about a discovery",
+    },
+  },
+
   research: {
     index: "FEATURED PUBLICATION / 2020",
     eyebrow: "Taxonomy · Comparative morphology",
@@ -284,7 +371,7 @@ export const en: Copy = {
   },
 
   case: {
-    index: "02 / CASE STUDY",
+    index: "03 / CASE STUDY",
     eyebrow: "CNCFlora · 2020—2026",
     heading: { line1: "Infrastructure for", line2: "", emphasis: "assessing a flora." },
     abstract:
@@ -425,7 +512,7 @@ export const en: Copy = {
   },
 
   lulcHabitat: {
-    index: "02.1 / SPECIAL MENTION",
+    index: "03.1 / SPECIAL MENTION",
     eyebrow: "LULC Habitat · collaborative application",
     heading: {
       line1: "A system ready to",
@@ -476,7 +563,7 @@ export const en: Copy = {
   },
 
   work: {
-    index: "03 / SELECTED WORK",
+    index: "04 / SELECTED WORK",
     heading: { line1: "Projects that keep", line2: "knowledge ", emphasis: "in circulation." },
     intro:
       "Software, data and publications built so scientific knowledge can be queried, tested and reused. Everything below is public and verifiable.",
@@ -615,7 +702,7 @@ export const en: Copy = {
   },
 
   teaching: {
-    index: "04 / TEACHING",
+    index: "05 / TEACHING",
 
     practice: {
       eyebrow: "Teaching · from primary school to graduate courses",
@@ -763,7 +850,7 @@ export const en: Copy = {
   },
 
   technology: {
-    index: "05 / TECHNOLOGY",
+    index: "06 / TECHNOLOGY",
     eyebrow: "From scientific writing to infrastructure",
     heading: { line1: "Technologies that run through", emphasis: "the work." },
     countLabel: "technologies & methods",
@@ -886,7 +973,7 @@ export const en: Copy = {
   },
 
   phenology: {
-    index: "06 / PHENOLOGY",
+    index: "07 / PHENOLOGY",
     eyebrow: "Working rhythm, 2023—2026",
     heading: { line1: "Phenology of a", emphasis: "living repository." },
     intro:
@@ -953,7 +1040,7 @@ export const en: Copy = {
   },
 
   trajectory: {
-    index: "07 / CAREER",
+    index: "08 / CAREER",
     heading: { line1: "From the specimen", line2: "to the ", emphasis: "infrastructure." },
     intro:
       "Before the pipelines came the trails, benches and collections. That is where I learned to observe rigorously, preserve context and turn scattered evidence into knowledge other people can use.",
@@ -1209,7 +1296,7 @@ export const en: Copy = {
   },
 
   cvGraph: {
-    index: "08 / CV AS A GRAPH",
+    index: "09 / CV AS A GRAPH",
     eyebrow: "Two lenses, the same graph",
     heading: { line1: "The CV", emphasis: "beyond the tree." },
     lead: "A CV usually organises a career as a tree: education, experience, skills and output sorted into categories. But a professional life is far more interconnected. Projects link technologies, methods, people, institutions and competencies. Representing these relations as a graph makes previously implicit knowledge visible, revealing new ways to explore, understand and discover a career.",
@@ -1233,7 +1320,7 @@ export const en: Copy = {
   },
 
   contact: {
-    index: "09 / CONTACT",
+    index: "10 / CONTACT",
     eyebrow: "Next chapter",
     heading: {
       line1: "Science and public management need",

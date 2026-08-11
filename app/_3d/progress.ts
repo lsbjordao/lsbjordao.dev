@@ -1,6 +1,6 @@
 import type { Register } from "./registers";
 
-export type ActId = "branch" | "key" | "trichome" | "territory" | "clade";
+export type ActId = "branch" | "consulting" | "key" | "trichome" | "territory" | "clade";
 
 /** Não se chama `Window`: sombrearia o global do DOM, que o diretor usa. */
 export type ActWindow = { id: ActId; top: number; height: number };

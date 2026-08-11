@@ -40,7 +40,7 @@ export function createDirector(canvas: HTMLCanvasElement, opts: DirectorOptions)
 
   let pointer: { x: number; y: number } | null = null;
 
-  const acts: Act[] = [];
+  const acts: Array<{ act: Act; root: ReturnType<Act["build"]> }> = [];
   const ctx: ActContext = {
     budget: { particles: opts.compact ? 2000 : 8000, segments: opts.compact ? 32 : 96 },
     pointer: () => pointer,
@@ -74,7 +74,7 @@ export function createDirector(canvas: HTMLCanvasElement, opts: DirectorOptions)
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
-    windows = acts.flatMap((act) => {
+    windows = acts.flatMap(({ act }) => {
       const el = document.querySelector(act.anchor);
       if (!el) return [];
       const rect = el.getBoundingClientRect();
@@ -113,13 +113,22 @@ export function createDirector(canvas: HTMLCanvasElement, opts: DirectorOptions)
 
     // Na travessia o ato anterior continua em quadro, retintado: é o que faz
     // "a mesma estrutura, dois modos de ver" acontecer de fato.
-    const emQuadro = acts.find((a) => a.id === (inFrameId ?? acts[0]?.id));
+    const emQuadro = acts.find(({ act }) => act.id === (inFrameId ?? acts[0]?.act.id));
+
+    // Cada ato é uma raiz independente. Esconder as demais é indispensável
+    // assim que existe mais de uma geometria na mesma Scene: o diretor atualiza
+    // somente o ato em quadro, então não pode depender de `update()` para
+    // desligar os anteriores.
+    acts.forEach(({ root }) => {
+      root.visible = false;
+    });
 
     if (emQuadro) {
+      emQuadro.root.visible = true;
       const progress = active?.progress ?? 1;
-      emQuadro.update(t, progress, uniforms);
+      emQuadro.act.update(t, progress, uniforms);
 
-      const station = emQuadro.station(progress);
+      const station = emQuadro.act.station(progress);
       const molas = [cam.pos, cam.tgt] as const;
       const alvos = [station.position, station.target] as const;
       for (let s = 0; s < 2; s += 1) {
@@ -144,7 +153,7 @@ export function createDirector(canvas: HTMLCanvasElement, opts: DirectorOptions)
     if (emQuadro) {
       // Um ato pode pedir para ser recortado no rect de um elemento. A origem
       // do scissor é embaixo à esquerda; a do getBoundingClientRect, em cima.
-      const clip = emQuadro.frame?.();
+      const clip = emQuadro.act.frame?.();
       if (clip) {
         const r = clip.getBoundingClientRect();
         const y = window.innerHeight - r.bottom;
@@ -208,8 +217,10 @@ export function createDirector(canvas: HTMLCanvasElement, opts: DirectorOptions)
   return {
     /** Registra um ato. Chamado antes do primeiro frame útil. */
     add(act: Act) {
-      acts.push(act);
-      scene.add(act.build(ctx));
+      const root = act.build(ctx);
+      root.visible = false;
+      acts.push({ act, root });
+      scene.add(root);
       measure();
       schedule();
     },
@@ -221,7 +232,10 @@ export function createDirector(canvas: HTMLCanvasElement, opts: DirectorOptions)
       window.removeEventListener("pointermove", onPointer);
       document.removeEventListener("visibilitychange", onVisibility);
       canvas.removeEventListener("webglcontextlost", onLost);
-      for (const act of acts) act.dispose();
+      for (const mounted of acts) {
+        scene.remove(mounted.root);
+        mounted.act.dispose();
+      }
       renderer.dispose();
     },
   };

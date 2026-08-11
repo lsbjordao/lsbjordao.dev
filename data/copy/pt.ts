@@ -28,6 +28,7 @@ export const pt = {
     label: "Escala",
     scale: {
       branch: "",
+      consulting: "",
       key: "",
       trichome: "200 µm",
       territory: "1000 km",
@@ -57,6 +58,7 @@ export const pt = {
 
   nav: {
     contratar: "Habilidades",
+    metodo: "Método",
     cncflora: "Conservação da Flora",
     projetos: "Projetos",
     aulas: "Aulas",
@@ -288,6 +290,91 @@ export const pt = {
     },
   },
 
+  consulting: {
+    index: "02 / ENGENHARIA DA SOLUÇÃO",
+    eyebrow: "Consultoria · da incerteza à evidência",
+    heading: {
+      before: "Da pergunta incerta",
+      emphasis: "à solução defensável.",
+    },
+    intro:
+      "Uma boa consultoria não começa pelo framework. Começa pela decisão que precisa ser tomada — e constrói evidência suficiente para que produto, arquitetura, investimento e risco façam sentido juntos.",
+    principleLabel: "Princípio de trabalho",
+    principle:
+      "A primeira entrega não é código: é reduzir as incertezas que poderiam tornar o código errado.",
+    scene: {
+      label: "Modelo vivo de decisão",
+      input: "sinais · hipóteses · restrições",
+      output: "produto · arquitetura · plano",
+      uncertainty: "incerteza",
+      evidence: "evidência",
+      live: "Three.js · modelo em tempo real",
+      hint: "Role para percorrer ou escolha uma etapa",
+    },
+    steps: [
+      {
+        code: "01",
+        verb: "Enquadrar",
+        title: "Qual decisão precisa ser tomada?",
+        body:
+          "Alinho problema, resultado esperado, patrocinador, usuários, limites institucionais e o que precisa ser verdade para valer a pena investir.",
+        artifact: "problema · resultados · atores · fronteiras",
+      },
+      {
+        code: "02",
+        verb: "Investigar",
+        title: "O trabalho real, não o processo ideal.",
+        body:
+          "Combino entrevistas, documentos, dados, observação e oficinas para revelar regras, exceções, dependências e conhecimento que ainda vive apenas nas pessoas.",
+        artifact: "histórias de domínio · jornadas · inventário de dados",
+      },
+      {
+        code: "03",
+        verb: "Modelar",
+        title: "Dar nomes antes de dar telas.",
+        body:
+          "Organizo linguagem, domínio, fluxos e requisitos verificáveis. A rastreabilidade liga cada decisão à necessidade, à evidência e ao critério de aceite.",
+        artifact: "modelo conceitual · requisitos · regras · rastreabilidade",
+      },
+      {
+        code: "04",
+        verb: "Decidir",
+        title: "Opções antes da arquitetura.",
+        body:
+          "Comparo recortes de produto e alternativas técnicas por adequação, manutenção, segurança, interoperabilidade, custo total e reversibilidade.",
+        artifact: "MVP · cenários · ADRs · arquitetura evolutiva",
+      },
+      {
+        code: "05",
+        verb: "Provar",
+        title: "A dúvida cara vira experimento curto.",
+        body:
+          "Protótipos e spikes testam a adoção, os dados, a integração ou a tecnologia antes que uma hipótese frágil se transforme em compromisso caro.",
+        artifact: "protótipo · spike · evidência · risco residual",
+      },
+      {
+        code: "06",
+        verb: "Evoluir",
+        title: "Construir com memória e feedback.",
+        body:
+          "Backlog, testes, observabilidade e decisões versionadas mantêm o entendimento vivo durante entrega, operação e mudança — quando novos fatos inevitavelmente aparecem.",
+        artifact: "roadmap · critérios · operação · aprendizado",
+      },
+    ],
+    outcome: {
+      label: "Saída da descoberta",
+      title: "Confiança suficiente para investir — sem fingir que a incerteza zerou.",
+      body:
+        "O resultado é um recorte de produto aprovável, requisitos prioritários, arquitetura mínima, riscos explícitos e uma faixa de construção baseada em premissas visíveis.",
+      cards: [
+        { value: "01", label: "problema prioritário" },
+        { value: "MVP", label: "fronteira explícita" },
+        { value: "≠ 0", label: "risco residual visível" },
+      ],
+      cta: "Conversar sobre uma descoberta",
+    },
+  },
+
   research: {
     index: "PUBLICAÇÃO EM DESTAQUE / 2020",
     eyebrow: "Taxonomia · Morfologia comparada",
@@ -310,7 +397,7 @@ export const pt = {
   },
 
   case: {
-    index: "02 / ESTUDO DE CASO",
+    index: "03 / ESTUDO DE CASO",
     eyebrow: "CNCFlora · 2020—2026",
     heading: { line1: "Uma infraestrutura", line2: "para ", emphasis: "avaliar a flora." },
     abstract:
@@ -453,7 +540,7 @@ export const pt = {
   },
 
   lulcHabitat: {
-    index: "02.1 / MENÇÃO ESPECIAL",
+    index: "03.1 / MENÇÃO ESPECIAL",
     eyebrow: "LULC Habitat · aplicação colaborativa",
     heading: {
       line1: "Um sistema pronto para",
@@ -504,7 +591,7 @@ export const pt = {
   },
 
   work: {
-    index: "03 / TRABALHO SELECIONADO",
+    index: "04 / TRABALHO SELECIONADO",
     heading: { line1: "Projetos que fazem", line2: "o conhecimento ", emphasis: "circular." },
     intro:
       "Software, dados e publicações concebidos para que conhecimento científico possa ser consultado, testado e reutilizado. Tudo abaixo é público e verificável.",
@@ -644,7 +731,7 @@ export const pt = {
   },
 
   teaching: {
-    index: "04 / DOCÊNCIA",
+    index: "05 / DOCÊNCIA",
 
     /* Dar aula é a parte mais antiga da minha trajetória e a que menos aparece
        num portfólio de engenharia — por isso vem antes da estante de apostilas. */
@@ -798,7 +885,7 @@ export const pt = {
   },
 
   technology: {
-    index: "05 / TECNOLOGIAS",
+    index: "06 / TECNOLOGIAS",
     eyebrow: "Da escrita científica à infraestrutura",
     heading: { line1: "Tecnologias que atravessam", emphasis: "o trabalho." },
     countLabel: "tecnologias & métodos",
@@ -921,7 +1008,7 @@ export const pt = {
   },
 
   phenology: {
-    index: "06 / FENOLOGIA",
+    index: "07 / FENOLOGIA",
     eyebrow: "Ritmo de trabalho, 2023—2026",
     heading: { line1: "Fenologia de um", emphasis: "repositório vivo." },
     intro:
@@ -990,7 +1077,7 @@ export const pt = {
   },
 
   trajectory: {
-    index: "07 / TRAJETÓRIA",
+    index: "08 / TRAJETÓRIA",
     heading: { line1: "Do espécime", line2: "à ", emphasis: "infraestrutura." },
     intro:
       "Antes dos pipelines, vieram as trilhas, as bancadas e as coleções. Foi ali que aprendi a observar com rigor, registrar contexto e transformar evidência dispersa em conhecimento que outras pessoas conseguem usar.",
@@ -1246,7 +1333,7 @@ export const pt = {
   },
 
   cvGraph: {
-    index: "08 / CURRÍCULO EM GRAFO",
+    index: "09 / CURRÍCULO EM GRAFO",
     eyebrow: "Duas lentes, o mesmo grafo",
     heading: { line1: "O currículo", emphasis: "além da árvore." },
     lead: "Um currículo costuma organizar a trajetória profissional como uma árvore: formação, experiências, habilidades e produções distribuídas em categorias. Mas uma vida profissional é muito mais interligada. Projetos conectam tecnologias, métodos, pessoas, instituições e competências. Ao representar essas relações como um grafo, conhecimentos antes implícitos tornam-se visíveis, revelando novas formas de explorar, compreender e descobrir uma trajetória.",
@@ -1270,7 +1357,7 @@ export const pt = {
   },
 
   contact: {
-    index: "09 / CONTATO",
+    index: "10 / CONTATO",
     eyebrow: "Próximo capítulo",
     heading: {
       line1: "A ciência e a gestão precisam de",

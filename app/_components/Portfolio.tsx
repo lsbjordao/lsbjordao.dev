@@ -42,6 +42,7 @@ import ExperienceCarousel from "./ExperienceCarousel";
 import Frond from "./Frond";
 import Phenology from "./Phenology";
 import ScrollProgress from "./ScrollProgress";
+import SolutionConsulting from "./SolutionConsulting";
 import Stage from "./Stage";
 import StatBoard from "./StatBoard";
 import Teaching from "./Teaching";
@@ -309,6 +310,9 @@ export default function Portfolio({ lang }: { lang: Lang }) {
         <nav className={menuOpen ? "nav nav--open" : "nav"} aria-label={c.a11y.mainNav}>
           <a href="#contratar" onClick={closeMenu}>
             {c.nav.contratar}
+          </a>
+          <a href="#metodo" onClick={closeMenu}>
+            {c.nav.metodo}
           </a>
           <a href="#cncflora" onClick={closeMenu}>
             {c.nav.cncflora}
@@ -647,6 +651,8 @@ export default function Portfolio({ lang }: { lang: Lang }) {
             </div>
           )}
         </section>
+
+        <SolutionConsulting lang={lang} />
 
         <section className="research-feature" id="tricomas" data-register="prancha">
           <div className="research-feature__media" data-reveal>

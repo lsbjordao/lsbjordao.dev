@@ -35,13 +35,15 @@ export default function Stage({ lang }: { lang: Lang }) {
 
     const boot = async () => {
       try {
-        const [{ createDirector }, { createBranchAct }] = await Promise.all([
+        const [{ createDirector }, { createBranchAct }, { createConsultingAct }] = await Promise.all([
           import("../_3d/director"),
           import("../_3d/acts/branch"),
+          import("../_3d/acts/consulting"),
         ]);
         if (cancelled) return;
         const d = createDirector(canvas, { onAct: setAct, reducedMotion, compact });
         d.add(createBranchAct());
+        d.add(createConsultingAct());
         director = d;
       } catch {
         // Contexto que não sobe não é erro do visitante: a página inteira
