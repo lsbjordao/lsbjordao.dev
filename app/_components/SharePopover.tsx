@@ -10,10 +10,12 @@ type SharePopoverProps = {
   url: string;
   labels: ShareLabels;
   onClose: () => void;
-  buttonPos?: { top: number; left: number } | null;
+  buttonPos?: { top: number; left: number; right: number } | null;
 };
 
 type NetworkKey = "x" | "facebook" | "linkedin" | "whatsapp" | "telegram";
+
+const POPOVER_GAP = 8;
 
 /**
  * Share sheet rendered INSIDE the phone screen (so the screen's `overflow:
@@ -147,10 +149,11 @@ export default function SharePopover({
         aria-label={labels.title}
         style={{
           position: "absolute",
-          top: buttonPos ? `${buttonPos.top}px` : "auto",
-          left: buttonPos ? `${buttonPos.left}px` : "50%",
-          transform: buttonPos ? "translateY(0.5rem)" : "translateX(-50%)",
+          top: buttonPos ? `${buttonPos.top + POPOVER_GAP}px` : "auto",
+          left: buttonPos ? "auto" : "50%",
+          right: buttonPos ? `${buttonPos.right}px` : "auto",
           bottom: buttonPos ? "auto" : "1rem",
+          transform: buttonPos ? "none" : "translateX(-50%)",
           zIndex: 10000,
         }}
       >

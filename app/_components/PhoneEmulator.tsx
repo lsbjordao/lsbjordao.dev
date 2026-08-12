@@ -218,6 +218,7 @@ export default function PhoneEmulator({
   const [shareButtonPos, setShareButtonPos] = useState<{
     top: number;
     left: number;
+    right: number;
   } | null>(null);
 
   useEffect(() => {
@@ -235,14 +236,19 @@ export default function PhoneEmulator({
       if (Date.now() - lastToggle < 350) return;
       lastToggle = Date.now();
 
-      // Calculate button position relative to iframe
+      // Calculate button position in iframe-viewport coordinates (the iframe
+      // fills the phone screen, so these are also the screen's local coords).
       const button = target?.closest('[aria-label="Compartilhar perfil"]');
       if (button) {
         const buttonRect = button.getBoundingClientRect();
-        const iframeRect = iframe.getBoundingClientRect();
+        // Coordinates relative to the iframe viewport; since the iframe fills
+        // the phone screen, these match the screen's own local coordinates.
+        const viewportWidth =
+          button.ownerDocument?.documentElement?.clientWidth ?? iframe.clientWidth;
         setShareButtonPos({
-          top: buttonRect.bottom - iframeRect.top,
-          left: buttonRect.left - iframeRect.left,
+          top: buttonRect.bottom,
+          left: buttonRect.left,
+          right: viewportWidth - buttonRect.right,
         });
       }
 
