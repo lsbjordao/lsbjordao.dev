@@ -1,5 +1,6 @@
 import { copy as allCopy } from "@/data/copy";
-import type { Lang } from "@/data/site";
+import { profile, type Lang } from "@/data/site";
+import PhoneEmulator from "./PhoneEmulator";
 
 const demoUrl = "/mobile-mvp/index.html";
 
@@ -18,6 +19,7 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 
 export default function MobileMvp({ lang }: { lang: Lang }) {
   const c = allCopy[lang].mobileMvp;
+  const shareUrl = `${profile.site}${lang === "en" ? "/en" : ""}/#mobile`;
 
   return (
     <section
@@ -68,20 +70,13 @@ export default function MobileMvp({ lang }: { lang: Lang }) {
             <span className="mobile-mvp__live">{c.liveLabel}</span>
           </div>
 
-          <div className="phone-emulator">
-            <span className="phone-emulator__button phone-emulator__button--volume" />
-            <span className="phone-emulator__button phone-emulator__button--power" />
-            <div className="phone-emulator__screen">
-              <span className="phone-emulator__camera" aria-hidden="true" />
-              <iframe
-                src={demoUrl}
-                title={c.frameTitle}
-                loading="lazy"
-                allow="clipboard-write; web-share"
-              />
-              <span className="phone-emulator__gesture" aria-hidden="true" />
-            </div>
-          </div>
+          <PhoneEmulator
+            demoUrl={demoUrl}
+            frameTitle={c.frameTitle}
+            controls={c.controls}
+            shareUrl={shareUrl}
+            share={c.share}
+          />
 
           <p className="mobile-mvp__hint">
             <span aria-hidden="true">↳</span>
