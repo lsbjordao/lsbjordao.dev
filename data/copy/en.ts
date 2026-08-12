@@ -52,6 +52,7 @@ export const en: Copy = {
     metodo: "Method",
     cncflora: "Flora Conservation",
     projetos: "Projects",
+    mobile: "Mobile",
     aulas: "Courses",
     trajetoria: "Career",
     cv: "CV",
@@ -671,6 +672,42 @@ export const en: Copy = {
     },
   },
 
+  mobileMvp: {
+    index: "05 / MOBILE DEVELOPMENT",
+    eyebrow: "React Native · Expo · Android & iOS",
+    heading: {
+      before: "An idea that fits",
+      emphasis: "in the palm of your hand.",
+    },
+    intro:
+      "This MVP turns my portfolio into a direct, tactile and portable mobile experience. The same TypeScript codebase serves Android, iOS and the web, while each platform keeps what feels native to it.",
+    openDemo: "Open full screen",
+    demoLabel: "Interactive build · browser",
+    liveLabel: "Live",
+    frameTitle: "Lucas S.B. Jordão's mobile MVP running in an Android emulator",
+    demoHint: "Scroll, tap and open links inside the device.",
+    stackLabel: "Built with",
+    stack: ["React Native", "Expo 54", "TypeScript", "Native APIs", "Responsive UI"],
+    status: "MVP · in development",
+    principles: [
+      {
+        title: "One codebase, two platforms",
+        body:
+          "Shared components and business rules for Android and iOS mean less duplication and faster product iteration.",
+      },
+      {
+        title: "Interaction that feels native",
+        body:
+          "System sharing, haptic feedback, safe areas and gestures are part of the architecture from the first prototype.",
+      },
+      {
+        title: "From prototype to delivery",
+        body:
+          "Responsive layout, bundled fonts, accessibility and verifiable builds make the MVP ready to learn from real use.",
+      },
+    ],
+  },
+
   patents: {
     meta: "REC–01 / INTERDISCIPLINARY INFRASTRUCTURE",
     verified: "VERIFIED",
@@ -702,7 +739,7 @@ export const en: Copy = {
   },
 
   teaching: {
-    index: "05 / TEACHING",
+    index: "06 / TEACHING",
 
     practice: {
       eyebrow: "Teaching · from primary school to graduate courses",
@@ -850,7 +887,7 @@ export const en: Copy = {
   },
 
   technology: {
-    index: "06 / TECHNOLOGY",
+    index: "07 / TECHNOLOGY",
     eyebrow: "From scientific writing to infrastructure",
     heading: { line1: "Technologies that run through", emphasis: "the work." },
     countLabel: "technologies & methods",
@@ -973,7 +1010,7 @@ export const en: Copy = {
   },
 
   phenology: {
-    index: "07 / PHENOLOGY",
+    index: "08 / PHENOLOGY",
     eyebrow: "Working rhythm, 2023—2026",
     heading: { line1: "Phenology of a", emphasis: "living repository." },
     intro:
@@ -1040,7 +1077,7 @@ export const en: Copy = {
   },
 
   trajectory: {
-    index: "08 / CAREER",
+    index: "09 / CAREER",
     heading: { line1: "From the specimen", line2: "to the ", emphasis: "infrastructure." },
     intro:
       "Before the pipelines came the trails, benches and collections. That is where I learned to observe rigorously, preserve context and turn scattered evidence into knowledge other people can use.",
@@ -1296,7 +1333,7 @@ export const en: Copy = {
   },
 
   cvGraph: {
-    index: "09 / CV AS A GRAPH",
+    index: "10 / CV AS A GRAPH",
     eyebrow: "Two lenses, the same graph",
     heading: { line1: "The CV", emphasis: "beyond the tree." },
     lead: "A CV usually organises a career as a tree: education, experience, skills and output sorted into categories. But a professional life is far more interconnected. Projects link technologies, methods, people, institutions and competencies. Representing these relations as a graph makes previously implicit knowledge visible, revealing new ways to explore, understand and discover a career.",
@@ -1320,7 +1357,7 @@ export const en: Copy = {
   },
 
   contact: {
-    index: "10 / CONTACT",
+    index: "11 / CONTACT",
     eyebrow: "Next chapter",
     heading: {
       line1: "Science and public management need",

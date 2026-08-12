@@ -61,6 +61,7 @@ export const pt = {
     metodo: "Método",
     cncflora: "Conservação da Flora",
     projetos: "Projetos",
+    mobile: "Mobile",
     aulas: "Aulas",
     trajetoria: "Trajetória",
     cv: "CV",
@@ -700,6 +701,42 @@ export const pt = {
     },
   },
 
+  mobileMvp: {
+    index: "05 / DESENVOLVIMENTO MOBILE",
+    eyebrow: "React Native · Expo · Android & iOS",
+    heading: {
+      before: "Uma ideia que cabe",
+      emphasis: "na palma da mão.",
+    },
+    intro:
+      "Este MVP transforma meu portfólio em uma experiência mobile direta, tátil e portátil. A mesma base em TypeScript atende Android, iOS e web, enquanto cada plataforma preserva o que tem de nativo.",
+    openDemo: "Abrir em tela cheia",
+    demoLabel: "Build interativa · navegador",
+    liveLabel: "Ao vivo",
+    frameTitle: "MVP mobile de Lucas S.B. Jordão executando em um emulador Android",
+    demoHint: "Role, toque e abra os links dentro do aparelho.",
+    stackLabel: "Construído com",
+    stack: ["React Native", "Expo 54", "TypeScript", "Native APIs", "Responsive UI"],
+    status: "MVP · em desenvolvimento",
+    principles: [
+      {
+        title: "Uma base, duas plataformas",
+        body:
+          "Componentes e regras compartilhados para Android e iOS, com menos duplicação e uma evolução mais rápida do produto.",
+      },
+      {
+        title: "Interação que se sente nativa",
+        body:
+          "Compartilhamento do sistema, feedback tátil, áreas seguras e gestos entram na arquitetura desde o primeiro protótipo.",
+      },
+      {
+        title: "Do protótipo à entrega",
+        body:
+          "Layout responsivo, tipografia empacotada, acessibilidade e builds verificáveis deixam o MVP pronto para aprender com uso real.",
+      },
+    ],
+  },
+
   patents: {
     meta: "REC–01 / INFRAESTRUTURA INTERDISCIPLINAR",
     verified: "VERIFICADO",
@@ -731,7 +768,7 @@ export const pt = {
   },
 
   teaching: {
-    index: "05 / DOCÊNCIA",
+    index: "06 / DOCÊNCIA",
 
     /* Dar aula é a parte mais antiga da minha trajetória e a que menos aparece
        num portfólio de engenharia — por isso vem antes da estante de apostilas. */
@@ -885,7 +922,7 @@ export const pt = {
   },
 
   technology: {
-    index: "06 / TECNOLOGIAS",
+    index: "07 / TECNOLOGIAS",
     eyebrow: "Da escrita científica à infraestrutura",
     heading: { line1: "Tecnologias que atravessam", emphasis: "o trabalho." },
     countLabel: "tecnologias & métodos",
@@ -1008,7 +1045,7 @@ export const pt = {
   },
 
   phenology: {
-    index: "07 / FENOLOGIA",
+    index: "08 / FENOLOGIA",
     eyebrow: "Ritmo de trabalho, 2023—2026",
     heading: { line1: "Fenologia de um", emphasis: "repositório vivo." },
     intro:
@@ -1077,7 +1114,7 @@ export const pt = {
   },
 
   trajectory: {
-    index: "08 / TRAJETÓRIA",
+    index: "09 / TRAJETÓRIA",
     heading: { line1: "Do espécime", line2: "à ", emphasis: "infraestrutura." },
     intro:
       "Antes dos pipelines, vieram as trilhas, as bancadas e as coleções. Foi ali que aprendi a observar com rigor, registrar contexto e transformar evidência dispersa em conhecimento que outras pessoas conseguem usar.",
@@ -1333,7 +1370,7 @@ export const pt = {
   },
 
   cvGraph: {
-    index: "09 / CURRÍCULO EM GRAFO",
+    index: "10 / CURRÍCULO EM GRAFO",
     eyebrow: "Duas lentes, o mesmo grafo",
     heading: { line1: "O currículo", emphasis: "além da árvore." },
     lead: "Um currículo costuma organizar a trajetória profissional como uma árvore: formação, experiências, habilidades e produções distribuídas em categorias. Mas uma vida profissional é muito mais interligada. Projetos conectam tecnologias, métodos, pessoas, instituições e competências. Ao representar essas relações como um grafo, conhecimentos antes implícitos tornam-se visíveis, revelando novas formas de explorar, compreender e descobrir uma trajetória.",
@@ -1357,7 +1394,7 @@ export const pt = {
   },
 
   contact: {
-    index: "10 / CONTATO",
+    index: "11 / CONTATO",
     eyebrow: "Próximo capítulo",
     heading: {
       line1: "A ciência e a gestão precisam de",

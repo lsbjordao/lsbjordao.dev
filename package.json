@@ -9,6 +9,7 @@
     "prebuild": "node scripts/generate-images.mjs",
     "build": "next build",
     "build:openai": "next build && node scripts/prepare-sites.mjs",
+    "mobile:mvp": "node scripts/sync-mobile-mvp.mjs",
     "contributions": "node scripts/fetch-contributions.mjs",
     "cv": "node scripts/build-cv.mjs",
     "start": "next start",

@@ -40,6 +40,7 @@ import Cladogram from "./Cladogram";
 import CvGraph from "./CvGraph";
 import ExperienceCarousel from "./ExperienceCarousel";
 import Frond from "./Frond";
+import MobileMvp from "./MobileMvp";
 import Phenology from "./Phenology";
 import ScrollProgress from "./ScrollProgress";
 import SolutionConsulting from "./SolutionConsulting";
@@ -319,6 +320,9 @@ export default function Portfolio({ lang }: { lang: Lang }) {
           </a>
           <a href="#projetos" onClick={closeMenu}>
             {c.nav.projetos}
+          </a>
+          <a href="#mobile" onClick={closeMenu}>
+            {c.nav.mobile}
           </a>
           <a href="#aulas" onClick={closeMenu}>
             {c.nav.aulas}
@@ -1305,6 +1309,8 @@ export default function Portfolio({ lang }: { lang: Lang }) {
             </aside>
           )}
         </section>
+
+        <MobileMvp lang={lang} />
 
         <Teaching lang={lang} />
 
