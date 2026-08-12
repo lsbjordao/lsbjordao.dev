@@ -145,17 +145,14 @@ export default function SharePopover({
         role="dialog"
         aria-modal="true"
         aria-label={labels.title}
-        style={
-          buttonPos
-            ? {
-                position: "absolute",
-                top: `${buttonPos.top}px`,
-                left: `${buttonPos.left}px`,
-                transform: "translateY(0.5rem)",
-                bottom: "auto",
-              }
-            : {}
-        }
+        style={{
+          position: "absolute",
+          top: buttonPos ? `${buttonPos.top}px` : "auto",
+          left: buttonPos ? `${buttonPos.left}px` : "50%",
+          transform: buttonPos ? "translateY(0.5rem)" : "translateX(-50%)",
+          bottom: buttonPos ? "auto" : "1rem",
+          zIndex: 10000,
+        }}
       >
         <span className="phone-share__grabber" aria-hidden="true" />
         <p className="phone-share__title">{labels.title}</p>

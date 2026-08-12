@@ -7788,11 +7788,11 @@ footer > p {
   inset: 0;
   pointer-events: auto;
   cursor: default;
+  background: transparent;
+  z-index: 1;
 }
 
 .phone-share__popover {
-  position: absolute;
-  z-index: 10000;
   width: 15rem;
   max-width: calc(100% - 1rem);
   padding: 0.8rem;
