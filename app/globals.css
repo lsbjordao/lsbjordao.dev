@@ -7792,21 +7792,17 @@ footer > p {
 
 .phone-share__popover {
   position: absolute;
-  bottom: 0;
-  left: 50%;
   z-index: 10000;
   width: 15rem;
   max-width: calc(100% - 1rem);
   padding: 0.8rem;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
   background: rgba(12, 14, 13, 0.94);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-bottom: none;
   box-shadow: 0 1.4rem 3.4rem rgba(0, 0, 0, 0.52);
   color: rgba(255, 255, 255, 0.9);
   font-family: var(--mono);
   animation: phone-share-in 0.16s ease;
-  transform: translateX(-50%);
   pointer-events: auto;
   max-height: 80vh;
   overflow-y: auto;

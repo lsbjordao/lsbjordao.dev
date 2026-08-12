@@ -10,6 +10,7 @@ type SharePopoverProps = {
   url: string;
   labels: ShareLabels;
   onClose: () => void;
+  buttonPos?: { top: number; left: number } | null;
 };
 
 type NetworkKey = "x" | "facebook" | "linkedin" | "whatsapp" | "telegram";
@@ -26,6 +27,7 @@ export default function SharePopover({
   url,
   labels,
   onClose,
+  buttonPos,
 }: SharePopoverProps) {
   const [copied, setCopied] = useState(false);
   const popoverRef = useRef<HTMLDivElement | null>(null);
@@ -143,6 +145,17 @@ export default function SharePopover({
         role="dialog"
         aria-modal="true"
         aria-label={labels.title}
+        style={
+          buttonPos
+            ? {
+                position: "absolute",
+                top: `${buttonPos.top}px`,
+                left: `${buttonPos.left}px`,
+                transform: "translateY(0.5rem)",
+                bottom: "auto",
+              }
+            : {}
+        }
       >
         <span className="phone-share__grabber" aria-hidden="true" />
         <p className="phone-share__title">{labels.title}</p>

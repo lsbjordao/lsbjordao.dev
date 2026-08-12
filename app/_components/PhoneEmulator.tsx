@@ -215,6 +215,10 @@ export default function PhoneEmulator({
   // sheet is rendered inside the phone screen, so it stays within the device.
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [shareOpen, setShareOpen] = useState(false);
+  const [shareButtonPos, setShareButtonPos] = useState<{
+    top: number;
+    left: number;
+  } | null>(null);
 
   useEffect(() => {
     const iframe = iframeRef.current;
@@ -224,11 +228,24 @@ export default function PhoneEmulator({
       !!el?.closest?.('[aria-label="Compartilhar perfil"]');
     // The button toggles the sheet; suppress the native Share sheet.
     const onButton = (e: Event) => {
-      if (!isShareButton(e.target as Element | null)) return;
+      const target = e.target as Element | null;
+      if (!isShareButton(target)) return;
       e.preventDefault();
       e.stopImmediatePropagation();
       if (Date.now() - lastToggle < 350) return;
       lastToggle = Date.now();
+
+      // Calculate button position relative to iframe
+      const button = target?.closest('[aria-label="Compartilhar perfil"]');
+      if (button) {
+        const buttonRect = button.getBoundingClientRect();
+        const iframeRect = iframe.getBoundingClientRect();
+        setShareButtonPos({
+          top: buttonRect.bottom - iframeRect.top,
+          left: buttonRect.left - iframeRect.left,
+        });
+      }
+
       setShareOpen((v) => !v);
     };
     // Tapping anywhere else in the app closes the sheet.
@@ -381,7 +398,11 @@ export default function PhoneEmulator({
             open={shareOpen}
             url={shareUrl}
             labels={share}
-            onClose={() => setShareOpen(false)}
+            onClose={() => {
+              setShareOpen(false);
+              setShareButtonPos(null);
+            }}
+            buttonPos={shareButtonPos}
           />
         </div>
       </div>
