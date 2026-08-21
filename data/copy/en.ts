@@ -956,6 +956,8 @@ export const en: Copy = {
             "Schema modelling and migration",
             "Web application security — authentication and authorisation, JWT, sessions, password recovery, and transactional email with Supabase Auth and Resend (LULC-Habitat)",
             "Static rendering, SSR and performance",
+            "Web animation with GSAP",
+            "Interactive 3D graphics in the browser with Three.js and WebGL",
             "Automated testing and code review",
           ],
         },

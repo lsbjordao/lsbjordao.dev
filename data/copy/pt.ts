@@ -991,6 +991,8 @@ export const pt = {
             "Modelagem e evolução de esquema",
             "Segurança de aplicações web — autenticação e autorização, JWT, sessões, recuperação de senha e e-mails transacionais com Supabase Auth e Resend (LULC-Habitat)",
             "Renderização estática, SSR e performance",
+            "Animação web com GSAP",
+            "Gráficos 3D interativos no navegador com Three.js e WebGL",
             "Testes automatizados e revisão de código",
           ],
         },
