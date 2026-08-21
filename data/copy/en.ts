@@ -346,7 +346,8 @@ export const en: Copy = {
         { value: "MVP", label: "explicit boundary" },
         { value: "≠ 0", label: "visible residual risk" },
       ],
-      cta: "Talk about a discovery",
+      cta: "More details about IT consulting",
+      ctaHref: "https://lsbjordao.github.io/consultoria/",
     },
   },
 

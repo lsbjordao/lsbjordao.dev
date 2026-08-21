@@ -372,7 +372,8 @@ export const pt = {
         { value: "MVP", label: "fronteira explícita" },
         { value: "≠ 0", label: "risco residual visível" },
       ],
-      cta: "Conversar sobre uma descoberta",
+      cta: "Mais detalhes sobre consultoria em TI",
+      ctaHref: "https://lsbjordao.github.io/consultoria/",
     },
   },
 

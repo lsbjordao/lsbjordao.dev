@@ -4,9 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { copy as allCopy } from "@/data/copy";
 import type { Lang } from "@/data/site";
 
-function Arrow() {
+function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
-    <svg aria-hidden="true" className="icon" viewBox="0 0 20 20" fill="none">
+    <svg
+      aria-hidden="true"
+      className={diagonal ? "icon icon--diagonal" : "icon"}
+      viewBox="0 0 20 20"
+      fill="none"
+    >
       <path d="M3 10h13M11 5l5 5-5 5" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   );
@@ -170,8 +175,13 @@ export default function SolutionConsulting({ lang }: { lang: Lang }) {
           <span>{c.outcome.label}</span>
           <h3>{c.outcome.title}</h3>
           <p>{c.outcome.body}</p>
-          <a className="button button--acid" href="#contato">
-            {c.outcome.cta} <Arrow />
+          <a
+            className="button button--acid"
+            href={c.outcome.ctaHref}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {c.outcome.cta} <Arrow diagonal />
           </a>
         </div>
         <dl className="consulting__outcome-grid">
