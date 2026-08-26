@@ -686,6 +686,14 @@ export const pt = {
           "Extensão que adiciona um controle acessível de \"como citar\" a livros e sites Quarto, com cópia em texto por estilo CSL ou em BibTeX. As citações são montadas na renderização, sem biblioteca no navegador, e funcionam com recursos embutidos ou sem JavaScript.",
         imageAlt: "Identidade visual da extensão Quarto cite-this",
       },
+      markdown4Quarto: {
+        title: "Markdown 4 Quarto",
+        kicker: "Escrita nativa, publicação completa",
+        description:
+          "Criei uma extensão do VS Code que leva alertas, notas de rodapé, referências cruzadas, citações BibTeX/CSL, bibliografia e variáveis de projeto à prévia Markdown nativa. Arquivos .md permanecem como superfície de escrita; o Quarto entra na composição e publicação.",
+        imageAlt:
+          "Ícone com documento Markdown, seta de publicação e símbolo do Quarto em azul e turquesa",
+      },
     },
     relatedLinkLabels: {
       scholar: "Registro acadêmico",

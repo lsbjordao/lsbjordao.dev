@@ -657,6 +657,14 @@ export const en: Copy = {
           "An extension that adds an accessible \"how to cite\" control to Quarto books and websites, copying the citation as CSL-formatted text or BibTeX. Citations are built at render time, with no browser library, and work with embedded resources or with JavaScript off.",
         imageAlt: "Visual identity of the Quarto cite-this extension",
       },
+      markdown4Quarto: {
+        title: "Markdown 4 Quarto",
+        kicker: "Native authoring, full publishing",
+        description:
+          "I built a VS Code extension that brings alerts, footnotes, cross-references, BibTeX/CSL citations, bibliographies and project variables to the native Markdown preview. .md files remain the writing surface; Quarto handles composition and publishing.",
+        imageAlt:
+          "Icon with a Markdown document, publishing arrow and Quarto symbol in blue and turquoise",
+      },
     },
     relatedLinkLabels: {
       scholar: "Scholar record",

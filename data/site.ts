@@ -198,7 +198,8 @@ export type ProjectId =
   | "quartoWriting"
   | "quartoFocus"
   | "quartoConditional"
-  | "quartoCiteThis";
+  | "quartoCiteThis"
+  | "markdown4Quarto";
 
 /** Rótulo do bloco de links secundários de um card. */
 export type RelatedLabelId = "patents" | "ffbApp" | "curvaCode";
@@ -350,6 +351,15 @@ export const projects: Array<{
     href: "https://lsbjordao.github.io/quarto-cite-this/",
     category: "openScience",
     tags: ["Quarto", "Lua", "CSL", "BibTeX"],
+    fit: "contain",
+  },
+  {
+    id: "markdown4Quarto",
+    number: "12",
+    image: "/images/markdown-4-quarto.webp",
+    href: "https://marketplace.visualstudio.com/items?itemName=lsbjordao.markdown-4-quarto",
+    category: "openScience",
+    tags: ["VS Code", "Quarto", "Markdown", "BibTeX / CSL"],
     fit: "contain",
   },
 ];
