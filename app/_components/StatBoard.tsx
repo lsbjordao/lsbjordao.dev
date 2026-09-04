@@ -27,6 +27,7 @@ import {
 } from "@/data/academia";
 import { npmPackages, type Lang, type StatDrawerId } from "@/data/site";
 import { copy as allCopy } from "@/data/copy";
+import CommercialServices from "./CommercialServices";
 
 type OpenDrawer = { id: StatDrawerId; pinned: boolean };
 
@@ -112,8 +113,6 @@ export default function StatBoard({ lang }: { lang: Lang }) {
       <header className="stat-drawer__head">
         <h2>{d[active].title}</h2>
         <p>{d[active].note}</p>
-        {/* Só o símbolo: o próprio cartão já mostra "fechar lista" logo acima,
-            e repetir o rótulo a dois centímetros de distância polui. */}
         <button
           type="button"
           className="stat-drawer__close"
@@ -128,45 +127,48 @@ export default function StatBoard({ lang }: { lang: Lang }) {
   );
 
   return (
-    <section className="stats-board" aria-label={c.a11y.statsRegion}>
-      <div className="stats" onPointerLeave={dismissPreview}>
-        {c.stats.map((stat, index) => {
-          const cell = !stat.drawer ? (
-            <article className="stat" key={stat.label}>
-              <strong>{stat.value}</strong>
-              <span>{stat.label}</span>
-            </article>
-          ) : (
-            <button
-              type="button"
-              className={
-                active === stat.drawer ? "stat stat--drawer is-open" : "stat stat--drawer"
-              }
-              key={stat.label}
-              aria-expanded={active === stat.drawer}
-              aria-controls={active === stat.drawer ? drawerPanelId : undefined}
-              onClick={() => toggle(stat.drawer!)}
-              onFocus={() => preview(stat.drawer!)}
-              onPointerEnter={(event) => {
-                if (event.pointerType === "mouse") preview(stat.drawer!);
-              }}
-            >
-              <strong>{stat.value}</strong>
-              <span>
-                {stat.label}
-                <em className="stat__hint">
-                  <span className="stat__chevron" aria-hidden="true" />
-                  {active === stat.drawer && open?.pinned ? d.close : d.open}
-                </em>
-              </span>
-            </button>
-          );
+    <>
+      <section className="stats-board" aria-label={c.a11y.statsRegion}>
+        <div className="stats" onPointerLeave={dismissPreview}>
+          {c.stats.map((stat, index) => {
+            const cell = !stat.drawer ? (
+              <article className="stat" key={stat.label}>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </article>
+            ) : (
+              <button
+                type="button"
+                className={
+                  active === stat.drawer ? "stat stat--drawer is-open" : "stat stat--drawer"
+                }
+                key={stat.label}
+                aria-expanded={active === stat.drawer}
+                aria-controls={active === stat.drawer ? drawerPanelId : undefined}
+                onClick={() => toggle(stat.drawer!)}
+                onFocus={() => preview(stat.drawer!)}
+                onPointerEnter={(event) => {
+                  if (event.pointerType === "mouse") preview(stat.drawer!);
+                }}
+              >
+                <strong>{stat.value}</strong>
+                <span>
+                  {stat.label}
+                  <em className="stat__hint">
+                    <span className="stat__chevron" aria-hidden="true" />
+                    {active === stat.drawer && open?.pinned ? d.close : d.open}
+                  </em>
+                </span>
+              </button>
+            );
 
-          if (placement?.after === index) return [cell, panel];
-          return cell;
-        })}
-      </div>
-    </section>
+            if (placement?.after === index) return [cell, panel];
+            return cell;
+          })}
+        </div>
+      </section>
+      <CommercialServices lang={lang} />
+    </>
   );
 }
 
