@@ -1,4 +1,5 @@
 import type { Lang } from "@/data/site";
+import { company } from "@/data/company";
 import styles from "./CommercialServices.module.css";
 
 const content = {
@@ -37,6 +38,11 @@ const content = {
     principle: "A primeira entrega não é código.",
     principleStrong: "É redução de incerteza.",
     cta: "Conversar sobre um projeto",
+    commercialLabel: "Prestação de serviços",
+    commercialText: "Projetos e consultorias são contratados por meio da minha microempresa.",
+    companyLabel: "Nome fantasia",
+    commercialEmailLabel: "Projetos e consultorias",
+    personalEmailLabel: "Contato pessoal/profissional",
   },
   en: {
     index: "01 / HOW I CAN HELP",
@@ -73,6 +79,11 @@ const content = {
     principle: "The first deliverable is not code.",
     principleStrong: "It is reduced uncertainty.",
     cta: "Discuss a project",
+    commercialLabel: "Professional services",
+    commercialText: "Projects and consulting engagements are contracted through my company.",
+    companyLabel: "Trade name",
+    commercialEmailLabel: "Projects and consulting",
+    personalEmailLabel: "Personal/professional contact",
   },
 } as const;
 
@@ -112,6 +123,28 @@ export default function CommercialServices({ lang }: { lang: Lang }) {
         </p>
         <a href="#contato">{c.cta} <span aria-hidden="true">→</span></a>
       </div>
+
+      <aside className={styles.commercial} aria-label={c.commercialLabel}>
+        <div>
+          <span className={styles.commercialKicker}>{c.commercialLabel}</span>
+          <strong>{company.tradeName}</strong>
+          <p>{c.commercialText}</p>
+        </div>
+        <dl>
+          <div>
+            <dt>{c.companyLabel}</dt>
+            <dd>{company.tradeName}</dd>
+          </div>
+          <div>
+            <dt>{c.commercialEmailLabel}</dt>
+            <dd><a href={`mailto:${company.commercialEmail}`}>{company.commercialEmail}</a></dd>
+          </div>
+          <div>
+            <dt>{c.personalEmailLabel}</dt>
+            <dd><a href={`mailto:${company.personalEmail}`}>{company.personalEmail}</a></dd>
+          </div>
+        </dl>
+      </aside>
     </section>
   );
 }
