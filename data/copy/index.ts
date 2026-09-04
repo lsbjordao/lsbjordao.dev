@@ -39,7 +39,7 @@ const commercialPt: Copy = {
       modalityLabel: "Formato",
       modality: "Projetos por escopo · remoto, híbrido ou Rio de Janeiro",
       startLabel: "Contratação",
-      start: "Prestação de serviços via microempresa",
+      start: "Prestação de serviços via LSB Jordão",
     },
   },
   key: {
@@ -57,7 +57,7 @@ const commercialPt: Copy = {
       emphasis: "pode virar um sistema utilizável.",
     },
     intro:
-      "Se sua organização precisa transformar dados, conhecimento especializado ou processos complexos em software, infraestrutura de dados ou solução geoespacial, posso atuar da descoberta à implementação. Também considero oportunidades profissionais alinhadas a esse perfil.",
+      "Se sua organização precisa transformar dados, conhecimento especializado ou processos complexos em software, infraestrutura de dados ou solução geoespacial, posso atuar da descoberta à implementação. Projetos e consultorias são contratados pela LSB Jordão; para assuntos pessoais ou profissionais, mantenho também meu canal pessoal.",
     primaryCta: "Conversar sobre um projeto",
     cardLabel: "Formas de trabalhar comigo",
     looking: [
@@ -104,7 +104,7 @@ const commercialEn: Copy = {
       modalityLabel: "Format",
       modality: "Scoped projects · remote, hybrid or Rio de Janeiro",
       startLabel: "Engagement",
-      start: "Services contracted through my company",
+      start: "Professional services through LSB Jordão",
     },
   },
   key: {
@@ -122,7 +122,7 @@ const commercialEn: Copy = {
       emphasis: "can become a usable system.",
     },
     intro:
-      "If your organisation needs to turn data, specialised knowledge or complex processes into software, data infrastructure or a geospatial solution, I can work from discovery through implementation. I also consider professional opportunities aligned with this profile.",
+      "If your organisation needs to turn data, specialised knowledge or complex processes into software, data infrastructure or a geospatial solution, I can work from discovery through implementation. Projects and consulting are contracted through LSB Jordão; I also keep a separate personal/professional contact channel.",
     primaryCta: "Discuss a project",
     cardLabel: "Ways to work with me",
     looking: [
