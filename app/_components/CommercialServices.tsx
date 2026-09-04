@@ -40,7 +40,6 @@ const content = {
     cta: "Conversar sobre um projeto",
     commercialLabel: "Prestação de serviços",
     commercialText: "Projetos e consultorias são contratados por meio da minha microempresa.",
-    companyLabel: "Nome fantasia",
     commercialEmailLabel: "Projetos e consultorias",
     personalEmailLabel: "Contato pessoal/profissional",
   },
@@ -81,7 +80,6 @@ const content = {
     cta: "Discuss a project",
     commercialLabel: "Professional services",
     commercialText: "Projects and consulting engagements are contracted through my company.",
-    companyLabel: "Trade name",
     commercialEmailLabel: "Projects and consulting",
     personalEmailLabel: "Personal/professional contact",
   },
@@ -125,25 +123,20 @@ export default function CommercialServices({ lang }: { lang: Lang }) {
       </div>
 
       <aside className={styles.commercial} aria-label={c.commercialLabel}>
-        <div>
+        <div className={styles.commercialIdentity}>
           <span className={styles.commercialKicker}>{c.commercialLabel}</span>
-          <strong>{company.tradeName}</strong>
-          <p>{c.commercialText}</p>
+          <p><strong>{company.tradeName}</strong> · {c.commercialText}</p>
         </div>
-        <dl>
-          <div>
-            <dt>{c.companyLabel}</dt>
-            <dd>{company.tradeName}</dd>
-          </div>
-          <div>
-            <dt>{c.commercialEmailLabel}</dt>
-            <dd><a href={`mailto:${company.commercialEmail}`}>{company.commercialEmail}</a></dd>
-          </div>
-          <div>
-            <dt>{c.personalEmailLabel}</dt>
-            <dd><a href={`mailto:${company.personalEmail}`}>{company.personalEmail}</a></dd>
-          </div>
-        </dl>
+        <div className={styles.commercialContacts}>
+          <a href={`mailto:${company.commercialEmail}`}>
+            <span>{c.commercialEmailLabel}</span>
+            <strong>{company.commercialEmail}</strong>
+          </a>
+          <a href={`mailto:${company.personalEmail}`}>
+            <span>{c.personalEmailLabel}</span>
+            <strong>{company.personalEmail}</strong>
+          </a>
+        </div>
       </aside>
     </section>
   );
